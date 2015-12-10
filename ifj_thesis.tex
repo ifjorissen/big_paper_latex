@@ -1,0 +1,361 @@
+% This is the Reed College LaTeX thesis template. Most of the work 
+% for the document class was done by Sam Noble (SN), as well as this
+% template. Later comments etc. by Ben Salzberg (BTS). Additional
+% restructuring and APA support by Jess Youngberg (JY).
+% Your comments and suggestions are more than welcome; please email
+% them to cus@reed.edu
+%
+% See http://web.reed.edu/cis/help/latex.html for help. There are a 
+% great bunch of help pages there, with notes on
+% getting started, bibtex, etc. Go there and read it if you're not
+% already familiar with LaTeX.
+%
+% Any line that starts with a percent symbol is a comment. 
+% They won't show up in the document, and are useful for notes 
+% to yourself and explaining commands. 
+% Commenting also removes a line from the document; 
+% very handy for troubleshooting problems. -BTS
+
+% As far as I know, this follows the requirements laid out in 
+% the 2002-2003 Senior Handbook. Ask a librarian to check the 
+% document before binding. -SN
+
+%%
+%% Preamble
+%%
+% \documentclass{<something>} must begin each LaTeX document
+\documentclass[12pt,twoside]{reedthesis}
+% Packages are extensions to the basic LaTeX functions. Whatever you
+% want to typeset, there is probably a package out there for it.
+% Chemistry (chemtex), screenplays, you name it.
+% Check out CTAN to see: http://www.ctan.org/
+%%
+\usepackage{graphicx,latexsym} 
+\usepackage{amssymb,amsthm,amsmath,algorithm}
+\usepackage{longtable,booktabs,setspace} 
+\usepackage[hyphens]{url}
+\usepackage{rotating}
+\usepackage{natbib}
+\usepackage{cleveref}
+\usepackage{paralist}
+\usepackage{algpseudocode}
+\usepackage{pstricks}
+\usepackage{epstopdf}
+\graphicspath{ {figs/} }
+\makeatletter
+\let\OldStatex\Statex
+\renewcommand{\Statex}[1][3]{%
+  \setlength\@tempdima{\algorithmicindent}%
+  \OldStatex\hskip\dimexpr#1\@tempdima\relax}
+\makeatother
+% Comment out the natbib line above and uncomment the following two lines to use the new 
+% biblatex-chicago style, for Chicago A. Also make some changes at the end where the 
+% bibliography is included. 
+%\usepackage{biblatex-chicago}
+%\bibliography{thesis}
+
+% \usepackage{times} % other fonts are available like times, bookman, charter, palatino
+
+\title{the big paper, if you will}
+\author{Isabella F. Jorissen}
+% The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
+\date{May 2016}
+\division{Mathematics and Natural Sciences}
+\advisor{James Fix}
+%If you have two advisors for some reason, you can use the following
+%\altadvisor{Your Other Advisor}
+%%% Remember to use the correct department!
+\department{Mathematics}
+% if you're writing a thesis in an interdisciplinary major,
+% uncomment the line below and change the text as appropriate.
+% check the Senior Handbook if unsure.
+%\thedivisionof{The Established Interdisciplinary Committee for}
+% if you want the approval page to say "Approved for the Committee",
+% uncomment the next line
+%\approvedforthe{Committee}
+% \newtheorem{def}{Definition}
+\setlength{\parskip}{0pt}
+%%
+%% End Preamble
+%%
+%% The fun begins:
+\begin{document}
+
+  \maketitle
+  \frontmatter % this stuff will be roman-numbered
+  \pagestyle{empty} % this removes page numbers from the frontmatter
+
+% Acknowledgements (Acceptable American spelling) are optional
+% So are Acknowledgments (proper English spelling)
+    \chapter*{Acknowledgements}
+	I want to thank a few (lots, really) people.
+
+% The preface is optional
+% To remove it, comment it out or delete it.
+    \chapter*{Preface}
+    [I'm going to tell you a story about a math problem. There will be some words (don't worry about their meaning too much), some concepts (the words will help some), and a few pretty diagrams (to pull it all together). This is a story about a lot of things, depending on your perspective. In a way, it's a story about figuring out where you ought to go based on where you are. At least, that one of the ways I like to think about it. I've thrown in a little High Performance Computing for good measure, since - if you're anything like me - you'll want to know where your destination is as quickly as possible.
+
+    This math problem has a lot of names, and has been discovered, re-discovered, named, re-named, used, and re-used in more disciplines than I'm willing to count or list. I'd argue that the ``conceptual'' ``mathematical'' structure itself ``belongs'' to the realm of Computational Geometry, where it's referred to as the Voronoi Diagram. It has many aliases: Dirichlet Tesselation, Thiessen Polygons, Plant Polygons, and Wigner-Seitz Cell, among others. 
+
+    In the names of Tradition and Clarity, I've done my best to use exoteric language whenever possible, and to indulge in mathematical notation where appropriate. You're welcome to treat either as an endless stream of notation. My only advice to you, in the words of a Reed math professor I once had: ``remain calm.'']
+
+    % \begin {figure}
+    %   \begin{center}
+    %   \input{figs/test.tex}
+    %   \end{center}
+    % \end {figure}
+
+    \begin {figure}
+      \begin{center}
+      \caption{check this ish out... now put it in illustrator to make it pretty n such}
+      \input{figs/simple_8site.tex}
+      \end{center}
+    \end {figure}
+
+
+	% This is an example of a thesis setup to use the reed thesis document class.
+
+    \tableofcontents
+    \listofalgorithms
+
+% The abstract is not required if you're writing a creative thesis (but aren't they all?)
+% If your abstract is longer than a page, there may be a formatting issue.
+    \chapter*{Abstract}
+    [more specifics][math specifics]
+    [this is a math problem, this is a computational geometry problem, this is a spotlight on a common problem, this is related to a lot of other cool problems, this is a problem about space, this is an apology (explanatory), this is a survey of approaches to solving this problem as efficiently and elegantly as possible, this is building off of current implementations to examine the benefits of a) multicore / threaded and / or b) gpu accelerated implementations, this is about re-learning C, this is about wrangling threads and hating CUDA]
+	
+	% \chapter*{Dedication}
+	% You can have a dedication here if you wish.
+
+  \mainmatter % here the regular arabic numbering starts
+  \pagestyle{fancyplain} % turns page numbering back on
+
+%The \introduction command is provided as a convenience.
+%if you want special chapter formatting, you'll probably want to avoid using it altogether
+  \chapter*{Introduction}
+    \addcontentsline{toc}{chapter}{Introduction}
+	\chaptermark{Introduction}
+	\markboth{Introduction}{Introduction}
+  [the classic post office problem ...][insert something better here]
+  Suppose you are hoping to send a piece of mail via post office. In this day and age, it's uncommon to send a piece of mail, and you might ask yourself ``Where is the nearest post office?'' \par
+  But why is the post office \emph{there}? \par
+  To answer that question, assume the perspective of a city planner whose task is to determine where the next post office should located. The city planner might work under the assumption that people go to the post office closest to where they live. Roughly, the planner determines the areas of service for each post office, which consists of dividing the city into regions whose occupants are closer to the post office in that region than any other office. The area of service, for a particular post office, corresponds directly with the Voronoi cell of that site (the post office). We call this cell, or a region.\footnote{If the aforementioned example doesn't resonate with you, I'd encourage you to peruse \cref{appendix_one}, where I've included a plethora of other examples with the intent of motivating the problem from different perspectives, disciplines, and industries.}
+
+  \section{Formalizing the Post Office Problem} % (fold)
+  \label{sec:formalizing_the_post_office_problem}
+  [The Voronoi diagram is more than a pretty picture; it is a versatile geometric structure!] [Disclaimer about nice point sets and diagrams with non degenerate cases?]The diagram is the subdivision induced under the Voronoi assignment model, which consists in assigning every point in the plane to the site nearest to it.\par
+  To construct a Voronoi diagram, we need a set of sites, $P$, and way to measure the distance between two sites, p and q, denoted dist(p,q). For the purposes of this thesis, we consider the Voronoi diagram in the plane, sites are defined as points, and the distance between any two points is the Euclidian distance.\par
+  Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ a set of $n$ distinct points -- each one constituting a site -- in the plane. The Voronoi diagram of $P$ the subdivision of the plane into $n$ regions where for each region $V_{p_{i}}$ in the set of regions $V:=\{V_{p_{1}}, V_{p_{2}}, .. V_{p_{n}}\}$, $V_{p_{i}}$ is the region associated with site $p_{i}$. Further, the region $V_{p_{i}}$ is the set of points in the plane such that each point in $V_{p_{i}}$ is closer to $p_{i}$ than it is to any other site in $P$. Formally, given a plane $S$, a region or cell in a Voronoi diagram is the set of points in the plane which satisfy:
+  $$V_{p_{i}} := \{\,q \in S \mid dist(q, p_{i}) < dist(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$
+  For our purposes, $S= \Re^2$, the Euclidian plane in two dimensions, and $dist(p, q)$ is the Euclidian measure of distance in $\Re^2$. \par
+  We can also think of the region $V_{p_{i}}$ as the (possibly open) convex polygon which is the result of intersection of $n-1$ half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $l$ connecting them. [graph] At the midpoint, $m$, of $l$, imagine a line $b$, purpendicular to $l$ and passing through $m$. Note that $b$ is the purpendicular bisector of $l$. Then $b$ splits the plane into two half-planes. Define the half-plane containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{i}, p_{j})$. To connect this notion back to our first description of a Voronoi region, note that all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. Define set of half-planes containing $p_{i}$ as $H_{p_{i}} := \{\,h(p_{i}, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}$. There are $n-1$ half-planes in $H_{p_{i}}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are closer to $p_{i}$ than they are to $p_{j}$ or $p_{k}$. If we performed this intersection over all $n-1$ half-planes, we would have described the Voronoi region of $p_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
+  $$V_{p_{i}} = \bigcap_{h \in H_{p_{i}}}$$ 
+  Because the half-plane is a convex set\footnote{A set is convex if the straight line connecting any two points in the set is also in the region.} (or region), and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies heavily on intersection of half-planes and convex regions.\par
+  Every Voronoi region can be thought of as a (possibly open) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. The Voronoi diagram of a set of sites P, $Vor(P)$, is the collection of all of these regions [at then end, though, in the simplest sense, is the handful of vertices and a bundle of edges resulting from the union of these regions.] \footnote{If I may draw your attention to the set of vertices and edges resulting from the union of regions, you might note that there are bound to be duplicates. For example, two adjacent regions will share a bounding edge and two vertices (the endpoints of the shared edge). The presence of duplicates in this set might indicate that constructing the Voronoi diagram by taking the union of the individually computed regions might not be the most space or time conscious approach.}\par
+  We know that $Vor(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\Re^2$ is nearly a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to the half infinite edges (that is to say, all edges without two endpoints). [Diagram, before and after] \textit{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
+  $v - e + f = 2.$ Applying this to $Vor(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
+  $$(v + 1) - e + n = 2.$$ Since every edge has exactly two endpoints and every (and every vertex is of degree at least 3), we can say that $2e \geq 3(v + 1)$. Together with Euler'f formula, this implies that for a $n\geq 3$, the number of vertices is at most $2n -5$ and the number of edges is at most $3n -6$. 
+  % section formalizing_the_post_office_problem (end)
+  
+  \section{The Voronoi Diagram and its Dual} % (fold)
+  \label{sec:the_voronoi_diagram_and_its_dual}
+  [define triangulations, convex hull]
+  [define dual, the delaunay diagram]
+  [As long as the voronoi diagram doesn't have any degeneracies (all vertices are of degree 3) the delaunay graph will be a triangulation]
+  Imagine that we had a Voronoi diagram on $P$, $Vor(P)$. Choose a site $p_{i} \in P$ and, using $Vor(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it. [DIAGRAM] Do this for all the sites [DIAGRAM]. If we assume that $Vor(P)$ contains no degeneracies, then the resulting diagram is a Delaunay Trangulation. 
+  [This is true: ] Define the convex hull of $P$ to be the smallest convex region containing $P$ [DIAGRAM of convex hull of the set of points]. It is the intersection of all of the convex sets containing $P$. The boundary of the Delaunay triangulation of P is the convex hull of $P$.
+
+  
+  % section the_voronoi_diagram_and_its_dual (end)
+  \section{Properties of Voronoi and Delaunay Diagrams} % (fold)
+  \label{sec:properties_of_voronoi_and_delaunay_diagrams}
+  they are just the cat's pajamas they are the bees knees. 
+  
+  % section properties_of_voronoi_and_delaunay_diagrams (end)
+  \section{Applications of Voronoi and Delaunay Diagrams} % (fold)
+  \label{sec:applications_of_voronoi_and_delaunay_diagrams}
+  Generalizing voronoi diagrams (nearness, sites as objects other than points)
+  [Problems with $\mathcal{O}(n)$ reduction to delaunay, voronoi]
+  
+  % section applications_of_voronoi_and_delaunay_diagrams (end)
+  \section{Statement of algorithm goals (High Performance Computing)} % (fold)
+  \label{sec:statement_of_algorithm_goals_high_performance_computing_}
+    [I'm not one for goal setting, but here goes...] In this thesis, we wish to bear witness to the effects of modifying the two aspects of two different approaches to constructing the voronoi diagram (or the delaunay triangulation). Further, we ask the following question, which will be further motivated by the section on divide and conquer algorithms: ``given two valid delaunay triangulations (or voronoi diagrams), merge them''. So we're trying to merge them in parallel so we can see the results and maybe say something about that. We're also thinking about the question ``is there a way to \emph{order} the randomized incremental approach in a way that allows us to have multiple workers attacking the problem while also minimizing the amount of conflict?'' And we'll see more information on that problem in the section on randomized incremental and also the section on progress with that endeavor.]
+  % section statement_of_algorithm_goals_high_performance_computing_ (end)
+
+  \chapter*{Constructing the Voronoi Diagram}
+    \addcontentsline{toc}{chapter}{Constructing the Voronoi Diagram}
+    \chaptermark{Constructing the Voronoi Diagram}
+    \markboth{Constructing the Voronoi Diagram}{Constructing the Voronoi Diagram}
+    \setcounter{chapter}{1}
+    \setcounter{section}{0}
+  Algorithms to construct the Voronoi diagram fall into three rough categories: incremental approaches, divide and conquer approaches, and sweepline approaches. The worst case time compexity approaches for each of these is $\mathcal{O}(n^{2})$, $\mathcal{O}(n\log n)$ and $\mathcal{O}(n\log n)$ respectively. [Probably some more info about space complexity, average case, expected case]\par
+  Since the problem of sorting numbers can be transformed into the problem of computing a Voronoi diagram in linear $\mathcal{O}(n)$ time, the Voronoi diagram can be constructed in optimal time $\theta(n\log n)$. (Cool fact: Asymptotically, the complexity of the constructing the diagram is no more difficult than the task of finding a region.)\par
+  A note on storage: There are many different ways to store a Voronoi diagram. Algorithms will occasionally suggest data structures which complement the algorithm approach and are space efficient. However, it is often at the discretion of the programmer to choose the structures most appropriate to their application's needs. In sum, these choices can range from devilishly clever [ref Guibas and Stolfi] to painfully ham-fisted. [I won't dwell on them in this chapter in any detail, but I may mention possibilities, especially if they appear in Shewchuck's implementation.] This much is true for any algorithm one might enounter: given a set of $n$ unique sites, $P:=\{p_{1}, p_{2}, .. p_{n}\}$, the output will be a handful of Voronoi vertices, $V$, and a bundle of Voronoi edges, $E$. 
+
+  \section{Intersection of Half-Planes: A Na{\"i}ve Approach} % (fold)
+  \label{sec:a_naive_approach}
+  The structure of the planar Voronoi diagram lends itself to relatively simple algorithm for its construction. Intuitively, the Voronoi diagram of a set of sites P, $Vor(P)$, can be found by computing each region $V_{p_{i}}$. If $|P| = n$, then no region can have more than $n-1$ edges. Each region, then takes $\mathcal{O}(n\log n)$ time. [summarize this alg?]. A region needs to be computed for each of the $n$ sites, so computing the Voronoi diagram with this approach would take $\mathcal{O}(n^{2}\log n)$ time.
+
+  \subsection{Constructing a Voronoi Region} % (fold)
+  \label{sub:constructing_a_voronoi_region}
+  Each Voronoi region is composed of edges and vertices. The vertices of the region are a subset of the Voronoi vertices. How can we determine the edges of a given region? Consider an arbitrary site $p_{i}$ $P$ (where $P:=\{p_{1}, p_{2}, .. p_{n}\}$ is a set of $n$ distinct points in $\Re^{2}$.) We've seen that the Voronoi region is a convex polygonal region. Futhermore, if $|P| = n$, then no region can have more than $n-1$ edges. Recall that an equivalent way of describing a Voronoi region is as the intersection of a set of half-planes. We can construct the region for a specific site by taking the intersection of this set of half-planes.
+  
+  % subsection constructing_a_voronoi_region (end)
+
+  % section a_naive_approach (end)
+
+  \section{Shamos Algorithm: A Divide and Conquer Approach} % (fold)
+  \label{sec:divide_and_conquer}
+  [history... one of the first algs?]
+  \subsection{Overview} % (fold)
+  \label{sub:overview}
+  [The Divide and Conquer algorithm is actually a really cool algorithm that splits up the voronoi sites (via a recursive function) until they are of trivial size, and then computes the voronoi for the trivial region and then merges the two (adjacent) regions. it's the merge part that's hard. so spend a good amount of time explaining that. Now talk about how shewchuck and his approach and also how this one of the main portions of the code we're gonna modify]
+
+  % subsection overview (end)
+
+  \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
+  \label{sub:divide_and_conquer_algorithm_pseudocode}
+  \cref{divconq_voronoi_diagram} and its supporting procedures, \cref{HandleSiteEvent} and \cref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. The vertex and edge structure for $Vor(P)$ will use a classic doubly connected edge list (DCEL) [do i need to explain this] and we will use a balanced binary search tree (BBST) to maintain the beachfront, $\beta$. The event queue, $Q$, is a plain old priority queue. 
+  
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Divide and Conquer Voronoi Diagram}\label{divconq_voronoi_diagram}
+  \Procedure{VoronoiDivConq}{$P$}\Comment{Construct $Vor(P)$}
+  \State $P_{L}, P_{R},  \gets \Call{PartitionSites}{$P$}$\Comment{Partition $P$ by median x-coordinate}
+  \State $Vor(P_{L}) \gets $\Call{VoronoiDivConq}{$P_{L}$}  \Comment{Recursive call}
+  \Statex[1] $Vor(P_{R}) \gets $\Call{VoronoiDivConq}{$P_{R}$}
+  \State \Call{VoronoiMerge}{$Vor(P_{L})$, $Vor(P_{R})$}  \Comment{Merge sub-diagrams}
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Divide and Conquer Voronoi Diagram: Merge Voronoi}\label{HandleCircleEvent}
+  \Procedure{VoronoiMerge}{$Vor(P_{L})$, $Vor(P_{R})$}
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+  
+  % subsection divide_and_conquer_algorithm_pseudocode (end)
+  
+  \subsection{Analysis of Space and Time Complexity} % (fold)
+  \label{sub:analysis_of_space_and_time_complexity}
+  
+  % subsection analysis_of_space_and_time_complexity (end)
+
+  % section divide_and_conquer (end)
+
+  \section{Fortune's Algorithm: A Sweepline Approach} % (fold)
+  \label{sec:fortune_s_algorithm}
+  [in the 1980's] Steven Fortune proposed a sweepline algorithm with asymptotic running time $\mathcal{O}(n\log n)$ and using $\mathcal{O}(n)$ space. [YOU NEED TO REVIEW THIS STUFF] Fortune's algorithm makes use of a sweepline, a horizontal line beginning at the top of the plane and descending to the bottom of the plane. The general strategy of the algorithm is to use a line to scan the plane, updating information about the structure of the diagram whenever the sweepline intersects a point of interest. Some of these points of interest are known in advance, and others arise during the construction of the diagram. When the sweepline has intersected each of these points of interest, a little tidying up gives the Voronoi diagram. With a bit of planning and the clever choice of a quad-edge data structure, the task of constructing the Voronoi diagram with this approach immediately yields its dual, the Delaunay triangulation.
+
+  \subsection{Conceptual Overview} % (fold)
+  \label{sub:conceptual_overview}
+  [Trim the fat here]
+  Fortune's algorithm uses a few key concepts and structures to support the construction of the Voronoi diagram. To gain an understanding of how to algorithm works, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\Re^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\Re^{2}$. [side note: Conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate. If you include this, at least mention that a circle event might occur above the highest site event, and how to handle that]\par
+  An astute reader might wonder how exactly we construct the Voronoi diagram with nothing but a set of sites and a vague notion of a line that falls down the plane. After all, there's no obvious method by which the intersection of the sweepline with a point of interest might yield a Voronoi vertex or edge. Further, it would seem that even if we could provide such a relationship would be subject to change as soon as the sweepline encountered the next point of interest. \par
+  Herein lies the elegance of Fortune's algorithm. Consider the portion of the plane that the sweepline has already encountered, this portion constitutes a closed half-plane, $s^+$. If a site exists in $s^+$, then any point $q$ in $s^+$ which is closer to that site than it is to $s$ will not be assigned to a site below $s$. When the sweepline $s$ encounters a site $p_{i}$ we call this a \emph{site event}. We consider the locus of points which are closer to $p_{i}$ than to $s$. The set of points equidistant to $s$ and $p_{i}$ form a parabolic arc. This arc, denoted $\beta_{p_{i}}$, is added to a a sequence of parabolic arcs called the \emph{beachfront}. We will refer to the beachfront as $\beta(P)$. The crucial observation is that the points above $\beta(P)$ will be assigned to a site already encountered by $s$. \par
+  [Make sure there's a clear difference between the notation used for the parabola and the notation used for an arc].
+  To understand how the beachfront plays a role in constructing the Voronoi diagram, let's consider times where the structure of the beachfront changes. New arcs are added to the beachfront whenever a site event occurs. At the moment where the new arc, $\beta_{p_{i}}$, is inserted into the beachfront, it is a simple vertical line (or a parabola of no width). If there is an arc above $\beta_{p_{i}}$, $\beta_{p_{i}}$ will only intersect it at one point since the beachfront is x-monotone. To insert $\beta_{p_{i}}$ into the beachfront, we split the arc above it into two parabolic arcs and insert $\beta_{p_{i}}$ in between the split arcs. We record the points where $\beta_{p_{i}}$ intersects with the arcs adjacent to it, and we refer to these points as \emph{breakpoints}\footnote{Note that this means that the right breakpoint of $\beta_{p_{i}}$ is the same as the left breakpoint of the arc which is adjacent on the right. Similarly, the right breakpoint of the arc adjacent to $\beta_{p_{i}}$ on the left is equal to $\beta_{p_{i}}$'s left breakpoint.} As $s$ moves downward, the breakpoints of each arc in the beachfront $\beta(P)$ change since the parabola that governs the arc widens. Another way to understand this is to recognize that that parabola whose corresponding arc is $\beta_{p_{i}}$ has as its focus the site $p_{i}$ and $s$ as its directrix. If we were to draw lines that tracked the movement of the breakpoints for the beachfront as the sweepline descended, they would each trace out the Voronoi edges. So we know that arcs get added to the beachfront whenever a site event occurs, in fact, the \emph{only} time an arc gets added to the beachfront is when a site event occurs. [And we can prove that!] \par
+  The second way the beachfront's structure changes is when an arc disappears. The disappearance of an arc coincides with the second type of event, called a \emph{circle event}. We'll define the notion of a circle event by studying a small portion of the beachfront. Consider the arcs $\alpha$, $\delta$, and $\gamma$ defined by three sites $p_{i}$, $p_{j}$, and $p_{k}$. Define the circle, $C$ with the three sites $p_{i}$, $p_{j}$, $p_{k}$. [You should probably remind the reader why $\alpha$ and $\gamma$ are not arcs from the same site, also why the circle contains no sites] Though the reasons aren't immediately obvious, we want to keep track of two points: the center of the circle, $q$, and the lowest point of the circle, $l$. If $\delta$ is the arc that is shrinking, when does it disappear? Recall that the center of the circle, $q$, is equidistant from $p_{i}$, $p_{j}$, $p_{k}$ and $l$. When the sweepline, $s$, reaches $l$, the arcs correspoinding to $p_{i}$ and $p_{k}$, $\alpha$ and $\gamma$, respectively, intersect at $q$. [Do I need to explain in more detail why, or can I *just* include a diagram]. At this point, the right breakpoint of $\alpha$ and the left breakpoint of $\gamma$ become equal to the left and right breakpoints of $\delta$, $\delta$ disappears. The edges traced out by the breakpoints of $\delta$ meet at $q$ and $q$ becomes a Voronoi vertex.\par
+  To summarize, a site event occurs when the sweepline intersects with a site (i.e they both have the same y-coordinate) and a circle event occurs when the sweepline intersects with the lowest point (that is to say, the point with the minimum y-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. The effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex.\par
+  It's important to note that in this example, we assumed that $p_{i}$, $p_{j}$, $p_{k}$ were non-collinear sites, since the circle defined by three collinear points would be a circle of infinite radius (that is to say, a line). Moreover, we glossed over the possibility that $C$ contained any other sites. How would any number of sites on the interior of $C$ affect the circle event itself? \par 
+  To answer this question, let's first make a brief digression and introduce the second structure that Fortune's algorithm employs: the \emph{event queue}. Armed with an understanding of how site events and circle events effect the structure of the beachfront, we can consider ourselves sufficiently motivated to define a structure that keeps track of these kinds of events. We know that the sweepline travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweepline begins, we can simply order the sites by decreasing y-coordinate and initialize the event queue with that infomation. Unlike site events, we don't know exactly when or how many circle events will occur\footnote{Though we can provide an upper bound, see \cref{vertex_bounds}}, so they complicate the problem insofar as they punctuate the otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events.  Circle events are added to event queue for every triple of consecutive arcs on the beachfront. So when a site event triggers a new arc on the beachfront, we need to check a couple of things, namely, whether or not the new arc\begin{inparaenum}[\itshape a\upshape)]
+  a) invalidates one or more circle events already in the event queue; or
+  b) creates one or more circle events\end{inparaenum}. In this manner, handling a site event often has a cascading effect, wherein the event itself doesn't create a circle event, but it might create a situation where one or more circle events would need to added or removed from the event queue. Similarly, handling a circle event can also lead to the creation or removal of one or more circle events, since the disappearance of an arc can lead to new combinations of triples on the beachfront. Note that a circle event exists in the event queue if and only if it satisfies\begin{inparaenum}[\itshape a\upshape)]
+  a) the property that the circle defined by the sites corresponding to the triple of arcs intersects the sweepline; and
+  b) hasn't already been deleted from the event queue\end{inparaenum}.
+
+ [Probably don't need this anymore .... Now that we have an event queue to keep track of the order of circle and site events, we can look back at our initial example. Let $p_{m}$ be a site located somewhere on the interior of our original circle, $C$. As $s$ crept downward, the site event corresponding to $p_{m}$ would have been handled before circle event at $l$. As a result, an arc $\beta$ would have been inserted somewhere between $\alpha$, $\delta$, and $\gamma$. More specifically, the arc directly above $p_{m}$ would have been split into two arcs. The only exception to this would be the edge case where $p_{m}$'s x-coordinate was exactly the same as either of the breakpoints of $\delta$. In that case, the arc wouldn't have split $\delta$; it would have been inserted directly in between $\delta$ and the appropriate adjacent arc. If this were the case, the triple of arcs whose corresponding sites had defined the circle would no longer exist, so the circle event would be invalid. In the former scenario, the new arc would have created at least one new triple of arcs, which would have prompted the creation of more circles, and thus cicle events. It's possible to show [do i have to?] that at least one of these new circle events would have been handled before our original circle event...]
+  % subsection overview (end)
+
+  \subsection{Data Structures and Algorithm Pseudocode} % (fold)
+  \label{sub:sweep_algorithm_pseudocode}
+  \cref{sweepline_voronoi_diagram} and its supporting procedures, \cref{HandleSiteEvent} and \cref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. The vertex and edge structure for $Vor(P)$ will use a classic doubly connected edge list (DCEL) [do i need to explain this] and we will use a balanced binary search tree (BBST) to maintain the beachfront, $\beta$. The event queue, $Q$, is a plain old priority queue.  
+  
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Sweepline Voronoi Diagram}\label{sweepline_voronoi_diagram}
+  \Procedure{VoronoiSweepline}{$P$}\Comment{Construct $Vor(P)$}
+  \State $Q\gets P$\Comment{Initialize event queue, $Q$, with set of sites, $P$}
+  \State $\beta\gets \{\}$\Comment{Initialize beachfront, $B$, as empty}
+  \While{$Q$ is not empty}\Comment{There are more events to handle}
+    \State $e\gets Q.pop()$\Comment{Pop the next event off the queue}
+    \If{$e$ is a site event}
+    \State\Call{HandleSiteEvent}{$e$}\Comment{e is a site $p_{i}$}
+    \Else
+    \State\Call{HandleCircleEvent}{$e$}\Comment{$e$ is a circle, $c_{l}$ with low point $l$}
+    \EndIf
+  \EndWhile
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Sweepline Voronoi Diagram: Handle Site Event}\label{HandleSiteEvent}
+  \Procedure{HandleSiteEvent}{$p_{i}$}
+  \Statex Something compelling
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Sweepline Voronoi Diagram: Handle Circle Event}\label{HandleCircleEvent}
+  \Procedure{HandleCircleEvent}{$c_{l}$}
+  \Statex now blow their minds, this is cool stuff!
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+  % subsection sweep_algorithm_pseudocode (end)
+
+  \subsection{Final thoughts on Fortune's Algorithm} % (fold)
+  \label{sub:final_thoughts_on_fortune_s_algorithm}
+  Though Fortune's algorithm wasn't the algorithm I spent the most time with on this thesis, it remains my favorite algorithm to witness. Fortune's algorithm reveals- more readily than any other I've encountered- the connection between sorting a set of numbers and computing the Voronoi diagram. [the connection]
+  [perhaps a note on degenerate cases]
+  [a note on space and time complexity] 
+  % subsection final_thoughts_on_fortune_s_algorithm (end)
+  % section fortune_s_algorithm (end)
+
+  \section{Randomized Incremental Approach}
+    \subsection{Overview}
+    \subsection{Proof of Correctness}
+    \subsection{Analysis of Space and Time Complexity}
+
+	% The three lines above are to make sure that the headers are right, that the intro gets included in the table of contents, and that it doesn't get numbered 1 so that chapter one is 1.
+  \chapter*{Parallel Approaches to Constructing the Voronoi Diagram}
+    \addcontentsline{toc}{chapter}{Parallel Approaches to Constructing the Voronoi Diagram}
+    \chaptermark{Parallel Approaches to Constructing the Voronoi Diagram}
+    \markboth{Parallel Approaches to Constructing the Voronoi Diagram}{Parallel Approaches to Constructing the Voronoi Diagram}
+    \setcounter{chapter}{2}
+    \setcounter{section}{0}
+
+  \section{Parallel(?) Merge Hull} % (fold)
+  \label{sec:parallel_merge_hull}
+  [content content content maybe a diagram maybe some code]
+
+  % section parallel_merge_hull (end)
+  \section{Parallel(?) Randomized Incremental} % (fold)
+  \label{sec:parallel_randomized_incremental}
+
+  % section parallel_randomized_incremental (end)
+
+% Double spacing: if you want to double space, or one and a half 
+% space, uncomment one of the following lines. You can go back to 
+% single spacing with the \singlespacing command.
+% \onehalfspacing
+% \doublespacing
+\appendix
+  \chapter{(The Post Office Problem Re-framed)}
+  \label{appendix_one}
+  [Imagine you are looking at a map of your campus\par
+  Imagine you are studying trees. You are lying in the grass and the shade is covering your face. There is another tree about a dozen feet away. we all know exactly how far away it is, but dozen sounds more prosaic. so it's a dozen feet away, and why is that? [area availiable to a tree]\par
+  You're walking the blocks of new york city and the wind is cold. Where is the nearest subway entrance? People are walking past you though, really, you're just shuffling. Where is the nearest subway with an N train? Is it a local or express line? Are you hungry, maybe you're hungry. Or maybe your're the one selling hot dogs. yes. hot dogs in new york city. where should you put your hot dog cart?] 
+\backmatter
+\bibliographystyle{APA/apa-good}  % or
+\bibliography{thesis}
+% Finally, an index would go here... but it is also optional.
+\end{document}
