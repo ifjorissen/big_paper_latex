@@ -1,0 +1,188 @@
+
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+\psset{arrowsize=.01 3.2 1.4 .3}
+\psset{dotsize=.2}
+\catcode`@=11
+
+\newpsobject{PST@Border}{psline}{linewidth=.003,linestyle=solid}
+\newpsobject{PST@Axes}{psline}{linewidth=.0015,linestyle=dotted,dotsep=.004}
+\newpsobject{PST@Solid}{psline}{linewidth=.0015,linestyle=solid}
+\newpsobject{PST@Dashed}{psline}{linewidth=.0015,linestyle=dashed,dash=.01 .01}
+\newpsobject{PST@Dotted}{psline}{linewidth=.0025,linestyle=dotted,dotsep=.008}
+\newpsobject{PST@LongDash}{psline}{linewidth=.0015,linestyle=dashed,dash=.02 .01}
+\newpsobject{PST@Diamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square,dotangle=45}
+\newpsobject{PST@Filldiamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*,dotangle=45}
+\newpsobject{PST@Cross}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+,dotangle=45}
+\newpsobject{PST@Plus}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+}
+\newpsobject{PST@Square}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square}
+\newpsobject{PST@Circle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=o}
+\newpsobject{PST@Triangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle}
+\newpsobject{PST@Pentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon}
+\newpsobject{PST@Fillsquare}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*}
+\newpsobject{PST@Fillcircle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=*}
+\newpsobject{PST@Filltriangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle*}
+\newpsobject{PST@Fillpentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon*}
+\newpsobject{PST@Arrow}{psline}{linewidth=.001,linestyle=solid}
+\catcode`@=12
+
+\fi
+\psset{unit=2.5in,xunit=2.5in,yunit=2.5in}
+\pspicture(0.000000,0.000000)(1.000000,1.000000)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+% .1426
+% .1587
+% .3694
+
+\PST@Border(0.1426,0.4554)
+(0.1426,0.4554)
+(0.3694,0.1336)
+
+% \PST@Border(0.7265,0.7654)
+% (0.7265,0.7654)
+% (0.8570,0.4534)
+
+% \PST@Border(0.1587,0.7674)
+% (0.1587,0.7674)
+% (0.3674,0.6343)
+
+% \PST@Border(0.1426,0.4554)
+% (0.1426,0.4554)
+% (0.5821,0.4217)
+
+\PST@Border(0.3694,0.1336)
+(0.3694,0.1336)
+(0.7225,0.1534)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.3694,0.1336)
+
+\PST@Border(0.7225,0.1534)
+(0.7225,0.1534)
+(0.3694,0.1336)
+
+\PST@Border(0.1426,0.4554)
+(0.1426,0.4554)
+(0.1587,0.7674)
+
+\PST@Border(0.1587,0.7674)
+(0.1587,0.7674)
+(0.4416,0.8727)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.8570,0.4534)
+
+% \PST@Border(0.8570,0.4534)
+% (0.8570,0.4534)
+% (0.5821,0.4217)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.3674,0.6343)
+
+\PST@Border(0.1587,0.7674)
+(0.1587,0.7674)
+(0.1426,0.4554)
+
+% \PST@Border(0.7225,0.1534)
+% (0.7225,0.1534)
+% (0.5821,0.4217)
+
+% \PST@Border(0.3674,0.6343)
+% (0.3674,0.6343)
+% (0.1426,0.4554)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.7265,0.7654)
+
+% \PST@Border(0.3674,0.6343)
+% (0.3674,0.6343)
+% (0.4416,0.8727)
+
+% \PST@Border(0.7265,0.7654)
+% (0.7265,0.7654)
+% (0.5821,0.4217)
+
+% \PST@Border(0.3674,0.6343)
+% (0.3674,0.6343)
+% (0.5821,0.4217)
+
+% \PST@Border(0.4416,0.8727)
+% (0.4416,0.8727)
+% (0.3674,0.6343)
+
+\PST@Border(0.4416,0.8727)
+(0.4416,0.8727)
+(0.1587,0.7674)
+
+\PST@Border(0.7225,0.1534)
+(0.7225,0.1534)
+(0.8570,0.4534)
+
+\PST@Border(0.7265,0.7654)
+(0.7265,0.7654)
+(0.4416,0.8727)
+
+% \PST@Border(0.3694,0.1336)
+% (0.3694,0.1336)
+% (0.5821,0.4217)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.1426,0.4554)
+
+% \PST@Border(0.1426,0.4554)
+% (0.1426,0.4554)
+% (0.3674,0.6343)
+
+% \PST@Border(0.5821,0.4217)
+% (0.5821,0.4217)
+% (0.7225,0.1534)
+
+\PST@Border(0.8570,0.4534)
+(0.8570,0.4534)
+(0.7225,0.1534)
+
+% \PST@Border(0.3674,0.6343)
+% (0.3674,0.6343)
+% (0.1587,0.7674)
+
+\PST@Border(0.4416,0.8727)
+(0.4416,0.8727)
+(0.7265,0.7654)
+
+\PST@Border(0.8570,0.4534)
+(0.8570,0.4534)
+(0.7265,0.7654)
+
+% \PST@Border(0.7265,0.7654)
+% (0.7265,0.7654)
+% (0.3674,0.6343)
+
+\PST@Border(0.3694,0.1336)
+(0.3694,0.1336)
+(0.1426,0.4554)
+
+% \PST@Border(0.3674,0.6343)
+% (0.3674,0.6343)
+% (0.7265,0.7654)
+
+\PST@Fillcircle(0.1426,0.4554)
+\PST@Fillcircle(0.1587,0.7674)
+\PST@Fillcircle(0.4416,0.8727)
+\PST@Fillcircle(0.7265,0.7654)
+\PST@Fillcircle(0.8570,0.4534)
+\PST@Fillcircle(0.7225,0.1534)
+\PST@Fillcircle(0.3694,0.1336)
+\PST@Fillcircle(0.3674,0.6343)
+\PST@Fillcircle(0.5821,0.4217)
+
+\catcode`@=12
+\fi
+\endpspicture

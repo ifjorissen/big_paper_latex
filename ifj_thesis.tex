@@ -30,7 +30,7 @@
 % Chemistry (chemtex), screenplays, you name it.
 % Check out CTAN to see: http://www.ctan.org/
 %%
-\usepackage{graphicx,latexsym} 
+\usepackage{graphicx, latexsym} 
 \usepackage{amssymb,amsthm,amsmath,algorithm}
 \usepackage{longtable,booktabs,setspace} 
 \usepackage[hyphens]{url}
@@ -40,7 +40,13 @@
 \usepackage{paralist}
 \usepackage{algpseudocode}
 \usepackage{pstricks}
-\usepackage{epstopdf}
+% \usepackage[T1]{fontenc}
+% \usepackage{epstopdf}
+\usepackage{dirtytalk}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\captionsetup{format=hang,justification=raggedright}
+% \usepackage{minipage}
 \graphicspath{ {figs/} }
 \makeatletter
 \let\OldStatex\Statex
@@ -105,18 +111,43 @@
     %   \end{center}
     % \end {figure}
 
-    \begin {figure}
-      \begin{center}
-      \caption{check this ish out... now put it in illustrator to make it pretty n such}
-      \input{figs/simple_8site.tex}
-      \end{center}
-    \end {figure}
+
+    % \begin {figure}
+    %   \begin{center}
+    %   \caption{check this ish out... now put it in illustrator to make it pretty n such}
+    %   \input{figs/simple_8site.tex}
+    %   \end{center}
+    % \end {figure}
+
+    % \begin {figure}
+    %   \begin{center}
+    %   \caption{check this ish out... now put it in illustrator to make it pretty n such}
+    %   \input{figs/ch1/guibas/hwe.tex}
+    %   \end{center}
+    % \end {figure}
+
+
+    % \begin {figure}
+    %   \begin{center}
+    %   \caption{test results}
+    %   \input{figs/test_results.tex}
+    %   \end{center}
+    % \end {figure}
+
+
+    % \begin {figure}
+    %   \begin{center}
+    %   \caption{check this ish out... now put it in illustrator to make it pretty n such}
+    %   \input{figs/test2.tex}
+    %   \end{center}
+    % \end {figure}
 
 
 	% This is an example of a thesis setup to use the reed thesis document class.
 
     \tableofcontents
     \listofalgorithms
+    \listoffigures
 
 % The abstract is not required if you're writing a creative thesis (but aren't they all?)
 % If your abstract is longer than a page, there may be a formatting issue.
@@ -132,133 +163,228 @@
 
 %The \introduction command is provided as a convenience.
 %if you want special chapter formatting, you'll probably want to avoid using it altogether
+
   \chapter*{Introduction}
     \addcontentsline{toc}{chapter}{Introduction}
-	\chaptermark{Introduction}
-	\markboth{Introduction}{Introduction}
-  [the classic post office problem ...][insert something better here]
-  Suppose you are hoping to send a piece of mail via post office. In this day and age, it's uncommon to send a piece of mail, and you might ask yourself ``Where is the nearest post office?'' \par
+    \setcounter{chapter}{1}
+    \setcounter{section}{0}
+  \chaptermark{Introduction}
+  \markboth{Introduction}{Introduction}
+
+  \say{... To make this long discourse less boring for you, I want to wrap up part of it in the guise of a fable, in the course of which I hope the truth will not fail to manifest itself sufficiently clearly, and that this will be no less pleasing to you than if I were to set it forth wholly naked,}\citep[][p. 21]{descartes}.
+
+  \section{The World} % (fold)
+  \label{sec:the_world}
+  % In 1664, Ren\'{e} Descartes published \emph{The World}, also known as \emph{Treatise on Light}. In \emph{Treatise on Light}, Descartes outlines his philosophy of the world, consisting in a 
+  % Ren\'{e} Descartes spent four years to writing \emph{The World}, and it was not published until thirty-one years after its completion, on a leap year almost four hundred years ago. 
+    Ren\'{e} Descartes spent four years writing \emph{The World}, and abandoned it in 1633 after the Roman Inquisition condemmed Galileo and his heliocentric theory. It remained largely unpublished for thirty-one years after its abandonnment, save for some fragments which appeared in \emph{Principia philosophiae}. \emph{Treatise on Light}, first published as \emph{The World}, was not published until fifteen years after Descartes' death, on a leap year almost four hundred years ago. \par
+
+    Stepping into the world which Descartes presents in \emph{Treatise on Light} is astonishing in its own right, as his theory culminates in a cosmology where heavenly bodies lie unpreturbed at the centers of endlessly swirling corpuscules. For our purposes, the salient portion of Descartes' theory lies in this cosmology; his illustrations of the movement of bodies within the heavens are often touted as the first, however informal, use of the Voronoi diagram. \par
+
+    Under Descartes' view-- which builds off of his contemporaries-- there exists a trinity of elements. He writes \say{the Philosophers maintain that above the clouds there is a kind of air much subtler than ours, \ldots They say too that above this air there is yet another body, more subtle still, which they call the element of fire,}\citep[][p. 17]{descartes}. The third and final element is the element of earth, and it is the least \say{fine} of the three elements. These three elements may combine to create mixed or composite elements. The form of the first element is terribly small, and moves incredibly quickly-- the status, position, or size at any given time is imperceptible and indeterminate. The form of the third element, however, a large and move with much less urgency, and may resist the forces of other bodies. Further, Descartes believes that the elements of a higher order, that is to say, of a subtler sort, fill the gaps between the elements of a lower order so that they might constitute a perfectly solid body. \say{I say that this subtler air and this element of fire fill the gaps between the parts of the gross air that we breathe, so that these bodies, interlaced with one another, make up a mass as solid as any body can be,} \citep[][p. 17]{descartes}. \par 
+
+    In the section \emph{How, in the world as described, the heavens, the sun and the stars are formed}, Descartes asks us to imagine a new world in which we might have a number of bodies made up of the same matter. For Descartes, any given body of matter is surrounded on all sides by other bodies, arranged in such a way that there is no void between any two of them \citep[][p. 25]{descartes}. God agitates each body, giving it direction and motion; under this model, bodies are colliding constantly. The effects of a collision might be the breaking up or change in direction of one or more bodies. The smallest fragments, the products of many collisions, take the form of the finest first element which Descartes describes. The largest bodies which do not break apart, but rather, join together and form the third element. \par
+
+    The inclination of these \say{agitated} bodies is to move in a straight line, but the bodies all have a variety of masses and level of agigation associatated with them, so there emerges a rough ordering of the bodies about the center. Broadly, the smallest and least agitated bodies turn about the area closest to the center, while the larger or more agitated bodies trace out the larger circles around the center; at first blush, their movement might even resemble a straight line. Descartes superimposes this trinity of elements onto the principal parts of the universe: \say{the Sun and the fixed stars as the first kind, the heavens as the second, and the Earth with the planets and comets as the third,}\citep[][p. 20]{descartes}. Then, the center around which the bodies turn is a star, composed entirely of the first element; the elements which turn around it are the heavens; and the other earthly bodies are composed entirely of the third element.\par
+
+   % Furthermore, he notes that it is impossible for bodies to move in a straight line, in fact, each must travel along curved path of motion. \par
+
+    \begin{wrapfigure}{r}{0.54\textwidth}
+      \centering
+      \includegraphics[width=.4\textwidth]{descartes_transparent_heavenly}
+      \caption{Descartes' Heavenly Regions}
+      \label{fig:descartes_heavenly}
+    \end{wrapfigure}
+   % ABOVE ^^^ IS THIS NOT A CONTRADICTION? Above descartes says that the higher order elements penetrate the lwoer order ones
+
+   % The center, description of which we have delicately and deliberately escaped, is a star: a heavenly body composed entirely of the first element. The bodies which are composed of the second element and which turn about a center are called the heavens \citep[][p. 35]{descartes}. \par
+
+   Descartes' cosmology most directly likened to a Voronoi diagram through his description of the heavens as a whole. There is a heaven (we might call it a heavenly region) for each star. \cref{fig:descartes_heavenly}, illustrates this (and provides a much better intuition of the consequences of his theory than I am able to provide in words). He writes: \say{So there are as many different heavens as there are stars, and since the number of stars is indefinite so too is the number of heavens. And the firmament is just a surface without thickness separating all the heavens from one another,}\citep[][p. 35]{descartes}.\par
+
+   [The resemblence between Descartes' graphical representation of the heavens and the Voronoi diagram is undeniable.] The matter in the region defined as \textsc{hggh} is the heaven which rotates around $\epsilon$. Similarly, the heaven of star $S$ is precisely the matter in the region \textsc{fggf}. Perhaps more interesting, however, are the similarities between what he understands the diagram to be and the definition of a Voronoi diagram. As we mentioned earlier, Descartes believes that every star has a heaven associated with it. When we define the Voronoi diagram of a set of sites, we will note that every site has a corresponding region. The \emph{firmament}, as Descartes calls it, can be readily adapted to the Voronoi diagram with a shift in jargon: the firmament which separates the heavens from eachother are referred to as \emph{edges} in the Voronoi diagram. Should we have the desire to squint, we might even be able to glimpse an oblique reference to a Voronoi vertex: Descartes writes of the matter which lives at the intersection of three or more circles, at what appear to be \say{corners} of the firmament, it is likely smaller, and less agitated than the matter surrounding it.  
+  
+  % section the_world (end)
+% http://www.ph.ucla.edu/epi/snow/socscimed50_923_935_2000.pdf
+% https://books.google.com/books?id=cGeCNa_vookC&pg=PA152&lpg=PA152&dq=%60%60the+highest+use+of+cartography:+to+find+out+by+mapping+that+which+cannot+be+discovered+by+other+means+or,+at+least,+not+with+as+much+precision&source=bl&ots=olky0OHznK&sig=24PzRFn9l1vQWPEyMtoHx2HtZ6Y&hl=en&sa=X&ved=0ahUKEwjK6M3zop7LAhVJ-mMKHWXACD0Q6AEIHTAA#v=onepage&q=%60%60the%20highest%20use%20of%20cartography%3A%20to%20find%20out%20by%20mapping%20that%20which%20cannot%20be%20discovered%20by%20other%20means%20or%2C%20at%20least%2C%20not%20with%20as%20much%20precision&f=false
+  \section{The Apocryphal Tale of John Snow} % (fold)
+  \label{sec:the_apocryphal_tale_of_john_snow}
+  If my dear Reader will continue to indulge, fast-forward two hundred years\ldots to 1854. It is summer in London, England. Beginning in late August, the Soho district of London experienced a cholera outbreak. The severe dehydration caused by the disease lead to dozens of deaths in a matter of days, and the numbers rose to over five hundred in the first two weeks. 
+
+  \say{Dr. Snow's maps illustrate the highest use of cartography: to find out by mapping that which cannot be discovered by other means or, at least, not with as much precision.}
+  
+  % section the_apocryphal_tale_of_john_snow (end)
+
+
+  \chapter*{The Voronoi Diagram}
+    \addcontentsline{toc}{chapter}{The Voronoi Diagram}
+    \setcounter{chapter}{2}
+    \setcounter{section}{0}
+	\chaptermark{The Voronoi Diagram}
+	\markboth{The Voronoi Diagram}{The Voronoi Diagram}
+  Suppose you are hoping to send a piece of mail via post office. In this day and age, it's uncommon to send a piece of mail, and you might ask yourself \say{Where is the nearest post office?} \par
   But why is the post office \emph{there}? \par
-  To answer that question, assume the perspective of a city planner whose task is to determine where the next post office should located. The city planner might work under the assumption that people go to the post office closest to where they live. Roughly, the planner determines the areas of service for each post office, which consists of dividing the city into regions whose occupants are closer to the post office in that region than any other office. The area of service, for a particular post office, corresponds directly with the Voronoi cell of that site (the post office). We call this cell, or a region.\footnote{If the aforementioned example doesn't resonate with you, I'd encourage you to peruse \cref{appendix_one}, where I've included a plethora of other examples with the intent of motivating the problem from different perspectives, disciplines, and industries.}
+  To answer that question, assume the perspective of a city planner whose task is to determine where the next post office should located. The city planner might work under the assumption that people go to the post office closest to where they live. Roughly, the planner determines the areas of service for each post office, which consists of dividing the city into regions whose occupants are closer to the post office in that region than any other office. The area of service, for a particular post office, corresponds directly with the Voronoi cell of that site (the post office). We call this cell, or a region.\footnote{If the aforementioned example doesn't resonate with you, I'd encourage you to peruse \cref{appendix_one}, where I've included a plethora of other examples with the intent of motivating the problem from different perspectives, disciplines, and industries.}\par
 
   \section{Formalizing the Post Office Problem} % (fold)
   \label{sec:formalizing_the_post_office_problem}
-  [The Voronoi diagram is more than a pretty picture; it is a versatile geometric structure!] [Disclaimer about nice point sets and diagrams with non degenerate cases?]The diagram is the subdivision induced under the Voronoi assignment model, which consists in assigning every point in the plane to the site nearest to it.\par
-  To construct a Voronoi diagram, we need a set of sites, $P$, and way to measure the distance between two sites, p and q, denoted dist(p,q). For the purposes of this thesis, we consider the Voronoi diagram in the plane, sites are defined as points, and the distance between any two points is the Euclidian distance.\par
-  Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ a set of $n$ distinct points -- each one constituting a site -- in the plane. The Voronoi diagram of $P$ the subdivision of the plane into $n$ regions where for each region $V_{p_{i}}$ in the set of regions $V:=\{V_{p_{1}}, V_{p_{2}}, .. V_{p_{n}}\}$, $V_{p_{i}}$ is the region associated with site $p_{i}$. Further, the region $V_{p_{i}}$ is the set of points in the plane such that each point in $V_{p_{i}}$ is closer to $p_{i}$ than it is to any other site in $P$. Formally, given a plane $S$, a region or cell in a Voronoi diagram is the set of points in the plane which satisfy:
-  $$V_{p_{i}} := \{\,q \in S \mid dist(q, p_{i}) < dist(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$
-  For our purposes, $S= \Re^2$, the Euclidian plane in two dimensions, and $dist(p, q)$ is the Euclidian measure of distance in $\Re^2$. \par
-  We can also think of the region $V_{p_{i}}$ as the (possibly open) convex polygon which is the result of intersection of $n-1$ half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $l$ connecting them. [graph] At the midpoint, $m$, of $l$, imagine a line $b$, purpendicular to $l$ and passing through $m$. Note that $b$ is the purpendicular bisector of $l$. Then $b$ splits the plane into two half-planes. Define the half-plane containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{i}, p_{j})$. To connect this notion back to our first description of a Voronoi region, note that all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. Define set of half-planes containing $p_{i}$ as $H_{p_{i}} := \{\,h(p_{i}, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}$. There are $n-1$ half-planes in $H_{p_{i}}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are closer to $p_{i}$ than they are to $p_{j}$ or $p_{k}$. If we performed this intersection over all $n-1$ half-planes, we would have described the Voronoi region of $p_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
-  $$V_{p_{i}} = \bigcap_{h \in H_{p_{i}}}$$ 
-  Because the half-plane is a convex set\footnote{A set is convex if the straight line connecting any two points in the set is also in the region.} (or region), and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies heavily on intersection of half-planes and convex regions.\par
-  Every Voronoi region can be thought of as a (possibly open) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. The Voronoi diagram of a set of sites P, $Vor(P)$, is the collection of all of these regions [at then end, though, in the simplest sense, is the handful of vertices and a bundle of edges resulting from the union of these regions.] \footnote{If I may draw your attention to the set of vertices and edges resulting from the union of regions, you might note that there are bound to be duplicates. For example, two adjacent regions will share a bounding edge and two vertices (the endpoints of the shared edge). The presence of duplicates in this set might indicate that constructing the Voronoi diagram by taking the union of the individually computed regions might not be the most space or time conscious approach.}\par
-  We know that $Vor(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\Re^2$ is nearly a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to the half infinite edges (that is to say, all edges without two endpoints). [Diagram, before and after] \textit{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
-  $v - e + f = 2.$ Applying this to $Vor(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
-  $$(v + 1) - e + n = 2.$$ Since every edge has exactly two endpoints and every (and every vertex is of degree at least 3), we can say that $2e \geq 3(v + 1)$. Together with Euler'f formula, this implies that for a $n\geq 3$, the number of vertices is at most $2n -5$ and the number of edges is at most $3n -6$. 
+  One way to understand the Voronoi diagram is via a rigorous exploration of subdivisions, manifolds, and edge algebras.\footnote{If this interests you, skip this thesis and read Guibas and Stolfi's paper.\citep{}} However,  for the purposes of this thesis we begin with a more gentle introduction. My goal is to offer a description of the Voronoi diagram that relies on its geometric properties in the Euclidian Plane. The diagram is the subdivision induced under the Voronoi assignment model, which consists in assigning every point in the plane to the site nearest to it. To construct a Voronoi diagram, we need a set of sites, $P$, and way to measure the distance between two sites, p and q, denoted $\delta(p,q)$. For the purposes of this thesis, we consider the Voronoi diagram in the plane, sites are defined as points, and the distance between any two points is the Euclidian distance.\par
+  Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ a set of $n$ distinct points -- each one constituting a site -- in the plane. The Voronoi diagram of $P$ the subdivision of the plane into $n$ regions where for each region $V_{i}$ in the set of regions $V:=\{V_{1}, V_{2}, .. V_{n}\}$, $V_{i}$ is the region associated with site $p_{i}$. Further, the region $V_{i}$ is the set of points in the plane such that each point in $V_{i}$ is closer to $p_{i}$ than it is to any other site in $P$. Formally, given a plane $S$, a region or cell in a Voronoi diagram is the set of points in the plane which satisfy:
+  $$V_{i} := \{\,q \in S \mid \delta(q, p_{i}) \leq \delta(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$
+  For our purposes, $S= \Re^2$, the Euclidian plane in two dimensions, and $\delta(p, q)$ is the Euclidian measure of distance in $\Re^2$. \par
+  We can also think of the region $V_{i}$ as the (possibly unbounded) convex polygon which is the result of intersection of $n-1$ half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $l$ connecting them. [graph] At the midpoint, $m$, of $l$, imagine a line $b$, purpendicular to $l$ and passing through $m$. Note that $b$ is the perpendicular bisector of $l$. Then $b$ splits the plane into two half-planes. Define the half-plane containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{i}, p_{j})$. To connect this notion back to our first description of a Voronoi region, note that all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. Define set of half-planes containing $p_{i}$ as $H_{i} := \{\,h(p_{i}, p_{j}) \mid j\neq i \}$. There are $n-1$ half-planes in $H_{i}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are closer to $p_{i}$ than they are to $p_{j}$ or $p_{k}$. If we performed this intersection over all $n-1$ half-planes, we would have described the Voronoi region of $p_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
+  $$V_{i} = \bigcap_{h \in H_{i}}$$ 
+  Because the half-plane is a convex set\footnote{A set is convex if the line segment connecting any two points in the set is also in the region.} (or region), and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies heavily on intersection of half-planes and convex regions.\par
+  To summarize, every Voronoi region can be thought of as a (possibly unbounded) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. The Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, is the collection of all of these regions.
+  We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\Re^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints). [DIAGRAM, before and after?] \par
+
+  Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
+  $v - e + f = 2.$ Applying this to $\mbox{Vor}(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
+  $$(v + 1) - e + n = 2.$$ Since every edge has exactly two endpoints and every (and every vertex is of degree at least 3), we can say that $2e \geq 3(v + 1)$. Together with Euler's formula, this implies that for a $n\geq 3$, the number of vertices is at most $2n -5$ and the number of edges is at most $3n -6$. 
   % section formalizing_the_post_office_problem (end)
+  \section{Intersection of Half-Planes: A Na{\"i}ve Approach} % (fold)
+  \label{sec:a_naive_approach}
+  The structure of the planar Voronoi diagram lends itself to relatively simple algorithm for its construction. Using the notions and terminology from above, we can cobble together a naive algorithm to compute the Voronoi diagram of a set of sites. Intuitively, the Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, can be found by computing each region $V_{i}$ and defining $\mbox{Vor}(P)$ to be that set of regions. \par
+
+  We've seen that the Voronoi region is a convex polygonal region. Futhermore, if $|P| = n$, then no region can have more than $n-1$ edges. Recall that an equivalent way of describing a Voronoi region is as the intersection of a set of half-planes. We can construct the region for a specific site by taking the intersection of this set of half-planes. Each region, then takes $\mathcal{O}(n\log n)$ time. A region needs to be computed for each of the $n$ sites, so computing the Voronoi diagram with this approach would take $\mathcal{O}(n^{2}\log n)$ time.
+
+  [diagram?][algorithm overview for intersection fo half planes?]
   
   \section{The Voronoi Diagram and its Dual} % (fold)
   \label{sec:the_voronoi_diagram_and_its_dual}
-  [define triangulations, convex hull]
-  [define dual, the delaunay diagram]
-  [As long as the voronoi diagram doesn't have any degeneracies (all vertices are of degree 3) the delaunay graph will be a triangulation]
-  Imagine that we had a Voronoi diagram on $P$, $Vor(P)$. Choose a site $p_{i} \in P$ and, using $Vor(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it. [DIAGRAM] Do this for all the sites [DIAGRAM]. If we assume that $Vor(P)$ contains no degeneracies, then the resulting diagram is a Delaunay Trangulation. 
-  [This is true: ] Define the convex hull of $P$ to be the smallest convex region containing $P$ [DIAGRAM of convex hull of the set of points]. It is the intersection of all of the convex sets containing $P$. The boundary of the Delaunay triangulation of P is the convex hull of $P$.
+  While the Voronoi diagram can be computed directly with relative- though certainly not always computatational- ease, it can also be computed indirectly, that is, through the construction of its dual, the \emph{Delaunay triangulation}. One of the many advantages of working with the dual is the ability to work with triangular faces instead of with polygonal regions with an unknown number of sides. Given a Voronoi diagram on $P$, $\mbox{Vor}(P)$, choose a site $p_{i} \in P$. Using $\mbox{Vor}(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it, as in \cref{fig:del_intuition1}. Do this for all the sites as in \cref{fig:del_intuition2}. If we assume that $\mbox{Vor}(P)$ contains no degeneracies, then the resulting diagram is the Delaunay Trangulation, $\mbox{Del}(P)$, as shown in \cref{fig:del_intuition}.
 
-  
+  \begin{figure}[!htb]
+    \centering
+    \begin{subtable}{.475\textwidth}
+      \input{figs/intro/del_intuition_1.tex}
+      \caption{A site connected to its adjacent sites}
+      \label{fig:del_intuition1}
+    \end{subtable}%
+    \begin{subtable}{.475\textwidth}
+      \input{figs/intro/del_intuition_done.tex}
+      \caption{All sites connected to their adjacent sites}
+      \label{fig:del_intuition2}
+    \end{subtable}
+    \caption{Voronoi Diagram (Solid) and Delaunay Triangulation (Dashed)}
+    \label{fig:del_intuition}
+  \end{figure}
+
+% move degenerate case to a last paragraph where you can finally be honest with them
+  Note that we are being a bit cavalier with this description of the Delaunay triangulation. If four or more sites were co-circular, our result would be a Delaunay subdivision, which could be quickly modified (via the addition of edges, if necessary) to be a Delaunay triangulation. Furthermore, the Delaunay triangulation of a  Voronoi diagram whose sites are in general position is unique.\par
+
+  Now, let's take a couple steps back and define the Delaunay triangulation a bit more rigorously, so we can better examine its properties and relation to the Voronoi diagram. It's useful, for our purposes, to consider the \emph{convex hull}.  This is the smallest convex region containing $P$, that is roughly, the intersection of all of the convex sets containing $P$. We will define this set as the smallest convex set generated by taking conbinations of points of $P$. Precisely, given points $q_{1}$,... $q_{k}$, a \emph{convex combination} of those points is defined as $\Sigma\alpha_{i}q_{i}$ where the $\alpha_{i}$'s are non-negative and $\Sigma\alpha_{i}=1.$  So, for our point set $P$ we are interested in the convex hull  $\mbox{conv}(P)$ defined as the set
+
+   % in $\Re^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, 
+
+  % Precisely, given $n$ points in $\Re^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, and the points generated by the combination of $p_{i}$'s are the \emph{convex set}.\cite{SHAMOS pg 90-91}
+  \[
+   \mbox{conv}(P) = \{\, \alpha_{1}p_{1} + ... + \alpha_{n}p_{n} \ \mid\ \text{for$ \,\alpha_{i} \in \Re, \; \alpha_{i} \geq 0$ and $\Sigma\alpha_{i} = 1$}\,\} 
+  \]
+  \cref{fig:convex_hull} illustrates the convex hull of the same point set used in \cref{fig:del_intuition1, fig:del_intuition2}. 
+  This region of the plane is best understood in terms of a complete description of its boundary \footnote{See \cref{fig:convex_hull}}. 
+  The boundary of the Delaunay triangulation of P is the convex hull of $P$. It's important to note here that every edge in the convex hull of a set of sites is an edge in the Delaunay triangulation.
+
+  \begin{figure}[!htb]
+    \centering
+    \input{figs/intro/convex_hull.tex}
+      % \caption{All sites connected to their adjacent sites}
+    \caption{Convex hull of a set of points}
+    \label{fig:convex_hull}
+  \end{figure}
+
+  What distinguishes the Delaunay triangulation of a set $P$ from any other triangulation of $P$ are its unique properties, which are directly related to its privileged position as the dual of the Voronoi diagram. (maximizes the minimum angle of all triangulations and why this is cool, empty circumcircle property for each facet)(also, do I need to provide a proof that the straight line dual of the voronoi is a triangulation?)
+
+  As a side note, this is precisely how we confirm the delaunayhood of a subdivision. More precisely, if every face (triangle) in the diagram is \emph{locally delaunay} (that is to say, passes the circle test), then the diagram is considered to be \emph{globally delaunay}.
+
+
   % section the_voronoi_diagram_and_its_dual (end)
-  \section{Properties of Voronoi and Delaunay Diagrams} % (fold)
-  \label{sec:properties_of_voronoi_and_delaunay_diagrams}
-  they are just the cat's pajamas they are the bees knees. 
-  
-  % section properties_of_voronoi_and_delaunay_diagrams (end)
   \section{Applications of Voronoi and Delaunay Diagrams} % (fold)
   \label{sec:applications_of_voronoi_and_delaunay_diagrams}
-  Generalizing voronoi diagrams (nearness, sites as objects other than points)
-  [Problems with $\mathcal{O}(n)$ reduction to delaunay, voronoi]
+  Beyond the intrinsic allure of the Voronoi diagram and its stright line dual, the Delaunay triangulation, lies a fascinating set of linear time reductions to some of the central proximity problems. This means that if we take the time to preprocess a set of sites into a Voronoi diagram, then we can answer many different questions in linear (or better!) time. This is especially significant when the time complexity of answering that question is greater than $\mathcal{O}(n)$.\par 
+
+  From the previous section \cref{sec:the_voronoi_diagram_and_its_dual}, we saw that it is possible to obtain the dual of the Voronoi diagram in linear time. Thus, we can use the Voronoi diagram to solve the problem of triangulating a set of sites $P$, by returning the dual of the diagram. 
+
+  The Post Office Problem is a classic, though perhaps slightly dated, motivation for the Voronoi diagram. However, it captures one of the central use cases for the Voronoi diagram, which is its ability to answer the \emph{nearest neighbor problem}. The nearest neighbor problem can be stated as such: given a set of sites $P$, and a query point $q$, return the point in $P$ which is closest to $q$. Recall that the Voronoi diagram partitions the plane into a set of $\mid\,P\,\mid$ regions which satisfy the stipulation that every point in a given region is closer to the site associated with that region than it is to any other site. Then, given a query point $q$ and a Voronoi diagram of $P$, we can answer the nearest neighbor question by simply locating the region that $q$ is in, a question we can answer in $\mathcal{O}(\log n)$ time with linear auxilliary storage.\citep{shamos, p 214}\par
   
+  (Closely) related to this are the \emph{closest pair} and \emph{all nearest neighbors} problems. The closest pair problem asks, given a set of sites $P$, which pair of points $p_{i}$ and $p_{j}$ in $P$ are closest? The all nearest neighbors problem can be framed similarly: given a set of sites $P$, return a collection of pairs ($p_{i}$, $p_{j}$) such that $p_{j}$ is the nearest neighbor of $p_{i}$.\footnote{Note here that the closest pair problem is really a specification of the nearest neighbors problem where the query point $q$ is some $p_{i}$ in $P$ and not arbitrary $q$ in $\Re^2$.} When given a Voronoi diagram on those sites, the all nearest neighbors problem can be answered in linear time by recognizing that the nearest neighbor of a single site must be one of the sites with which it shares an edge. Equivalently, we can consider the Delaunay triangulation on the same set of sites, $\mbox{Del}(P)$. Recall that each vertex on the Delaunay triangulation is a site of $\mbox{Vor}(P)$. Furthermore, note that the line segment connecting a vertex $p_{i}$ of $\mbox{Del}(P)$ to its nearest neighbor is, and must be, one of the edges in $\mbox{Del}(P)$. So, if we spend time on the order of $\mathcal{O}(n)$ computing the result of the all nearest neighbors problem on $\mbox{Vor}(P)$, we will, by definition, have the answer the the closest pair problem for each site in $P$. 
+
+  [MINIMUM SPANNING TREE, other problems?]
+  
+  \section{Properties of Voronoi and Delaunay Diagrams} % (fold)
+  \label{sec:properties_of_voronoi_and_delaunay_diagrams}
+  This section summarizes the terminology from \cref{sec:formalizing_the_post_office_problem, sec:a_naive_approach, sec:the_voronoi_diagram_and_its_dual, sec:applications_of_voronoi_and_delaunay_diagrams} 
+  
+  % section properties_of_voronoi_and_delaunay_diagrams (end)
+
   % section applications_of_voronoi_and_delaunay_diagrams (end)
   \section{Statement of algorithm goals (High Performance Computing)} % (fold)
   \label{sec:statement_of_algorithm_goals_high_performance_computing_}
-    [I'm not one for goal setting, but here goes...] In this thesis, we wish to bear witness to the effects of modifying the two aspects of two different approaches to constructing the voronoi diagram (or the delaunay triangulation). Further, we ask the following question, which will be further motivated by the section on divide and conquer algorithms: ``given two valid delaunay triangulations (or voronoi diagrams), merge them''. So we're trying to merge them in parallel so we can see the results and maybe say something about that. We're also thinking about the question ``is there a way to \emph{order} the randomized incremental approach in a way that allows us to have multiple workers attacking the problem while also minimizing the amount of conflict?'' And we'll see more information on that problem in the section on randomized incremental and also the section on progress with that endeavor.]
+    In this thesis, we wish to bear witness to the effects of modifying the two aspects of two different approaches to constructing the Voronoi diagram (or the Delaunay triangulation). Further, we ask the following question, which will be further motivated by the section on divide and conquer algorithms: ``given two valid delaunay triangulations (or voronoi diagrams), merge them''. So we're trying to merge them in parallel so we can see the results and maybe say something about that. We're also thinking about the question ``is there a way to \emph{order} the randomized incremental approach in a way that allows us to have multiple workers attacking the problem while also minimizing the amount of conflict?'' And we'll see more information on that problem in the section on randomized incremental and also the section on progress with that endeavor.]
   % section statement_of_algorithm_goals_high_performance_computing_ (end)
 
   \chapter*{Constructing the Voronoi Diagram}
     \addcontentsline{toc}{chapter}{Constructing the Voronoi Diagram}
     \chaptermark{Constructing the Voronoi Diagram}
     \markboth{Constructing the Voronoi Diagram}{Constructing the Voronoi Diagram}
-    \setcounter{chapter}{1}
+    \setcounter{chapter}{3}
     \setcounter{section}{0}
-  Algorithms to construct the Voronoi diagram fall into three rough categories: incremental approaches, divide and conquer approaches, and sweepline approaches. The worst case time compexity approaches for each of these is $\mathcal{O}(n^{2})$, $\mathcal{O}(n\log n)$ and $\mathcal{O}(n\log n)$ respectively. [Probably some more info about space complexity, average case, expected case]\par
-  Since the problem of sorting numbers can be transformed into the problem of computing a Voronoi diagram in linear $\mathcal{O}(n)$ time, the Voronoi diagram can be constructed in optimal time $\theta(n\log n)$. (Cool fact: Asymptotically, the complexity of the constructing the diagram is no more difficult than the task of finding a region.)\par
-  A note on storage: There are many different ways to store a Voronoi diagram. Algorithms will occasionally suggest data structures which complement the algorithm approach and are space efficient. However, it is often at the discretion of the programmer to choose the structures most appropriate to their application's needs. In sum, these choices can range from devilishly clever [ref Guibas and Stolfi] to painfully ham-fisted. [I won't dwell on them in this chapter in any detail, but I may mention possibilities, especially if they appear in Shewchuck's implementation.] This much is true for any algorithm one might enounter: given a set of $n$ unique sites, $P:=\{p_{1}, p_{2}, .. p_{n}\}$, the output will be a handful of Voronoi vertices, $V$, and a bundle of Voronoi edges, $E$. 
-
-  \section{Intersection of Half-Planes: A Na{\"i}ve Approach} % (fold)
-  \label{sec:a_naive_approach}
-  The structure of the planar Voronoi diagram lends itself to relatively simple algorithm for its construction. Intuitively, the Voronoi diagram of a set of sites P, $Vor(P)$, can be found by computing each region $V_{p_{i}}$. If $|P| = n$, then no region can have more than $n-1$ edges. Each region, then takes $\mathcal{O}(n\log n)$ time. [summarize this alg?]. A region needs to be computed for each of the $n$ sites, so computing the Voronoi diagram with this approach would take $\mathcal{O}(n^{2}\log n)$ time.
-
-  \subsection{Constructing a Voronoi Region} % (fold)
-  \label{sub:constructing_a_voronoi_region}
-  Each Voronoi region is composed of edges and vertices. The vertices of the region are a subset of the Voronoi vertices. How can we determine the edges of a given region? Consider an arbitrary site $p_{i}$ $P$ (where $P:=\{p_{1}, p_{2}, .. p_{n}\}$ is a set of $n$ distinct points in $\Re^{2}$.) We've seen that the Voronoi region is a convex polygonal region. Futhermore, if $|P| = n$, then no region can have more than $n-1$ edges. Recall that an equivalent way of describing a Voronoi region is as the intersection of a set of half-planes. We can construct the region for a specific site by taking the intersection of this set of half-planes.
+  In \cref{sec:formalizing_the_post_office_problem} we saw a naive algorithm for computing the Voronoi diagram of a set of $n$ sites. The time complexity of the half-plane intersection algorithm, as we discovered in \cref{sec:a_naive_approach}, is $\mathcal{O}(n^{2}\log n)$. Though it provides an intuition of the diagram, there are far more optimal approaches to the construction of the Voronoi diagram. They fall into three rough categories: incremental approaches, divide and conquer approaches, and sweepline approaches. The worst case time complexity for each of these is $\mathcal{O}(n^{2})$, $\mathcal{O}(n\log n)$ and $\mathcal{O}(n\log n)$ respectively. In this chapter, we will examine two classic algorithsm to compute the Voronoi diagram: a divide and conquer algorithm, presented by Guibas and Stolfi [ref]; and Steven Fortune's sweepline algorithm. \par
+  
+  As it turns out, we can't do better than $\mathcal{O}(n\log n)$. Curious reader that you are, you might wonder: \say{Why?} And the answer is this: we can show, quite easily, in fact, that the problem of sorting numbers is \emph{reducible} to the problem of computing the Voronoi diagram. This means that given a set of integers, we can use an algorithm to construct of Voronoi diagram as a subroutine to compute the sorted set. Furthermore, it implies that we will never be able to construct the Voronoi diagram faster (in terms of complexity) than we will be able to sort integers. Thus, an immediate consequence of this reduction is a tight bound on the Voronoi diagram; it can be constructed in optimal time $\theta(n\log n)$. (Cool fact: Asymptotically, the complexity of the constructing the diagram is no more difficult than the task of finding a region.)\par
   
   % subsection constructing_a_voronoi_region (end)
-
   % section a_naive_approach (end)
-
-  \section{Shamos Algorithm: A Divide and Conquer Approach} % (fold)
-  \label{sec:divide_and_conquer}
-  [history... one of the first algs?]
-  \subsection{Overview} % (fold)
-  \label{sub:overview}
-  [The Divide and Conquer algorithm is actually a really cool algorithm that splits up the voronoi sites (via a recursive function) until they are of trivial size, and then computes the voronoi for the trivial region and then merges the two (adjacent) regions. it's the merge part that's hard. so spend a good amount of time explaining that. Now talk about how shewchuck and his approach and also how this one of the main portions of the code we're gonna modify]
-
-  % subsection overview (end)
-
-  \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
-  \label{sub:divide_and_conquer_algorithm_pseudocode}
-  \cref{divconq_voronoi_diagram} and its supporting procedures, \cref{HandleSiteEvent} and \cref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. The vertex and edge structure for $Vor(P)$ will use a classic doubly connected edge list (DCEL) [do i need to explain this] and we will use a balanced binary search tree (BBST) to maintain the beachfront, $\beta$. The event queue, $Q$, is a plain old priority queue. 
-  
-  \begin{algorithm}[H]
-  \begin{algorithmic}[1]
-  \caption{Divide and Conquer Voronoi Diagram}\label{divconq_voronoi_diagram}
-  \Procedure{VoronoiDivConq}{$P$}\Comment{Construct $Vor(P)$}
-  \State $P_{L}, P_{R},  \gets \Call{PartitionSites}{$P$}$\Comment{Partition $P$ by median x-coordinate}
-  \State $Vor(P_{L}) \gets $\Call{VoronoiDivConq}{$P_{L}$}  \Comment{Recursive call}
-  \Statex[1] $Vor(P_{R}) \gets $\Call{VoronoiDivConq}{$P_{R}$}
-  \State \Call{VoronoiMerge}{$Vor(P_{L})$, $Vor(P_{R})$}  \Comment{Merge sub-diagrams}
-  \EndProcedure
-  \end{algorithmic} 
-  \end{algorithm}
-
-  \begin{algorithm}[H]
-  \begin{algorithmic}[1]
-  \caption{Divide and Conquer Voronoi Diagram: Merge Voronoi}\label{HandleCircleEvent}
-  \Procedure{VoronoiMerge}{$Vor(P_{L})$, $Vor(P_{R})$}
-  \EndProcedure
-  \end{algorithmic} 
-  \end{algorithm}
-  
-  % subsection divide_and_conquer_algorithm_pseudocode (end)
-  
-  \subsection{Analysis of Space and Time Complexity} % (fold)
-  \label{sub:analysis_of_space_and_time_complexity}
-  
-  % subsection analysis_of_space_and_time_complexity (end)
-
-  % section divide_and_conquer (end)
 
   \section{Fortune's Algorithm: A Sweepline Approach} % (fold)
   \label{sec:fortune_s_algorithm}
-  [in the 1980's] Steven Fortune proposed a sweepline algorithm with asymptotic running time $\mathcal{O}(n\log n)$ and using $\mathcal{O}(n)$ space. [YOU NEED TO REVIEW THIS STUFF] Fortune's algorithm makes use of a sweepline, a horizontal line beginning at the top of the plane and descending to the bottom of the plane. The general strategy of the algorithm is to use a line to scan the plane, updating information about the structure of the diagram whenever the sweepline intersects a point of interest. Some of these points of interest are known in advance, and others arise during the construction of the diagram. When the sweepline has intersected each of these points of interest, a little tidying up gives the Voronoi diagram. With a bit of planning and the clever choice of a quad-edge data structure, the task of constructing the Voronoi diagram with this approach immediately yields its dual, the Delaunay triangulation.
+  In the 1980's Steven Fortune proposed a sweepline algorithm with asymptotic running time $\mathcal{O}(n\log n)$ and using $\mathcal{O}(n)$ space. Fortune's algorithm makes use of a sweepline, a horizontal line beginning at the top of the plane and descending to the bottom of the plane. The general strategy of the algorithm is to use a line to scan the plane, updating information about the structure of the diagram whenever the sweepline intersects a point of interest. Some of these points of interest are known in advance, and others arise during the construction of the diagram. With a bit of planning and the clever choice of a quad-edge data structure, the task of constructing the Voronoi diagram with this approach immediately yields its dual, the Delaunay triangulation. [ref guibas]
 
   \subsection{Conceptual Overview} % (fold)
   \label{sub:conceptual_overview}
-  [Trim the fat here]
-  Fortune's algorithm uses a few key concepts and structures to support the construction of the Voronoi diagram. To gain an understanding of how to algorithm works, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\Re^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\Re^{2}$. [side note: Conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate. If you include this, at least mention that a circle event might occur above the highest site event, and how to handle that]\par
+  Fortune's algorithm uses a few key concepts and structures to support the construction of the Voronoi diagram. To gain an understanding of how to algorithm works, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\Re^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\Re^{2}$. Note that conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
+
   An astute reader might wonder how exactly we construct the Voronoi diagram with nothing but a set of sites and a vague notion of a line that falls down the plane. After all, there's no obvious method by which the intersection of the sweepline with a point of interest might yield a Voronoi vertex or edge. Further, it would seem that even if we could provide such a relationship would be subject to change as soon as the sweepline encountered the next point of interest. \par
-  Herein lies the elegance of Fortune's algorithm. Consider the portion of the plane that the sweepline has already encountered, this portion constitutes a closed half-plane, $s^+$. If a site exists in $s^+$, then any point $q$ in $s^+$ which is closer to that site than it is to $s$ will not be assigned to a site below $s$. When the sweepline $s$ encounters a site $p_{i}$ we call this a \emph{site event}. We consider the locus of points which are closer to $p_{i}$ than to $s$. The set of points equidistant to $s$ and $p_{i}$ form a parabolic arc. This arc, denoted $\beta_{p_{i}}$, is added to a a sequence of parabolic arcs called the \emph{beachfront}. We will refer to the beachfront as $\beta(P)$. The crucial observation is that the points above $\beta(P)$ will be assigned to a site already encountered by $s$. \par
+  Herein lies the elegance of Fortune's algorithm. Consider the portion of the plane that the sweepline has already encountered, this portion constitutes a closed half-plane, $s^+$. If a site exists in $s^+$, then any point $q$ in $s^+$ which is closer to that site than it is to $s$ will not be assigned to a site below $s$. When the sweepline $s$ encounters a site $p_{i}$ we call this a \emph{site event}. We consider the locus of points which are closer to $p_{i}$ than to $s$. The set of points equidistant to $s$ and $p_{i}$ form a parabolic arc. This arc, denoted $\beta_{i}$, is added to a a sequence of parabolic arcs called the \emph{beachfront}. We will refer to the beachfront as $\beta(P)$. The crucial observation is that the points above $\beta(P)$ will be assigned to a site already encountered by $s$. \par
+
   [Make sure there's a clear difference between the notation used for the parabola and the notation used for an arc].
-  To understand how the beachfront plays a role in constructing the Voronoi diagram, let's consider times where the structure of the beachfront changes. New arcs are added to the beachfront whenever a site event occurs. At the moment where the new arc, $\beta_{p_{i}}$, is inserted into the beachfront, it is a simple vertical line (or a parabola of no width). If there is an arc above $\beta_{p_{i}}$, $\beta_{p_{i}}$ will only intersect it at one point since the beachfront is x-monotone. To insert $\beta_{p_{i}}$ into the beachfront, we split the arc above it into two parabolic arcs and insert $\beta_{p_{i}}$ in between the split arcs. We record the points where $\beta_{p_{i}}$ intersects with the arcs adjacent to it, and we refer to these points as \emph{breakpoints}\footnote{Note that this means that the right breakpoint of $\beta_{p_{i}}$ is the same as the left breakpoint of the arc which is adjacent on the right. Similarly, the right breakpoint of the arc adjacent to $\beta_{p_{i}}$ on the left is equal to $\beta_{p_{i}}$'s left breakpoint.} As $s$ moves downward, the breakpoints of each arc in the beachfront $\beta(P)$ change since the parabola that governs the arc widens. Another way to understand this is to recognize that that parabola whose corresponding arc is $\beta_{p_{i}}$ has as its focus the site $p_{i}$ and $s$ as its directrix. If we were to draw lines that tracked the movement of the breakpoints for the beachfront as the sweepline descended, they would each trace out the Voronoi edges. So we know that arcs get added to the beachfront whenever a site event occurs, in fact, the \emph{only} time an arc gets added to the beachfront is when a site event occurs. [And we can prove that!] \par
+  To understand how the beachfront plays a role in constructing the Voronoi diagram, let's consider times where the structure of the beachfront changes. New arcs are added to the beachfront whenever a site event occurs. At the moment where the new arc, $\beta_{i}$, is inserted into the beachfront, it is a simple vertical line (or a parabola of no width). If there is an arc above $\beta_{i}$, $\beta_{i}$ will only intersect it at one point since the beachfront is x-monotone. To insert $\beta_{i}$ into the beachfront, we split the arc above it into two parabolic arcs and insert $\beta_{i}$ in between the split arcs. We record the points where $\beta_{i}$ intersects with the arcs adjacent to it, and we refer to these points as \emph{breakpoints}\footnote{Note that this means that the right breakpoint of $\beta_{i}$ is the same as the left breakpoint of the arc which is adjacent on the right. Similarly, the right breakpoint of the arc adjacent to $\beta_{i}$ on the left is equal to $\beta_{i}$'s left breakpoint.} As $s$ moves downward, the breakpoints of each arc in the beachfront $\beta(P)$ change since the parabola that governs the arc widens. Another way to understand this is to recognize that that parabola whose corresponding arc is $\beta_{i}$ has as its focus the site $p_{i}$ and $s$ as its directrix. If we were to draw lines that tracked the movement of the breakpoints for the beachfront as the sweepline descended, they would each trace out the Voronoi edges. So we know that arcs get added to the beachfront whenever a site event occurs, in fact, the \emph{only} time an arc gets added to the beachfront is when a site event occurs. [And we can prove that!] \par
+
+    \begin{figure}[!htb]
+      \centering
+      \begin{subtable}{0.475\textwidth}
+        \centering
+        \input{figs/ch1/fortune/ex1_p0.tex}
+        \caption{Handling a Site Event}
+        \label{fig:fortune_0}
+      \end{subtable}%
+      \begin{subtable}{0.475\textwidth}
+        \centering
+        \input{figs/ch1/fortune/ex1_p1.tex}
+        \caption{Adding an arc to the beachfront}
+        \label{fig:fortune_1}
+      \end{subtable}
+      \begin{subtable}{0.475\textwidth}
+        \centering
+        \input{figs/ch1/fortune/ex1_p2.tex}
+        \caption{Add a new Circle Event}
+        \label{fig:fortune_2}
+      \end{subtable}
+      \begin{subtable}{0.475\textwidth}
+        \centering
+        \input{figs/ch1/fortune/ex1_p3.tex}
+        \caption{Circle's center marks Voronoi vertex (arc to be removed shown in bold)}
+        \label{fig:fortune_3}
+      \end{subtable}
+      \begin{subtable}{0.475\textwidth}
+        \centering
+        \input{figs/ch1/fortune/ex1_done.tex}
+        \caption{Handling Circle Event: creating Voronoi edges}
+        \label{fig:fortune_done}
+      \end{subtable}
+      \caption{Constructing the Voronoi Diagram of three sites.}
+      \label{fig:construct_vorof_3}
+    \end{figure}
+
   The second way the beachfront's structure changes is when an arc disappears. The disappearance of an arc coincides with the second type of event, called a \emph{circle event}. We'll define the notion of a circle event by studying a small portion of the beachfront. Consider the arcs $\alpha$, $\delta$, and $\gamma$ defined by three sites $p_{i}$, $p_{j}$, and $p_{k}$. Define the circle, $C$ with the three sites $p_{i}$, $p_{j}$, $p_{k}$. [You should probably remind the reader why $\alpha$ and $\gamma$ are not arcs from the same site, also why the circle contains no sites] Though the reasons aren't immediately obvious, we want to keep track of two points: the center of the circle, $q$, and the lowest point of the circle, $l$. If $\delta$ is the arc that is shrinking, when does it disappear? Recall that the center of the circle, $q$, is equidistant from $p_{i}$, $p_{j}$, $p_{k}$ and $l$. When the sweepline, $s$, reaches $l$, the arcs correspoinding to $p_{i}$ and $p_{k}$, $\alpha$ and $\gamma$, respectively, intersect at $q$. [Do I need to explain in more detail why, or can I *just* include a diagram]. At this point, the right breakpoint of $\alpha$ and the left breakpoint of $\gamma$ become equal to the left and right breakpoints of $\delta$, $\delta$ disappears. The edges traced out by the breakpoints of $\delta$ meet at $q$ and $q$ becomes a Voronoi vertex.\par
   To summarize, a site event occurs when the sweepline intersects with a site (i.e they both have the same y-coordinate) and a circle event occurs when the sweepline intersects with the lowest point (that is to say, the point with the minimum y-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. The effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex.\par
   It's important to note that in this example, we assumed that $p_{i}$, $p_{j}$, $p_{k}$ were non-collinear sites, since the circle defined by three collinear points would be a circle of infinite radius (that is to say, a line). Moreover, we glossed over the possibility that $C$ contained any other sites. How would any number of sites on the interior of $C$ affect the circle event itself? \par 
@@ -273,12 +399,12 @@
 
   \subsection{Data Structures and Algorithm Pseudocode} % (fold)
   \label{sub:sweep_algorithm_pseudocode}
-  \cref{sweepline_voronoi_diagram} and its supporting procedures, \cref{HandleSiteEvent} and \cref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. The vertex and edge structure for $Vor(P)$ will use a classic doubly connected edge list (DCEL) [do i need to explain this] and we will use a balanced binary search tree (BBST) to maintain the beachfront, $\beta$. The event queue, $Q$, is a plain old priority queue.  
+  \cref{sweepline_voronoi_diagram} and its supporting procedures, \cref{HandleSiteEvent} and \cref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. The vertex and edge structure for $\mbox{Vor}(P)$ will use a classic doubly connected edge list (DCEL) [do i need to explain this] and we will use a balanced binary search tree (BBST) to maintain the beachfront, $\beta$. The event queue, $Q$, is a plain old priority queue.  
   
   \begin{algorithm}[H]
   \begin{algorithmic}[1]
   \caption{Sweepline Voronoi Diagram}\label{sweepline_voronoi_diagram}
-  \Procedure{VoronoiSweepline}{$P$}\Comment{Construct $Vor(P)$}
+  \Procedure{VoronoiSweepline}{$P$}\Comment{Construct $\mbox{Vor}(P)$}
   \State $Q\gets P$\Comment{Initialize event queue, $Q$, with set of sites, $P$}
   \State $\beta\gets \{\}$\Comment{Initialize beachfront, $B$, as empty}
   \While{$Q$ is not empty}\Comment{There are more events to handle}
@@ -320,26 +446,270 @@
   % subsection final_thoughts_on_fortune_s_algorithm (end)
   % section fortune_s_algorithm (end)
 
-  \section{Randomized Incremental Approach}
-    \subsection{Overview}
-    \subsection{Proof of Correctness}
-    \subsection{Analysis of Space and Time Complexity}
+  \section{Guibas and Stolfi: A Divide and Conquer Approach} % (fold)
+  \label{sec:divide_and_conquer}
+  (Though it was published as a paper, ) Guibas and Stolfi's Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams presents a detailed and comprehensive presentation of the Voronoi and Delaunay diagrams. The central result of Guibas and Stolfi's paper is a quad-edge data structure which elegantly represents both the Voronoi diagram and its straight-line dual, the Delaunay triangulation. It can be thought of as a variant of the winged edge data structure. (do I need to explain this?) They offer a divide and conquer approach to the construction of Voronoi or Delaunay diagrams using their quad-edge structure whose time and space complexity is consistent with the bounds known to be optimal in the worst case. \footnote{Recall that the Voronoi diagram of $n$ sites can be computed in $\mathcal{O}(n\log n)$ time and occupying $\mathcal{O}(n)$ space, and these bounds are TIGHT!}
+  \subsection{Overview} % (fold)
+  \label{sub:guibas_stolfi_overview}
 
-	% The three lines above are to make sure that the headers are right, that the intro gets included in the table of contents, and that it doesn't get numbered 1 so that chapter one is 1.
+  Guibas and Stolfi's approach to the construction of the Voronoi diagram of $n$ sites is best witnessed directly, but in a pinch, I will gladly step in. Their quad edge data structure, which simultaneously represents an embdedding of a planar graph, its dual, and its mirror image, is the result of an attempt to separate more distinctly the topological properties of the diagram from the geometric properties of the diagram. They note that mainpulation of a Delaunay triangulation is simpler than performing the corresponding operations on a Voronoi diagram. They propose two primitives, one topological and the other geometric, which can be used more generally to manipulate, create, and test embeddings of graphs in arbitrary two-dimensional manifolds. They refer to thier geometric primitive as the InCircle test, which, in their words \say{encapsulates the essential geometric information that determines the topological structure of the Voronoi diagram}\cite{CITATION}. \par
+
+  [(maybe talk about this somewhere else... )The mysterious \emph{point at infinity}- discussion of which I have deliberately skirted thus far- now demands explanation?(here? now? really?) We might understand the Delaunay diagram (or, if you're interested in a challenge, the corresponding Voronoi diagram) as bundles of edges, faces, and vertices. As it turns out, the incidence relationships between these precisely define the topological structure of the diagram. We may take for granted that the Voronoi and Delaunay diagrams are topologically equivalent to an undirected graph embedded in the Euclidian plane. When we add a \emph{point at infinity}, we allow ourselves to consider these diagrams as planar graphs embedded on a sphere instead. Though it doesn't immediately seem to simplify things, it allows us to use the infinite elements of the diagrams (edges and faces) the same way we use the finite elements. \par]
+
+  Guibas and Stolfi's quad-edge data structure is the motivation for their in-depth discussion of embeddings of subdivisions on orientable manifolds, and though a thorough summary of their discussion is (perhaps) outside the scope of this paper, I will note, briefly, they ways in which their quad-edge data structure leverages their findings. Their quad-edge structure allows one to hop between the primal, dual, and mirror-image diagrams in constant time. It bears a strong resemblance to the winged-edge and half-edge data structures, but goes a step further, and takes advantage of the fact that an edge sits at the boundary of exactly two faces and two vertices. Moving between the primal and the dual, then, is a simple matter of exchanging the conventions around the representation of faces and the vertices. (there must be a better way to put this). This is achieved through their development of an \emph{edge algebra}, which captures the topological properties of a subdivision (and allows them to refine the set of edge functions which can be used to traverse the mesh). 
+
+  Recall that the Delaunay triangulation is a special case of the Delaunay subdivision. A delaunay subdivision of $n$ sites is a Delaunay Triangulation if no four sites are co-circular.\footnote{Guibas and Stolfi note, and I will, too, that this degeneracy can be handled swiftly if one is willing to introduce additional edges, and the result is a triangulation that is, in fact, Delaunay.} Their geometric predicate, InCircle, enforces the Delaunay condition, which states that a triangulation is Delaunay if and only if the circumcircle of every interior triangle is point-free (that is, contains no other sites). Futhermore, the result of the InCircle test yields information about the topology of that region. \par
+
+  We say that the circle from the InCircle test is a \emph{witness} to the Delaunayhood (or, perhaps, non-delaunayhood) of a given face. \par
+
+  \subsection{Algorithm Sketch}
+  \label{sub:Algortithm Sketch}
+  Like other divide and conquer algorithms, the Guibas and Stolfi's approach to constructing a Delaunay Triangulation relies on repeated partitioning of the problem's data until the partition conforms to a trivial (or base) case scenario. Note that the delaunay triangulation of three sites is, trivially, a single triangle. The edges defining the triangle is the convex hull of those three sites, and this makes sense, since we know that the convex hull of $n$ sites is always in the delaunay triangulation. [DIAGRAM] The trivial four-site case requires a single InCircle test to determine the orientation of the two triangles which compose the diagram.\par
+
+  For a set of sites where $n>4$ we apply the divide and conquer approach. We strategically choose (be more precise about this later) an x-value along thich we will recursively partition the set of sites, yielding a left side, denoted $P_{L}$ and a right side, $P_{R}$. We continue to do this until we are operating on a set of sites of trivial size. Once this happens, we return the trivial triangulation. The triangulations are then merged together pairwise in the order they were partitioned. The majority of the work, that is, the task of determining how $D_{L}$ and $D_{R}$ are connected, falls to the merge step of the algorithm. Any given merge step, then, operates on two adjacent, valid, Delaunay triangulations, $D_{L}$ and $D_{R}$, which have been separated by a known bisector.\par
+
+  The merge step of the algorithm that Guibas and Stolfi present assumes that we have access to the leftmost counterclockwise and rightmost clockwise edges of both $D_{L}$ and $D_{R}$. Note that the leftmost counterclockwise and rightmost clockwise edges are both edges on the convex hull of the diagram. With these four pieces of information, we can determine the edges (and, as an immediate result, faces) which span $D_{L}$ and $D_{R}$, knitting them together in to a valid Delaunay triangulation. This can be done in $\mathcal{O}(n)$ time, where $n$ is the number of sites in the finished diagram. The merge step can be broken into two main parts. First, we find the \emph{lower common tangent} of $D_{L}$ and $D_{R}$. The lower common tangent is the lowest line which is\begin{inparaenum}[\itshape a\upshape)] a) tangent to the polygons formed by the boundary of the convex hull; and b) the line does not intersect either polygon.\end{inparaenum} For our purposes the lower common tangent is also the edge which spans $D_{L}$ and $D_{R}$ and is the first valid edge of the merged result, $D_{LR}$. We know this edge to be valid because the lower and upper common tangents of $D_{L}$ and $D_{R}$ can easily be shown to be edges of the convex hull of the sites in $P$, that is, $P_{L} \cup P_{R}$. The lower common tangent can be found in linear time in the combined sizes of the hulls of $P_{L}$ and $P_{R}$. Once we have the lower common tangent, we wish to determine what the first \emph{cross-edge} will be. We will think of the cross edges as the edges which connect $D_{L}$ and $D_{R}$, and if we choose them carefully, we can maintain the Delaunay property of the diagram.\par
+
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/lct.tex}
+    %   \caption{Lower Common Tangent, $lct$, of $D_{L}$ and $D_{R}$}
+    %   \label{fig:lct}
+    % \end{figure}
+
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/knit0.tex}
+    %   \caption{First edge, $basel$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{CCW}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is true. That is to say, $\ell.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+    %   \label{fig:del_knit0}
+    % \end{figure}
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/knit1.tex}
+    %   \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $v$ in not in the circle defined by $\ell.twin.source$, $basel.twin.source$, and $basel.source$.}
+    %   \label{fig:del_knit1}
+    % \end{figure}
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/knit2.tex}
+    %   \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+    %   \label{fig:del_knit2}
+    % \end{figure}
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/knit3.tex}
+    %   \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.source$, $basel.twin.source$, and $basel.source$.}
+    %   \label{fig:del_knit3}
+    % \end{figure}
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \input{figs/ch1/guibas/knit4.tex}
+    %   \caption{Choosing the correct cross edge. Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is not in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns false.}
+    %   \label{fig:del_knit4}
+    % \end{figure}
+
+    \begin{figure}[!h]
+    % \ContinuedFloat
+    \centering
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/lct.tex}
+        \caption{Lower Common Tangent, $lct$, of $D_{L}$ and $D_{R}$}
+        \label{fig:lct}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit0.tex}
+        \caption{First edge, $basel$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{CCW}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is true. That is to say, $\ell.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+        \label{fig:del_knit0}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit1.tex}
+        \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $v$ in not in the circle defined by $\ell.twin.source$, $basel.twin.source$, and $basel.source$.}
+        \label{fig:del_knit1}
+      \end{subtable}
+    \end{figure}
+
+    \begin{figure}[!h]
+      \ContinuedFloat
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit2.tex}
+        \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+        \label{fig:del_knit2}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit3.tex}
+        \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.source$, $basel.twin.source$, and $basel.source$.}
+        \label{fig:del_knit3}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit4.tex}
+        \caption{Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is not in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns false.}
+        \label{fig:del_knit4}
+      \end{subtable}%
+    \end{figure}
+
+    \begin{figure}[!h]
+      \ContinuedFloat
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit5.tex}
+        \caption{Due to the result of the \textsc{InCircle} test, we update \emph{basel}'s destination to $\ell.twin.source$. We also update $\ell$ to $basel.twin.onext()$.}
+        \label{fig:del_knit5}
+      \end{subtable}
+      
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit6.tex}
+        \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.source$, is contained in the circle represented by the dashed lines. It is.}
+        \label{fig:del_knit6}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit7.tex}
+        \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
+        \label{fig:del_knit7}
+      \end{subtable}
+      \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+      % \label{fig:del_knit_all}
+    \end{figure}
+
+    \begin{figure}[!h]
+      \ContinuedFloat
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit8.tex}
+        \caption{We perform the same test again, checking to see if $v$ is contained in the dashed circle. This time, it is not, so we know that $\ell$ will be in $D_{P}$.}
+        \label{fig:del_knit8}
+      \end{subtable}
+      
+      % \begin{subtable}{\textwidth}
+      %   \centering
+      %   \input{figs/ch1/guibas/knit6.tex}
+      %   \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.source$, is contained in the circle represented by the dashed lines. It is.}
+      %   \label{fig:del_knit6}
+      % \end{subtable}
+
+      % \begin{subtable}{\textwidth}
+      %   \centering
+      %   \input{figs/ch1/guibas/knit7.tex}
+      %   \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
+      %   \label{fig:del_knit7}
+      % \end{subtable}
+      \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+      \label{fig:del_knit_all}
+    \end{figure}
+
+
+
+  So, how do we choose these edges? Given \emph{basel}, the lower common tangent connecting $D_{L}$ and $D_{R}$, we will perform the second part of the merge step, which utilizes the notion of a \emph{rising bubble} to maintain the delaunay property. The name reflects the conceptual actions we're about to perform: the rising bubble exists in the algorithm as the series of circle tests performed (roughly) along the vertical line separating $D_{L}$ and $D_{R}$. Before we proceed any further, however, it would be wise to provide a brief review of the terminology and edge functions we will use to traverse $D_{L}$ and $D_{R}$ to find the delaunay edges which produce $D_{LR}$. \cref{fig:half_edge} provides a visual guide for the terminology we will be using to traverse the graph and refer to its edges and vertices.
+
+    \begin{figure}[!htb]
+      \centering
+      \input{figs/ch1/guibas/hwe.tex}
+      \caption{Half Edge Terminology(still needs labels)}
+      \label{fig:half_edge}
+    \end {figure}
+
+  Before we create the \emph{rising bubble}, we need to make sure that \emph{basel} is a directed half-edge going from $rdi.twin.source$ to $ldo.source$, as in \cref{fig:lct}. The first circle we create uses the left and right endpoints of \emph{basel}. Recall that the vertices of the diagram we are using are located in $D_{R}$ and $D_{L}$, respectively. Since \emph{basel} is a directed edge, the vertices which serve as two inputs to our circle test can also be referred to as \emph{basel.source} and \emph{basel.twin.source}.\par
+
+  We introduce two more edges which we will use throughout this portion of the algorithm. \emph{lcand} is the next edge in $D_{L}$ to be enountered by the rising bubble. Similarly, \emph{rcand} if the next edge in $D_{R}$ to be encountered by the bubble. At the outset of this procedure, we set \emph{lcand} to be \emph{basel.twin.onext()} where \emph{onext()} is conveniently defined to be a function which returns the next edge out of the vertex \emph{basel.twin.source}. At this point, we'd like to know whether or not \emph{lcand} is valid edge. \par 
+
+  What does it mean for an edge to be \emph{valid}? A candidate edge is valid if the edge is located \say{above} \emph{basel}. That is to say, if we took the destination vertex of a given edge $e$ (which we can get easily with \emph{e.twin.source}) and the endpoints of \emph{basel}, the three vertices need to be ordered in a counterclockwise orientation. This predicate, referred to by Guibas and Stolfi as \textsc{CCW} is implemented as:
+  $$
+  CCW(A,B,C) =
+  \begin{vmatrix}
+  x_{A} & y_{A} & 1 \\
+  x_{B} & y_{B} & 1 \\
+  x_{C} & y_{C} & 1 \\  
+  \end{vmatrix} > 0.
+  $$  
+
+  So, in the case of determining whether or not \emph{lcand} is valid, we check its validity by ensuring that $\textsc{CCW}(lcand.twin.source, basel.twin.source, basel.source)$ is greater than 0. If \emph{lcand} is valid, then we may continue to the next step, which involves \say{pruning} $D_{L}$ in an appropriate way. What we need to do is consider whether or not any of edges from \emph{lcand.source}-- including \emph{lcand}-- intersect with the cross edge we'd like the insert. To do this we use the \textsc{InCircle} test, the second geometric predicate that Guibas and Stolfi use. 
+
+  The \textsc{InCircle} test takes as its arguments four sites, $A$, $B$, $C$, and $D$, and envisions a counterclockwise oriented circle $ABC$  and a lonely point $D$. The \textsc{InCircle} is defined but Guibas and Stolfi as follows: \say{\textsc{InCircle}($A$, $B$, $C$, $D$) is defined to be true if and only if point $D$ is interior to the region of the plane that is bounded by the oriented circle $ABC$ and lies to the left of it.}
+  
+  [now what does this tell me about the orientation
+  think about it in terms of triangles connect it back to the bit about the delaunay properties mximizing area, also maybe talk about how the determinant of this is the signed area of the terahedron formed with this parabolic mapping?etc]
+
+  If we wish to think about it in terms of the coordinates of $A$, $B$, $C$, and $D$, the \textsc{InCircle} predicate is equivalent to:
+  $$
+  InCircle(A,B,C,D) =
+  \begin{vmatrix}
+  x_{A} & y_{A} & x_{A}^2 + y_{A}^2 & 1 \\
+  x_{B} & y_{B} & x_{B}^2 + y_{B}^2 & 1 \\
+  x_{C} & y_{C} & x_{C}^2 + y_{C}^2 & 1 \\  
+  x_{D} & y_{D} & x_{D}^2 + y_{D}^2 & 1 \\  
+  \end{vmatrix} > 0.
+  $$  
+
+  When we apply this notion of the \textsc{InCircle} to determining whether or not \emph{lcand} will remain in the merged diagram $D_{LR}$, we will do so as follows: if \textsc{InCircle}(\emph{basel.twin.source},\emph{basel.source}, \emph{lcand.twin.source}, \emph{lcand.onext().twin.source}) then\emph{lcand.onext().twin.source} is in the circle defined by \emph{basel.twin.source},\emph{basel.source}, and \emph{lcand.twin.source}, which means that we must delete the edge \emph{lcand} and set the new value of \emph{lcand} to be \emph{lcand.onext()}. We continue to do this, deleting edges as necessary, until the \textsc{InCircle} test fails. Then, we repeat an analagous procedure for \emph{rcand}. [FINISH THIS]
+
+  \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
+  \label{sub:divide_and_conquer_algorithm_pseudocode}
+  \cref{divconq_del} and its supporting procedures [write these], provide a pseudocode implementation of a divide and conquer algorithm, as presented in Guibas and Stolfi's paper. The corresponding procedure for the dual is described in Shamos and Preparata's text. 
+  
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Divide and Conquer Delaunay Diagram}\label{divconq_del}
+  \Procedure{DelDivConq}{$P$}\Comment{Construct $Del(P)$}
+  \State $P_{L}, P_{R},  \gets \Call{PartitionSites}{$P$}$\Comment{Partition $P$ by median x-coordinate}
+  \State $DelP_{L}) \gets $\Call{DelDivConq}{$P_{L}$}  \Comment{Recursive call}
+  \Statex[1] $Del(P_{R}) \gets $\Call{DelDivConq}{$P_{R}$}
+  \State \Call{DelMerge}{$Del(P_{L})$, $Del(P_{R})$}  \Comment{Merge sub-diagrams}
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Divide and Conquer Delaunay Diagram: Merge}\label{del_merge}
+  \Procedure{DelMerge}{$Del(P_{L})$, $Del(P_{R})$}
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+  \begin{algorithmic}[1]
+  \caption{Divide and Conquer Delaunay Diagram: Lower Common Tangent}\label{del_lct}
+  \Procedure{DelLCT}{$Del(P_{L})$, $Del(P_{R})$}
+  \EndProcedure
+  \end{algorithmic} 
+  \end{algorithm}
+  
+  % subsection divide_and_conquer_algorithm_pseudocode (end)
+
+% 	% The three lines above are to make sure that the headers are right, that the intro gets included in the table of contents, and that it doesn't get numbered 1 so that chapter one is 1.
   \chapter*{Parallel Approaches to Constructing the Voronoi Diagram}
     \addcontentsline{toc}{chapter}{Parallel Approaches to Constructing the Voronoi Diagram}
     \chaptermark{Parallel Approaches to Constructing the Voronoi Diagram}
     \markboth{Parallel Approaches to Constructing the Voronoi Diagram}{Parallel Approaches to Constructing the Voronoi Diagram}
-    \setcounter{chapter}{2}
+    \setcounter{chapter}{4}
     \setcounter{section}{0}
-
   \section{Parallel(?) Merge Hull} % (fold)
   \label{sec:parallel_merge_hull}
-  [content content content maybe a diagram maybe some code]
-
+  [content content content maybe a diagram maybe ok some code]
   % section parallel_merge_hull (end)
   \section{Parallel(?) Randomized Incremental} % (fold)
   \label{sec:parallel_randomized_incremental}
+
+  \section{where does this go}
+    A note on storage: There are many different ways to store a Voronoi diagram. Algorithms will occasionally suggest data structures which complement the algorithm approach and are space efficient. However, it is often at the discretion of the programmer to choose the structures most appropriate to their application's needs. In sum, these choices can range from devilishly clever [ref Guibas and Stolfi] to painfully ham-fisted. It is important to note that by augmenting the Voronoi diagram with a point at infinity, we can treat it as a planar graph. Consequently, any data structure fit for use with a planar graph can be used to store and create a Voronoi diagram. [I won't dwell on them in this chapter in any detail, but I may mention possibilities, especially if they appear in Shewchuck's implementation.] This much is true for any algorithm one might encounter: given a set of $n$ unique sites, $P:=\{p_{1}, p_{2}, .. p_{n}\}$, the output will be a handful of Voronoi vertices, $V$, and a bundle of Voronoi edges, $E$. 
 
   % section parallel_randomized_incremental (end)
 
@@ -356,6 +726,7 @@
   You're walking the blocks of new york city and the wind is cold. Where is the nearest subway entrance? People are walking past you though, really, you're just shuffling. Where is the nearest subway with an N train? Is it a local or express line? Are you hungry, maybe you're hungry. Or maybe your're the one selling hot dogs. yes. hot dogs in new york city. where should you put your hot dog cart?] 
 \backmatter
 \bibliographystyle{APA/apa-good}  % or
-\bibliography{thesis}
+% \bibliographystyle{mla-good}
+\bibliography{ifj_thesis}
 % Finally, an index would go here... but it is also optional.
 \end{document}

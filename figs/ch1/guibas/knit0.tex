@@ -1,0 +1,286 @@
+
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+% \psset{arrowsize=.01 3.2 1.4 .3}
+\psset{dotsize=.2}
+\catcode`@=11
+
+\newpsobject{PST@Border}{psline}{linewidth=.003,linestyle=solid}
+\newpsobject{PST@Axes}{psline}{linewidth=.0015,linestyle=dotted,dotsep=.004}
+\newpsobject{PST@Solid}{psline}{linewidth=.0015,linestyle=solid}
+\newpsobject{PST@Dashed}{psline}{linewidth=.0015,linestyle=dashed,dash=.01 .01}
+\newpsobject{PST@Dotted}{psline}{linewidth=.0025,linestyle=dotted,dotsep=.008}
+\newpsobject{PST@LongDash}{psline}{linewidth=.0015,linestyle=dashed,dash=.02 .01}
+\newpsobject{PST@Diamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square,dotangle=45}
+\newpsobject{PST@Filldiamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*,dotangle=45}
+\newpsobject{PST@Cross}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+,dotangle=45}
+\newpsobject{PST@Plus}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+}
+\newpsobject{PST@Square}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square}
+\newpsobject{PST@Circle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=o}
+\newpsobject{PST@Triangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle}
+\newpsobject{PST@Pentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon}
+\newpsobject{PST@Fillsquare}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*}
+\newpsobject{PST@Fillcircle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=*}
+\newpsobject{PST@Filltriangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle*}
+\newpsobject{PST@Fillpentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon*}
+\newpsobject{PST@Arrow}{psline}{linewidth=.001,linestyle=solid}
+\catcode`@=12
+
+\fi
+\psset{unit=2in,xunit=2in,yunit=2in}
+\pspicture(0.100000,-0.200000)(1.90000,1.000000)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+% \rput[b](.6,.9){$D_{L}$}
+% \psline[linestyle=dotted](0.1426,0.4554)
+% (0.3694,0.1336)
+
+% \psline[linestyle=dotted](0.7265,0.7654)
+% (0.8570,0.4534)
+
+% \psline[linestyle=dotted](0.1587,0.7674)
+% (0.3674,0.6343)
+
+% \psline[linestyle=dotted](0.1426,0.4554)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.3694,0.1336)
+% (0.7225,0.1534)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.3694,0.1336)
+
+% \psline[linestyle=dotted](0.7225,0.1534)
+% (0.3694,0.1336)
+
+% \psline[linestyle=dotted](0.1426,0.4554)
+% (0.1587,0.7674)
+
+% \psline[linestyle=dotted](0.1587,0.7674)
+% (0.4416,0.8727)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.8570,0.4534)
+
+% \psline[linestyle=dotted](0.8570,0.4534)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.3674,0.6343)
+
+% \psline[linestyle=dotted](0.1587,0.7674)
+% (0.1426,0.4554)
+
+% \psline[linestyle=dotted](0.7225,0.1534)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.3674,0.6343)
+% (0.1426,0.4554)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.7265,0.7654)
+
+% \psline[linestyle=dotted](0.3674,0.6343)
+% (0.4416,0.8727)
+
+% \psline[linestyle=dotted](0.7265,0.7654)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.3674,0.6343)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.4416,0.8727)
+% (0.3674,0.6343)
+
+% \psline[linestyle=dotted](0.4416,0.8727)
+% (0.1587,0.7674)
+
+% \psline[linestyle=dotted](0.7225,0.1534)
+% (0.8570,0.4534)
+
+% \psline[linestyle=dotted](0.7265,0.7654)
+% (0.4416,0.8727)
+
+% \psline[linestyle=dotted](0.3694,0.1336)
+% (0.5821,0.4217)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.1426,0.4554)
+
+% \psline[linestyle=dotted](0.1426,0.4554)
+% (0.3674,0.6343)
+
+% \psline[linestyle=dotted](0.5821,0.4217)
+% (0.7225,0.1534)
+
+% \psline[linestyle=dotted](0.8570,0.4534)
+% (0.7225,0.1534)
+
+% \psline[linestyle=dotted](0.3674,0.6343)
+% (0.1587,0.7674)
+
+% \psline[linestyle=dotted](0.4416,0.8727)
+% (0.7265,0.7654)
+
+% \psline[linestyle=dotted](0.8570,0.4534)
+% (0.7265,0.7654)
+
+% \psline[linestyle=dotted](0.7265,0.7654)
+% (0.3674,0.6343)
+
+% \psline[linestyle=dotted](0.3694,0.1336)
+% (0.1426,0.4554)
+
+% \psline[linestyle=dotted](0.3674,0.6343)
+% (0.7265,0.7654)
+\rput[b](.4,.9){$D_{L}$}
+\pscustom[linestyle=dotted]{
+  \translate(-.2, 0.0)
+  \psline[liftpen=2](0.1426,0.4554)
+    (0.3694,0.1336)
+
+  \psline[liftpen=2](0.3694,0.1336)
+    (0.7225,0.1534)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.3694,0.1336)
+
+  \psline[liftpen=2](0.1587,0.7674)
+    (0.4416,0.8727)
+
+  \psline[liftpen=2](0.8570,0.4534)
+    (0.5821,0.4217)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.3674,0.6343)
+
+  \psline[liftpen=2](0.1587,0.7674)
+    (0.1426,0.4554)
+
+  \psline[liftpen=2](0.3674,0.6343)
+    (0.4416,0.8727)
+
+  \psline[liftpen=2](0.7265,0.7654)
+    (0.5821,0.4217)
+
+  \psline[liftpen=2](0.7225,0.1534)
+    (0.8570,0.4534)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.1426,0.4554)
+
+  \psline[liftpen=2](0.1426,0.4554)
+    (0.3674,0.6343)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.7225,0.1534)
+
+  \psline[liftpen=2](0.3674,0.6343)
+    (0.1587,0.7674)
+
+  \psline[liftpen=2](0.4416,0.8727)
+    (0.7265,0.7654)
+
+  \psline[liftpen=2](0.8570,0.4534)
+    (0.7265,0.7654)
+
+  \psline[liftpen=2](0.7265,0.7654)
+    (0.3674,0.6343)
+
+  % lines from extra right point
+  \psline[liftpen=2](1.0,0.58)
+  (0.7225,0.1534)
+
+  \psline[liftpen=2](1.0,0.58)
+  (0.7265,0.7654)
+
+  \psline[liftpen=2](1.0,0.58)
+  (0.8570,0.4534)
+}
+
+\psdots(-0.0574,0.4554)
+\psdots(-0.0413,0.7674)
+\psdots(0.2416,0.8727)
+\psdots(0.5265,0.7654)
+\psdots(0.6570,0.4534)
+\psdots(0.5225,0.1534) %lcand.dest
+\psdots(0.1694,0.1336) %lowest point in dl
+\psdots(0.1674,0.6343)
+\psdots(0.3821,0.4217)
+% extra right point
+\psdots(0.8,0.58)
+
+\rput[b](1.6,.7){$D_{R}$}
+\pscustom[linestyle=dotted]{
+  \translate(1.0, -0.2)
+  \psline[liftpen=2](0.1426,0.4554)
+    (0.3694,0.1336)
+
+  \psline[liftpen=2](0.3694,0.1336)
+    (0.7225,0.1534)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.3694,0.1336)
+
+  \psline[liftpen=2](0.1587,0.7674)
+    (0.4416,0.8727)
+
+  \psline[liftpen=2](0.8570,0.4534)
+    (0.5821,0.4217)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.3674,0.6343)
+
+  \psline[liftpen=2](0.1587,0.7674)
+    (0.1426,0.4554)
+
+  \psline[liftpen=2](0.3674,0.6343)
+    (0.4416,0.8727)
+
+  \psline[liftpen=2](0.7265,0.7654)
+    (0.5821,0.4217)
+
+  \psline[liftpen=2](0.7225,0.1534)
+    (0.8570,0.4534)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.1426,0.4554)
+
+  \psline[liftpen=2](0.1426,0.4554)
+    (0.3674,0.6343)
+
+  \psline[liftpen=2](0.5821,0.4217)
+    (0.7225,0.1534)
+
+  \psline[liftpen=2](0.3674,0.6343)
+    (0.1587,0.7674)
+
+  \psline[liftpen=2](0.4416,0.8727)
+    (0.7265,0.7654)
+
+  \psline[liftpen=2](0.8570,0.4534)
+    (0.7265,0.7654)
+
+  \psline[liftpen=2](0.7265,0.7654)
+    (0.3674,0.6343)
+}
+  \psdots[linecolor=lightgray](1.1426,0.2554)
+  \psdots[linecolor=lightgray](1.1587,0.5674)
+  \psdots[linecolor=lightgray](1.4416,0.6727)
+  \psdots[linecolor=lightgray](1.7265,0.5654)
+  \psdots[linecolor=lightgray](1.8570,0.2534)
+  \psdots[linecolor=lightgray](1.7225,-0.0466)
+  \psdots[linecolor=lightgray](1.3694,-0.0664)
+  \psdots[linecolor=lightgray](1.3674,0.4343)
+  \psdots[linecolor=lightgray](1.5821,0.2217)
+\rput[b]{-10}(.85,-.05){\emph{basel}}
+\psline[arrowsize=3pt 4, arrowinset=0]{<-}(0.185,0.12)(1.3694,-0.0664)
+
+\rput[b]{5}(.37,.17){$\ell$}
+\psline[arrowsize=3pt 4, arrowinset=0]{->}(0.1694,0.1336)(0.51,0.1534)
+
+\catcode`@=12
+\fi
+\endpspicture
