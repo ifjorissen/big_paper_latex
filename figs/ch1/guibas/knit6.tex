@@ -29,7 +29,8 @@
 \catcode`@=12
 
 \fi
-\psset{unit=2in,xunit=2in,yunit=2in}
+% \psset{unit=2in,xunit=2in,yunit=2in}
+\psset{unit=.33\textwidth,xunit=.33\textwidth,yunit=.33\textwidth}
 \pspicture(0.100000,-0.200000)(1.90000,1.000000)
 \ifx\nofigs\undefined
 \catcode`@=11
@@ -206,7 +207,7 @@
 
 % % circle
 % % \rput[b](-.5,1.0){\emph{"Rising Bubble"}}
-\psarc[linewidth=.75pt, linestyle=dashed](0.976594, 0.161571){0.454167}{-40}{210}
+\psarc[linewidth=.75pt, linestyle=dashed, linecolor=darkgray](0.976594, 0.161571){0.454167}{-40}{210}
 
 \catcode`@=12
 \fi

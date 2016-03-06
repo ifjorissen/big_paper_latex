@@ -514,8 +514,7 @@
     %   \label{fig:del_knit4}
     % \end{figure}
 
-    \begin{figure}[!h]
-    % \ContinuedFloat
+    \begin{figure}[p]
     \centering
       \begin{subtable}{\textwidth}
         \centering
@@ -539,7 +538,7 @@
       \end{subtable}
     \end{figure}
 
-    \begin{figure}[!h]
+    \begin{figure}[p]
       \ContinuedFloat
       \begin{subtable}{\textwidth}
         \centering
@@ -563,7 +562,7 @@
       \end{subtable}%
     \end{figure}
 
-    \begin{figure}[!h]
+    \begin{figure}[p]
       \ContinuedFloat
       \begin{subtable}{\textwidth}
         \centering
@@ -589,7 +588,7 @@
       % \label{fig:del_knit_all}
     \end{figure}
 
-    \begin{figure}[!h]
+    \begin{figure}[p]
       \ContinuedFloat
       \begin{subtable}{\textwidth}
         \centering
@@ -598,23 +597,46 @@
         \label{fig:del_knit8}
       \end{subtable}
       
-      % \begin{subtable}{\textwidth}
-      %   \centering
-      %   \input{figs/ch1/guibas/knit6.tex}
-      %   \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.source$, is contained in the circle represented by the dashed lines. It is.}
-      %   \label{fig:del_knit6}
-      % \end{subtable}
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit9.tex}
+        \caption{We consider the right side again, noting that $r$ is still valid. We may note that $u$ has not been reassigned. However, since $basel$ has changed, we need to check that $u$ is not in the circle formed by $r.twin.source$, $basel.twin.source$, and $basel.source$. Here, it is not.}
+        \label{fig:del_knit9}
+      \end{subtable}
 
-      % \begin{subtable}{\textwidth}
-      %   \centering
-      %   \input{figs/ch1/guibas/knit7.tex}
-      %   \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
-      %   \label{fig:del_knit7}
-      % \end{subtable}
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit10.tex}
+        \caption{Again, since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns true.}
+        \label{fig:del_knit10}
+      \end{subtable}
+    \end{figure}
+
+    \begin{figure}[p]
+      \ContinuedFloat
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit11.tex}
+        \caption{Because the \textsc{InCircle} test returned true, we update $basel$ so that its source is now $r.twin.source$. We also add the old $basel$ edge to $D_{P}$. Finally, we update $r$.}
+        \label{fig:del_knit11}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit12.tex}
+        \caption{We continue in this manner until we reach the ``top'', that is, until the point when we reach the upper common tangent, shown here as $uct$. This will occur when both $l$ and $r$ are invalid.}
+        \label{fig:del_knit12}
+      \end{subtable}
+
+      \begin{subtable}{\textwidth}
+        \centering
+        \input{figs/ch1/guibas/knit_done.tex}
+        \caption{The finished diagram, $D_{P}$}
+        \label{fig:del_knit_done}
+      \end{subtable}
       \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
       \label{fig:del_knit_all}
     \end{figure}
-
 
 
   So, how do we choose these edges? Given \emph{basel}, the lower common tangent connecting $D_{L}$ and $D_{R}$, we will perform the second part of the merge step, which utilizes the notion of a \emph{rising bubble} to maintain the delaunay property. The name reflects the conceptual actions we're about to perform: the rising bubble exists in the algorithm as the series of circle tests performed (roughly) along the vertical line separating $D_{L}$ and $D_{R}$. Before we proceed any further, however, it would be wise to provide a brief review of the terminology and edge functions we will use to traverse $D_{L}$ and $D_{R}$ to find the delaunay edges which produce $D_{LR}$. \cref{fig:half_edge} provides a visual guide for the terminology we will be using to traverse the graph and refer to its edges and vertices.
