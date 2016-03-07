@@ -1,0 +1,96 @@
+
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+
+\fi
+\psset{dotsize=.3}
+\psset{unit=.185\textwidth,xunit=.185\textwidth,yunit=.185\textwidth}
+\pspicture(-.75,-1.75)(1.75,1.25)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+\def\RightHalfEdgeCCW{
+  \psline[liftpen=2, linearc=.008]{-}(0.05, 0.0)(1.2, 0.0)(.95,.14)
+}
+
+% \def\LeftHalfEdgeCCW{
+%   \psline[liftpen=2, linearc=.005]{-}(0.95, 0.0)(0.0, 0.0)(.20,.12)
+% }
+
+% labels
+\rput[t](.6,.15){$e$}
+\rput[t](.6,-.15){$e.twin$}
+\rput[t]{120}(.75,.4){$e.next$}
+
+\rput[tr](-.125, -.025){$v$}
+\rput[tl](1.325, -.025){$u$}
+\rput[b](0.6, 1.195){$w$}
+\rput[b](1.35, .6){$f$}
+
+\psdots(-.05, 0.0)
+\psdots(1.25, 0.0)
+\psdots(0.6, 1.12)
+% central one
+\pscustom[linewidth=1.5pt]{
+\msave
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+} 
+
+% bottom
+\pscustom[linewidth=1.5pt, linecolor=gray]{
+  \mrestore
+  \msave
+  \rotate{180}
+  \translate(-1.2, .1)
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+}
+
+
+% left
+\pscustom[linewidth=1.5pt, linecolor=gray]{
+  \mrestore
+  \msave
+  \translate(-0.05, 0.0)
+  \rotate{180}
+  \translate(-.5, -1.1)
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  % \mrestore
+} 
+% right
+\pscustom[linewidth=1.5pt, linecolor=gray]{
+  \mrestore
+  \translate(0.05, 0.0)
+  \rotate{180}
+  \translate(-1.9, -1.1)
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+}
+
+
+\catcode`@=12
+\fi
+\endpspicture

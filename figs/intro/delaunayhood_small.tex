@@ -1,0 +1,45 @@
+
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+% \psset{arrowsize=.01 3.2 1.4 .3}
+\psset{dotsize=.2}
+\catcode`@=11
+\catcode`@=12
+
+\fi
+% \psset{unit=2in,xunit=2in,yunit=2in}
+\psset{unit=.33\textwidth,xunit=.33\textwidth,yunit=.33\textwidth}
+\pspicture(-0.25000, -0.12500)(.7500,1.000000)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+%labels
+\rput[b](.25, .80){$a$}
+\rput[Br](-0.05, 0.25){$b$}
+\rput[t](.35, .075){$c$}
+\rput[Bl](.55, .5){$d$}
+
+\rput[b]{30}(.3, .33){$e$}
+
+%sites
+\psdots(0.0, 0.25)
+\psdots(.5, .5)
+\psdots(.25, .75)
+\psdots(.375, .125)
+
+%convex hull
+\psline(0.0, 0.25)(.25, 0.75)
+\psline(.25, 0.75)(.5, .5)
+\psline(.5, .5)(.375, .125)
+\psline(0.0, 0.25)(.375, .125)
+
+%cross edges
+\psline(0.0, 0.25)(.5, .5)
+
+%circle
+\pscircle[linestyle=dashed](0.25, 0.375){0.279508}
+
+\catcode`@=12
+\fi
+\endpspicture

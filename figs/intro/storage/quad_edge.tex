@@ -4,8 +4,9 @@
 \def\PSTloaded{t}
 
 \fi
-\psset{unit=.1667\textwidth,xunit=.1667\textwidth,yunit=.1667\textwidth}
-\pspicture(-1.2500000,-1.2500000)(1.25000000,1.25000000)
+\psset{dotsize=.3}
+\psset{unit=.185\textwidth,xunit=.185\textwidth,yunit=.185\textwidth}
+\pspicture(-.7500000,-1.7500000)(1.75000000,.75000000)
 \ifx\nofigs\undefined
 \catcode`@=11
 
@@ -13,19 +14,39 @@
   \psline[liftpen=2, linearc=.008]{-}(0.05, 0.0)(1.2, 0.0)(.90,.15)
 }
 
-\def\LeftHalfEdgeCCW{
-  \psline[liftpen=2, linearc=.005]{-}(0.95, 0.0)(0.0, 0.0)(.20,.12)
-}
+\pscustom[linewidth=1.5pt]{
+\msave
+  \psline(0.0, 0.0)(.25, 0.0)(.90,.15)
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+  \translate(1.225,.025)
+  \rotate{120}
+  \RightHalfEdgeCCW
+} 
 
-
+% \def\LeftHalfEdgeCCW{
+%   \psline[liftpen=2, linearc=.005]{-}(0.95, 0.0)(0.0, 0.0)(.20,.12)
+% }
 
 % labels
 \rput[t](.6,.15){$e$}
 \rput[t](.6,-.15){$e.twin$}
 \rput[t]{120}(.75,.4){$e.next$}
+
+\rput[tr](-.125, -.025){$v$}
+\rput[tl](1.325, -.025){$u$}
+\rput[b](0.6, 1.195){$w$}
+\rput[b](1.35, .6){$f$}
+
+\psdots(-.05, 0.0)
+\psdots(1.25, 0.0)
+\psdots(0.6, 1.12)
+
+\rput(.55,0.0){\psdots[dotstyle=+](-.05, -.025)}
 % central one
 \pscustom[linewidth=1.5pt]{
-\msave
+\mrestore
   \RightHalfEdgeCCW
   \translate(1.225,.025)
   \rotate{120}
@@ -81,6 +102,8 @@
   \rotate{120}
   \RightHalfEdgeCCW
 }
+
+
 
 
 \catcode`@=12
