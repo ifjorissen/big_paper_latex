@@ -30,12 +30,11 @@
 
 \fi
 % \psset{unit=2.5in,xunit=2.5in,yunit=2.5in}
-\psset{unit=\textwidth,xunit=\textwidth,yunit=\textwidth}
-\pspicture(0.000000,0.400)(1.000000,1.0000)
+\psset{unit=.33\textwidth,xunit=.33\textwidth,yunit=.33\textwidth}
+\pspicture(0.000000,0.250000)(1.000000,1.000000)
 \ifx\nofigs\undefined
 \catcode`@=11
 
-\rput[l](0.45,0.95){$\alpha$}
 % \psline(0.5237,0.9679)
 % (0.5247,0.9627)
 % (0.5273,0.9499)
@@ -88,8 +87,10 @@
 % (0.6498,0.9548)
 % (0.6524,0.9679)
 
-\parabola(0.6524,0.9679)(0.5899,0.8035)
+\psframe[linecolor=white, fillstyle=solid, fillcolor=lightgray](0.0400,0.7983)(1.000000,.9679)
+\parabola[linestyle=dashed](0.6524,0.9679)(0.5899,0.8035)
 
+\rput[l](0.45,0.92){$\alpha$}
 \rput[l](0.0450,0.75){$s$}
 \psline(0.0400,0.7983)
 % (0.0400,0.7983)
@@ -120,7 +121,7 @@
 % (0.8542,0.7983)
 % (0.8868,0.7983)
 % (0.9193,0.7983)
-(0.9519,0.7983)
+(1.0,0.7983)
 
 \rput[r](0.15,0.484){$p_{i}$}
 \PST@Fillcircle(0.1911,0.4840)

@@ -1,0 +1,42 @@
+
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+% \psset{arrowsize=.01 3.2 1.4 .3}
+\psset{dotsize=.2}
+\catcode`@=11
+\catcode`@=12
+
+\fi
+% \psset{unit=2in,xunit=2in,yunit=2in}
+\psset{unit=.33\textwidth,xunit=.33\textwidth,yunit=.33\textwidth}
+\pspicture(0.000, -0.2500)(1.000, .75)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+%labels
+\rput[Br](0.20, 0.0){$a$} %b
+\rput[Bb](.5, 0.05){$b$} %d
+\rput[Bl](.8, 0.0){$c$} %a
+
+%sites
+\psdots(0.25, 0.0) %b
+\psdots(.5, 0.0) %d
+\psdots(.75, 0.0) %a
+
+
+%lines
+\psline[linestyle=dashed, arrowsize=3pt 4]{<->}(0.375, -0.2)(0.375, .70)
+\psline[linestyle=dashed, arrowsize=3pt 4]{<->}(0.625, -0.2)(0.625, .70)
+\psline[linewidth=1pt, linestyle=dotted](.25, 0.0)(.75, 0.0)
+% \psline[linestyle=dashed](0.75, -0.2)(0.75, .5)
+
+%cross edges
+% \psline(0.0, 0.25)(.5, .5)
+
+%circle
+% \pscircle[linestyle=dashed](0.25, 0.4375){0.3125}
+
+\catcode`@=12
+\fi
+\endpspicture
