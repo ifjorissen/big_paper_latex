@@ -1,0 +1,90 @@
+% Define new PST objects, if not already defined
+\ifx\PSTloaded\undefined
+\def\PSTloaded{t}
+\psset{arrowsize=.01 3.2 1.4 .3}
+\psset{dotsize=.2}
+\catcode`@=11
+
+\newpsobject{PST@Border}{psline}{linewidth=.003,linestyle=solid}
+\newpsobject{PST@Axes}{psline}{linewidth=.0015,linestyle=dotted,dotsep=.004}
+\newpsobject{PST@Solid}{psline}{linewidth=.0015,linestyle=solid}
+\newpsobject{PST@Dashed}{psline}{linewidth=.0025,linestyle=dashed,dash=.01 .01}
+\newpsobject{PST@Dotted}{psline}{linewidth=.0025,linestyle=dotted,dotsep=.008}
+\newpsobject{PST@LongDash}{psline}{linewidth=.0015,linestyle=dashed,dash=.02 .01}
+\newpsobject{PST@Diamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square,dotangle=45}
+\newpsobject{PST@Filldiamond}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*,dotangle=45}
+\newpsobject{PST@Cross}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+,dotangle=45}
+\newpsobject{PST@Plus}{psdots}{linewidth=.001,linestyle=solid,dotstyle=+}
+\newpsobject{PST@Square}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square}
+\newpsobject{PST@Circle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=o}
+\newpsobject{PST@Triangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle}
+\newpsobject{PST@Pentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon}
+\newpsobject{PST@Fillsquare}{psdots}{linewidth=.001,linestyle=solid,dotstyle=square*}
+\newpsobject{PST@Fillcircle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=*}
+\newpsobject{PST@Filltriangle}{psdots}{linewidth=.001,linestyle=solid,dotstyle=triangle*}
+\newpsobject{PST@Fillpentagon}{psdots}{linewidth=.001,linestyle=solid,dotstyle=pentagon*}
+\newpsobject{PST@Arrow}{psline}{linewidth=.001,linestyle=solid}
+\catcode`@=12
+
+\fi
+\psset{unit=.3\textwidth,xunit=.3\textwidth,yunit=.3\textwidth}
+\pspicture(-.25000,-0.25000)(1.250,1.2500)
+\ifx\nofigs\undefined
+\catcode`@=11
+
+\psline(0.3150,0.7808)(0.5427,0.7113)
+\psline(0.7324,0.3287)(0.7035,0.5732)
+\psline(0.5742,0.6265)(0.7035,0.5732)
+\psline(0.5410,0.2304)(0.3565,0.3639)
+\psline(0.5410,0.2304)(0.7324,0.3287)
+\psline(0.3605,0.4149)(0.3565,0.3639)
+\psline(0.3605,0.4149)(0.2031,0.6088)
+\psline(0.2031,0.6088)(0.3150,0.7808)
+\psline(0.5742,0.6265)(0.3605,0.4149)
+\psline(0.5427,0.7113)(0.5742,0.6265)
+
+% half infinite edges
+\psline(0.7324,0.3287)(0.9509,0.2326)
+\psline(0.7035,0.5732)(0.9519,0.6751)
+\psline(0.3565,0.3639)(0.0583,0.1580)
+\psline(0.5410,0.2304)(0.5523,0.0320)
+\psline(0.2031,0.6088)(0.0400,0.6170)
+\psline(0.5427,0.7113)(0.6412,0.9678)
+\psline(0.3150,0.7808)(0.2440,0.9679)
+
+\psbezier[linestyle=dashed](0.0583,0.1580)(-.5, -.1)(-.5, 1.75)(1.15, 1.15)
+\psbezier[linestyle=dashed](0.0400,0.6170)(-.25, .7)(0.0, 1.5)(1.15, 1.15)
+\psbezier[linestyle=dashed](0.2440,0.9679)(0.1, 1.25)(0.9, 1.25)(1.15, 1.15)
+\psbezier[linestyle=dashed](0.6412,0.9678)(.75, 1.1)(1.0, 1.1)(1.15, 1.15)
+
+\psbezier[linestyle=dashed](0.9519,0.6751)(1.1, .8)(1.1, 1.0)(1.15, 1.15)
+\psbezier[linestyle=dashed](0.9509,0.2326)(1.25, 0.1)(1.25, .8)(1.15, 1.15)
+\psbezier[linestyle=dashed](0.5523,0.0320)(1.0, -.5)(1.5, .5)(1.15, 1.15)
+
+
+\psdots(0.1426,0.4554)
+\psdots(0.1587,0.7674)
+\psdots(0.4416,0.8727)
+\psdots(0.7265,0.7654)
+\psdots(0.8570,0.4534)
+\psdots(0.7225,0.1534)
+\psdots(0.3694,0.1336)
+\psdots(0.3674,0.6343)
+\psdots(0.5821,0.4217)
+\psdots[dotstyle=o](0.3150,0.7808)
+\psdots[dotstyle=o](0.5427,0.7113)
+\psdots[dotstyle=o](0.2031,0.6088)
+\psdots[dotstyle=o](0.5742,0.6265)
+\psdots[dotstyle=o](0.7035,0.5732)
+\psdots[dotstyle=o](0.3605,0.4149)
+\psdots[dotstyle=o](0.7324,0.3287)
+\psdots[dotstyle=o](0.3565,0.3639)
+\psdots[dotstyle=o](0.5410,0.2304)
+
+% vertex @infinity
+\rput[b](1.15, 1.2){$v_{\infty}$}
+\psdots[dotstyle=o](1.15, 1.15)
+
+\catcode`@=12
+\fi
+\endpspicture

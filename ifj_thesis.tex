@@ -47,6 +47,7 @@
 \usepackage{subcaption}
 \usepackage{nameref}
 \usepackage{wrapfig}
+\usepackage{dsfont}
 \captionsetup{format=hang,justification=raggedright}
 % \usepackage{minipage}
 \graphicspath{ {figs/} }
@@ -118,7 +119,6 @@
 % If your abstract is longer than a page, there may be a formatting issue.
     \chapter*{Abstract}
     [more specifics][math specifics]
-    [this is a math problem, this is a computational geometry problem, this is a spotlight on a common problem, this is related to a lot of other cool problems, this is a problem about space, this is an apology (explanatory), this is a survey of approaches to solving this problem as efficiently and elegantly as possible, this is building off of current implementations to examine the benefits of a) multicore / threaded and / or b) gpu accelerated implementations, this is about re-learning C, this is about wrangling threads and hating CUDA]
 	
 	% \chapter*{Dedication}
 	% You can have a dedication here if you wish.
@@ -129,26 +129,25 @@
 %The \introduction command is provided as a convenience.
 %if you want special chapter formatting, you'll probably want to avoid using it altogether
 
-  \chapter*{Introduction}
-    \addcontentsline{toc}{chapter}{Introduction}
+  \chapter*{The Voronoi Diagram}
+    \addcontentsline{toc}{chapter}{The Voronoi Diagram}
     \setcounter{chapter}{1}
     \setcounter{section}{0}
-  \chaptermark{Introduction}
-  \markboth{Introduction}{Introduction}
+  \chaptermark{The Voronoi Diagram}
 
   \say{... To make this long discourse less boring for you, I want to wrap up part of it in the guise of a fable, in the course of which I hope the truth will not fail to manifest itself sufficiently clearly, and that this will be no less pleasing to you than if I were to set it forth wholly naked,}\citep[][p. 21]{descartes}.
 
-  \section{The World} % (fold)
+  \section{Descartes' Cosmological Picture} % (fold)
   \label{sec:the_world}
     Ren\'{e} Descartes spent four years writing \emph{The World}, and abandoned it in 1633 after the Roman Inquisition condemned Galileo and his heliocentric theory. It remained largely unpublished for thirty-one years after its abandonment, save for some fragments which appeared in \emph{Principia philosophiae}. \emph{Treatise on Light}, first published as \emph{The World}, was not published until fifteen years after Descartes' death, on a leap year almost four hundred years ago. \par
 
     Stepping into the world which Descartes presents in \emph{Treatise on Light} is astonishing in its own right, as his theory culminates in a cosmology where heavenly bodies lie unperturbed at the centers of endlessly swirling corpuscles. For our purposes, the salient portion of Descartes' theory lies in this cosmology; his illustrations of the movement of bodies within the heavens are often touted as the first, however informal, use of the Voronoi diagram. \par
 
-    Under Descartes' view-- which builds off of his contemporaries-- there exists a trinity of elements. He writes \say{the Philosophers maintain that above the clouds there is a kind of air much subtler than ours, \ldots They say too that above this air there is yet another body, more subtle still, which they call the element of fire,}\citep[][p. 17]{descartes}. The third and final element is the element of earth, and it is the least \say{fine} of the three elements. These three elements may combine to create mixed or composite elements. The form of the first element is terribly small, and moves incredibly quickly-- the status, position, or size at any given time is imperceptible and indeterminate. The form of the third element, however, a large and move with much less urgency, and may resist the forces of other bodies. Further, Descartes believes that the elements of a higher order, that is to say, of a subtler sort, fill the gaps between the elements of a lower order so that they might constitute a perfectly solid body. \say{I say that this subtler air and this element of fire fill the gaps between the parts of the gross air that we breathe, so that these bodies, interlaced with one another, make up a mass as solid as any body can be,} \citep[][p. 17]{descartes}. \par 
+    Under Descartes' view-- which builds off of his contemporaries-- there exists a trinity of elements. He writes \say{the Philosophers maintain that above the clouds there is a kind of air much subtler than ours, \ldots They say too that above this air there is yet another body, more subtle still, which they call the element of fire,}\citep[p. 17]{descartes}. The third and final element is the element of earth, and it is the least \say{fine} of the three elements. These three elements may combine to create mixed or composite elements. The form of the first element is terribly small, and moves incredibly quickly-- the status, position, or size at any given time is imperceptible and indeterminate. The form of the third element, however, a large and move with much less urgency, and may resist the forces of other bodies. Further, Descartes believes that the elements of a higher order, that is to say, of a subtler sort, fill the gaps between the elements of a lower order so that they might constitute a perfectly solid body. \say{I say that this subtler air and this element of fire fill the gaps between the parts of the gross air that we breathe, so that these bodies, interlaced with one another, make up a mass as solid as any body can be,} \citep[][p. 17]{descartes}. \par 
 
-    In the section \emph{How, in the world as described, the heavens, the sun and the stars are formed}, Descartes asks us to imagine a new world in which we might have a number of bodies made up of the same matter. For Descartes, any given body of matter is surrounded on all sides by other bodies, arranged in such a way that there is no void between any two of them \citep[][p. 25]{descartes}. God agitates each body, giving it direction and motion; under this model, bodies are colliding constantly. The effects of a collision might be the breaking up or change in direction of one or more bodies. The smallest fragments, the products of many collisions, take the form of the finest first element which Descartes describes. The largest bodies which do not break apart, but rather, join together and form the third element. \par
+    In the section \emph{How, in the world as described, the heavens, the sun and the stars are formed}, Descartes asks us to imagine a new world in which we might have a number of bodies made up of the same matter. For Descartes, any given body of matter is surrounded on all sides by other bodies, arranged in such a way that there is no void between any two of them \citep[p. 25]{descartes}. God agitates each body, giving it direction and motion; under this model, bodies are colliding constantly. The effects of a collision might be the breaking up or change in direction of one or more bodies. The smallest fragments, the products of many collisions, take the form of the finest first element which Descartes describes. The largest bodies do not break apart. Rather, they join together and form the third element. \par
 
-    The inclination of these \say{agitated} bodies is to move in a straight line, but the bodies all have a variety of masses and level of agitation associated with them, so there emerges a rough ordering of the bodies about the center. Broadly, the smallest and least agitated bodies turn about the area closest to the center, while the larger or more agitated bodies trace out the larger circles around the center; at first blush, their movement might even resemble a straight line. Descartes superimposes this trinity of elements onto the principal parts of the universe: \say{the Sun and the fixed stars as the first kind, the heavens as the second, and the Earth with the planets and comets as the third,}\citep[][p. 20]{descartes}. Then, the center around which the bodies turn is a star, composed entirely of the first element; the elements which turn around it are the heavens; and the other earthly bodies are composed entirely of the third element.\par
+    The inclination of these \say{agitated} bodies is to move in a straight line, but the bodies all have a variety of masses and levels of agitation associated with them, so there emerges a rough ordering of the bodies about the center. Broadly, the smallest and least agitated bodies turn about the area closest to the center, while the larger or more agitated bodies trace out the larger circles around the center; at first blush, their movement might even resemble a straight line. Descartes superimposes this trinity of elements onto the principal parts of the universe: \say{the Sun and the fixed stars as the first kind, the heavens as the second, and the Earth with the planets and comets as the third,}\citep[][p. 20]{descartes}. Then, the center around which the bodies turn is a star, composed entirely of the first element; the elements which turn around it are the heavens; and the other earthly bodies are composed entirely of the third element.\par
 
    % Furthermore, he notes that it is impossible for bodies to move in a straight line, in fact, each must travel along curved path of motion. \par
 
@@ -162,57 +161,133 @@
 
    % The center, description of which we have delicately and deliberately escaped, is a star: a heavenly body composed entirely of the first element. The bodies which are composed of the second element and which turn about a center are called the heavens \citep[][p. 35]{descartes}. \par
 
-   Descartes' cosmology most directly likened to a Voronoi diagram through his description of the heavens as a whole. As shown in \cref{fig:descartes_heavenly}, there is a heaven (we might call it a heavenly region) for each star. He writes: \say{So there are as many different heavens as there are stars, and since the number of stars is indefinite so too is the number of heavens. And the firmament is just a surface without thickness separating all the heavens from one another,}\citep[][p. 35]{descartes}.\par
+   Descartes' depicted his cosmological understanding with a diagram, one most directly likened to a Voronoi diagram through his description of the heavens as a whole. Shown in \cref{fig:descartes_heavenly}, there is a heaven (we might call it a heavenly region) for each star. He writes: \say{So there are as many different heavens as there are stars, and since the number of stars is indefinite so too is the number of heavens. And the firmament is just a surface without thickness separating all the heavens from one another,}\citep[p. 35]{descartes}.\par
 
-   For those who are already familiar with the Voronoi diagram, it is easy to recognize the visual similarities between Descartes' graphical representation of the heavens and the Voronoi diagram. Perhaps more interesting, however, are the similarities between what he understands the diagram to be and the definition of a Voronoi diagram. As we mentioned earlier, Descartes believes that every star has a heaven associated with it. For example, the matter in the region defined as \textsc{hggh} is the heaven which rotates around $\epsilon$. Similarly, the heaven of star $S$ is precisely the matter in the region \textsc{fggf}. When we define the Voronoi diagram of a set of sites, we will note that every site has a corresponding region. The \emph{firmament}, as Descartes calls it, can be readily adapted to the Voronoi diagram with a shift in jargon: the firmament which separates the heavens from each other are referred to as \emph{edges} in the Voronoi diagram. Should we have the desire to squint, we might even be able to glimpse an oblique reference to a Voronoi vertex: Descartes writes of the matter which lives at the intersection of three or more circles, at what appear to be \say{corners} of the firmament, it is likely smaller, and less agitated than the matter surrounding it.  
-  
+   With Descartes' cosmology in the back of our minds, we look to \cref{fig:descartes_heavenly}. What Descartes has drawn around each star are (roughly) concentric circles representing the matter turning about the star. Examining the region near $S$ more closely, we can see that the largest circles intersect with the circles emanating out of the other stars. In Descartes' terms, when circles surrounding a given star intersect with another set of circles, they do so at the \emph{firmament}, which separates the heavenly regions from another. Visually, the firmament between any two heavenly regions--- take, for example, $S$ and $\epsilon$ --- occurs along the the set of points equidistant from both $S$ and $\epsilon$. The \say{corners} of the firmament, as Descartes calls them, are points where three circles--- each originating from a distinct heavenly body--- intersect. 
+   % For those who are already familiar with the Voronoi diagram, it is easy to recognize the visual similarities between Descartes' graphical representation of the heavens and the Voronoi diagram. Perhaps more interesting, however, are the similarities between what he understands the diagram to be and the definition of a Voronoi diagram. As we mentioned earlier, Descartes believes that every star has a heaven associated with it. For example, the matter in the region defined as \textsc{hggh} is the heaven which rotates around $\epsilon$. Similarly, the heaven of star $S$ is precisely the matter in the region \textsc{fggf}. When we define the Voronoi diagram of a set of sites, we will note that every site has a corresponding region. The \emph{firmament}, as Descartes calls it, can be readily adapted to the Voronoi diagram with a shift in jargon: the firmament which separates the heavens from each other are referred to as \emph{edges} in the Voronoi diagram. Should we have the desire to squint, we might even be able to glimpse an oblique reference to a Voronoi vertex: Descartes writes of the matter which lives at the intersection of three or more circles, at what appear to be \say{corners} of the firmament, it is likely smaller, and less agitated than the matter surrounding it.  
+
   % section the_world (end)
-  % http://www.ph.ucla.edu/epi/snow/socscimed50_923_935_2000.pdf
-  % https://books.google.com/books?id=cGeCNa_vookC&pg=PA152&lpg=PA152&dq=%60%60the+highest+use+of+cartography:+to+find+out+by+mapping+that+which+cannot+be+discovered+by+other+means+or,+at+least,+not+with+as+much+precision&source=bl&ots=olky0OHznK&sig=24PzRFn9l1vQWPEyMtoHx2HtZ6Y&hl=en&sa=X&ved=0ahUKEwjK6M3zop7LAhVJ-mMKHWXACD0Q6AEIHTAA#v=onepage&q=%60%60the%20highest%20use%20of%20cartography%3A%20to%20find%20out%20by%20mapping%20that%20which%20cannot%20be%20discovered%20by%20other%20means%20or%2C%20at%20least%2C%20not%20with%20as%20much%20precision&f=false
-  \section{The Apocryphal Tale of John Snow} % (fold)
-  \label{sec:the_apocryphal_tale_of_john_snow}
-    If my dear Reader will continue to indulge, fast-forward two hundred years\ldots to 1854. It is summer in London, England. Beginning in late August, the Soho district of London experienced a cholera outbreak. The severe dehydration caused by the disease lead to dozens of deaths in a matter of days, and the numbers rose to over five hundred in the first two weeks. 
 
-    \say{Dr. Snow's maps illustrate the highest use of cartography: to find out by mapping that which cannot be discovered by other means or, at least, not with as much precision.}
-    
-    % section the_apocryphal_tale_of_john_snow (end)
+  \section{Definition of the Voronoi Diagram in $\mathds{R}^d$} % (fold)
+  \label{sec:definition_of_the_voronoi_diagram_in_rd}
+    We can define the Voronoi Tessellation with naught but a collection of points and a way to measure the distance between points. Let $P:=\{p_{1}, p_{2},\ldots, p_{n}\}$ be a finite set of $n$ distinct points in $\mathds{R}^d$. We call the $P$ the set of Voronoi sites. The Voronoi diagram of $P$, $\mbox{Vor}(P)$, is a subdivision of the plane into $n$ regions. Specifically, $$\mbox{Vor}(P):=\{V_{1}, V_{2}, \ldots, V_{n}\}$$ where each region $V_{i}$ is defined: 
+    $$V_{i} := \{\,q \in \mathds{R}^d \mid \delta(q, p_{i}) \leq \delta(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$ We take the $\delta(q, p)$ to be $\lVert p-q \rVert$, the usual measure of distance in $\mathds{R}^d$. 
+    For the purposes of this thesis, we will be working with diagrams in $\mathds{R}^2$. \Cref{fig:first_sight} shows the Voronoi diagram on nine sites. The sites are represented by filled dots, while the unfilled dots denote the intersection of Voronoi edges at Voronoi vertices.\par
 
+    \begin{figure}[!htb]
+      \centering
+      \input{figs/intro/first_sight.tex}
+      \caption{A Voronoi Diagram on nine sites}
+      \label{fig:first_sight}
+    \end{figure}
 
-  \chapter*{The Voronoi Diagram}
-    \addcontentsline{toc}{chapter}{The Voronoi Diagram}
-    \setcounter{chapter}{2}
-    \setcounter{section}{0}
-	\chaptermark{The Voronoi Diagram}
-	\markboth{The Voronoi Diagram}{The Voronoi Diagram}
-    Suppose you are hoping to send a piece of mail via post office. In this day and age, it's uncommon to send a piece of mail, and you might ask yourself \say{Where is the nearest post office?} \par
-    But why is the post office \emph{there}? \par
-    To answer that question, assume the perspective of a city planner whose task is to determine where the next post office should located. The city planner might work under the assumption that people go to the post office closest to where they live. Roughly, the planner determines the areas of service for each post office, which consists of dividing the city into regions whose occupants are closer to the post office in that region than any other office. The area of service, for a particular post office, corresponds directly with the Voronoi cell of that site (the post office). We call this cell, or a region.\footnote{If the aforementioned example doesn't resonate with you, I'd encourage you to peruse \cref{appendix_one}, where I've included a plethora of other examples with the intent of motivating the problem from different perspectives, disciplines, and industries.}\par
+  % section definition_of_the_voronoi_diagram_in_re_d_ (end)
+  
+  \section{A Half-Plane Characterization} % (fold)
+  \label{sec:half_plane_char}
+    The Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, is the collection of Voronoi regions corresponding to each site. Another way to describe a region $V_{i} \in \mbox{Vor}(P)$ is as the (possibly unbounded) convex polygon which is the result of intersection of half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $\ell$ connecting them. Let $b$ be the perpendicular bisector of $\ell$, which splits the plane into two half-planes. Define the half-plane along $b$ containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{j}, p_{i})$. We can connect this notion of half-planes to our original definition of a Voronoi region: note that with the exception of the set of points lying on $b$, all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. The points lying along $b$ will be included in both regions, since they are equidistant from $p_{i}$ and $p_{j}$. The dashed line in \cref{fig:one_half_plane} is the perpendicular bisector of $p$ and $q$. The shaded region represents the half-plane $h(p, q)$.\par
 
-  \section{Formalizing the Post Office Problem} % (fold)
-  \label{sec:formalizing_the_post_office_problem}
-    One way to understand the Voronoi diagram is via a rigorous exploration of subdivisions, manifolds, and edge algebras.\footnote{If this interests you, skip this thesis and read Guibas and Stolfi's paper.\citep{}} However,  for the purposes of this thesis we begin with a more gentle introduction. My goal is to offer a description of the Voronoi diagram that relies on its geometric properties in the Euclidean Plane. The diagram is the subdivision induced under the Voronoi assignment model, which consists in assigning every point in the plane to the site nearest to it. To construct a Voronoi diagram, we need a set of sites, $P$, and way to measure the distance between two sites, p and q, denoted $\delta(p,q)$. For the purposes of this thesis, we consider the Voronoi diagram in the plane, sites are defined as points, and the distance between any two points is the Euclidean distance.\par
-    Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ a set of $n$ distinct points -- each one constituting a site -- in the plane. The Voronoi diagram of $P$ the subdivision of the plane into $n$ regions where for each region $V_{i}$ in the set of regions $V:=\{V_{1}, V_{2}, .. V_{n}\}$, $V_{i}$ is the region associated with site $p_{i}$. Further, the region $V_{i}$ is the set of points in the plane such that each point in $V_{i}$ is closer to $p_{i}$ than it is to any other site in $P$. Formally, given a plane $S$, a region or cell in a Voronoi diagram is the set of points in the plane which satisfy:
-    $$V_{i} := \{\,q \in S \mid \delta(q, p_{i}) \leq \delta(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$
-    For our purposes, $S= \Re^2$, the Euclidean plane in two dimensions, and $\delta(p, q)$ is the Euclidian measure of distance in $\Re^2$. \par
-    We can also think of the region $V_{i}$ as the (possibly unbounded) convex polygon which is the result of intersection of $n-1$ half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $l$ connecting them. [graph] At the midpoint, $m$, of $l$, imagine a line $b$, perpendicular to $l$ and passing through $m$. Note that $b$ is the perpendicular bisector of $l$. Then $b$ splits the plane into two half-planes. Define the half-plane containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{i}, p_{j})$. To connect this notion back to our first description of a Voronoi region, note that all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. Define set of half-planes containing $p_{i}$ as $H_{i} := \{\,h(p_{i}, p_{j}) \mid j\neq i \}$. There are $n-1$ half-planes in $H_{i}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are closer to $p_{i}$ than they are to $p_{j}$ or $p_{k}$. If we performed this intersection over all $n-1$ half-planes, we would have described the Voronoi region of $p_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
+    Define set of half-planes containing $p_{i}$ as $H_{i} := \{\,h(p_{i}, p_{j}) \mid j\neq i \}$. There are $n-1$ half-planes in $H_{i}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are at least as close or closer to $p_{i}$ as they are to $p_{j}$ or $p_{k}$. Extrapolating a bit further, if we performed this intersection over all $n-1$ half-planes, we would have the necessary information to determine the set of points which are at least as close or closer to $p_{i}$ as they are to all other sites. Which is, of course, the description of the $V_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
     $$V_{i} = \bigcap_{h \in H_{i}}$$ 
-    Because the half-plane is a convex set\footnote{A set is convex if the line segment connecting any two points in the set is also in the region.} (or region), and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies heavily on intersection of half-planes and convex regions.\par
-    To summarize, every Voronoi region can be thought of as a (possibly unbounded) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. The Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, is the collection of all of these regions.
-    We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\Re^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints).\par
 
-    Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
-    $v - e + f = 2.$ Applying this to $\mbox{Vor}(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
+    \Cref{fig:all_half_planes} illustrates how $V_{p}$ is formed by the intersection of half-planes, it is the darkest shaded region bounded by a solid border.
+
+    \begin{figure}[!htb]
+      \centering
+      \begin{subtable}{.475\textwidth}
+        \input{figs/intro/half_plane0.tex}
+        \caption{One half-plane, $h(p, q)$}
+        \label{fig:one_half_plane}
+      \end{subtable}%
+      \begin{subtable}{.475\textwidth}
+      \centering
+        \input{figs/intro/half_plane.tex}
+        \caption{$V_{p}$ from half-plane intersections}
+        \label{fig:all_half_planes}
+      \end{subtable}
+      \caption{Half-Plane Intersections}
+      \label{fig:half_planes}
+    \end{figure}
+    Recall that a set is convex if the line segment connecting any two points in the set is also in the region.Because the half-plane is a convex set and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies on half-plane intersections.\par
+
+    In summary, every Voronoi region can be thought of as a (possibly unbounded) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. 
+  % section  (end)
+
+  \section{The Voronoi Graph} % (fold)
+  \label{sec:voronoi_graph}
+    Everything that we have discovered so far about the Voronoi diagram (and its dual) suggests that the Voronoi diagram has linear complexity. What we mean by that is that the number of Voronoi vertices and edges corresponds linearly with the number of sites we compute the diagram on. It would be incredibly convenient if we could show that a Voronoi diagram can be represented as a planar graph\footnote{Recall that when a graph is planar, it can be embedded in the plane in a way that no edges in the graph intersect unless they have the same endpoints.}, since that would allow us to apply \emph{Euler's Formula}.\par
+
+    \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true: $v - e + f = 2.$ Furthermore, if the graph is \emph{simple}\footnote{A simple graph is one which does not contain multiple edges with the sane endpoints or edges whose two endpoints are the same, often called a \say{loop}.}, that $e \leq 3n -6$.\par
+
+    What prevents the Voronoi diagram from being planar are its \emph{half-infinite edges}, discussed in \cref{sec:half_plane_char}. However, we can make the Voronoi diagram of $P$ into a planar graph by introducing a vertex \say{at infinity}. Then, we assign the vertex at infinity to be second endpoint of each half infinite edge in the diagram. \Cref{fig:vertex_at_infinity} illustrates how the addition of a vertex at infinity changes the Voronoi diagram on nine sites we saw in \cref{fig:first_sight}.\par
+
+
+    \begin{figure}[!htb]
+      \centering
+      \input{figs/intro/vertex_at_infinity.tex}
+      \caption{Connecting Half-Infinite Edges to $v_{\infty}$}
+      \label{fig:vertex_at_infinity}
+    \end{figure}
+
+    % We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\mathds{R}^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints).\par
+
+    % Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
+    % $v - e + f = 2.$ 
+
+    Now, we can apply Euler's Formula to the slightly modified diagram. So given $\mbox{Vor}(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
     $$(v + 1) - e + n = 2.$$ Since every edge has exactly two endpoints and every vertex is of degree three,\footnote{This doesn't include the vertex at infinity, which will have out-degree \emph{at least} three.} we can say that $2e \geq 3(v + 1)$. Together with Euler's formula, this implies that for a $n\geq 3$, the number of vertices is at most $2n -5$ and the number of edges is at most $3n -6$. 
-  % section formalizing_the_post_office_problem (end)
-  \section{Intersection of Half-Planes: A Na{\"i}ve Approach} % (fold)
-  \label{sec:a_naive_approach}
-    The structure of the planar Voronoi diagram lends itself to relatively simple algorithm for its construction. Using the notions and terminology from above, we can cobble together a naive algorithm to compute the Voronoi diagram of a set of sites. Intuitively, the Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, can be found by computing each region $V_{i}$ and defining $\mbox{Vor}(P)$ to be that set of regions. \par
 
-    We've seen that the Voronoi region is a convex polygonal region. Furthermore, if $|P| = n$, then no region can have more than $n-1$ edges. Recall that an equivalent way of describing a Voronoi region is as the intersection of a set of half-planes. We can construct the region for a specific site by taking the intersection of this set of half-planes. Each region, then takes $\mathcal{O}(n\log n)$ time. A region needs to be computed for each of the $n$ sites, so computing the Voronoi diagram with this approach would take $\mathcal{O}(n^{2}\log n)$ time.
+
+ %  \chapter*{The Voronoi Diagram}
+ %    \addcontentsline{toc}{chapter}{The Voronoi Diagram}
+ %    \setcounter{chapter}{2}
+ %    \setcounter{section}{0}
+	% \chaptermark{The Voronoi Diagram}
+	% \markboth{The Voronoi Diagram}{The Voronoi Diagram}
+    % Suppose you are hoping to send a piece of mail via post office. In this day and age, it's uncommon to send a piece of mail, and you might ask yourself \say{Where is the nearest post office?} \par
+    % But why is the post office \emph{there}? \par
+    % To answer that question, assume the perspective of a city planner whose task is to determine where the next post office should located. The city planner might work under the assumption that people go to the post office closest to where they live. Roughly, the planner determines the areas of service for each post office, which consists of dividing the city into regions whose occupants are closer to the post office in that region than any other office. The area of service, for a particular post office, corresponds directly with the Voronoi cell of that site (the post office). We call this cell, or a region.\footnote{If the aforementioned example doesn't resonate with you, I'd encourage you to peruse \cref{appendix_one}, where I've included a plethora of other examples with the intent of motivating the problem from different perspectives, disciplines, and industries.}\par
+
+  % \section{Formalizing the Post Office Problem} % (fold)
+  % \label{sec:formalizing_the_post_office_problem}
+    % We can define the Voronoi Tessellation with naught but a collection of points and a way to measure the distance between points. Given $P:=\{p_{1}, p_{2},\ldots, p_{n}\}$, a finite set of $n$ distinct points in $\mathds{R}^d$, the Voronoi diagram of $P$, $\mbox{Vor}(P)$, is a subdivision of the plane into $n$ regions. Specifically, $$\mbox{Vor}(P):=\{V_{1}, V_{2}, \ldots, V_{n}\}$$ where each region $V_{i}$ is defined: 
+    % $$V_{i} := \{\,q \in \mathds{R}^d \mid \delta(q, p_{i}) \leq \delta(q, p_{j}) \text{ for all }\, p_{j}\in P\,\text{ where }j\neq i \}.$$
+    % For the purposes of this thesis, we will be working with diagrams in $\mathds{R}^2$. We take the $\delta(q, p)$ to be the usual measure of distance in $\mathds{R}^2$.\par
+
+    % \begin{figure}[!htb]
+    %   \centering
+    %   \begin{subtable}{.475\textwidth}
+    %     \input{figs/intro/del_intuition_1.tex}
+    %     \caption{A site connected to its adjacent sites}
+    %     \label{fig:del_intuition1}
+    %   \end{subtable}%
+    %   \begin{subtable}{.475\textwidth}
+    %     \input{figs/intro/del_intuition_done.tex}
+    %     \caption{All sites connected to their adjacent sites}
+    %     \label{fig:del_intuition2}
+    %   \end{subtable}
+    %   \caption{Voronoi Diagram (Solid) and Delaunay Triangulation (Dashed)}
+    %   \label{fig:del_intuition}
+    % \end{figure}
+
+
+
+    % We can also think of the region $V_{i}$ as the (possibly unbounded) convex polygon which is the result of intersection of $n-1$ half-planes. Let's unpack that a little bit. Given two sites $p_{i}$ and $p_{j}$, imagine the line, $l$ connecting them. [graph] At the midpoint, $m$, of $l$, imagine a line $b$, perpendicular to $l$ and passing through $m$. Note that $b$ is the perpendicular bisector of $l$. Then $b$ splits the plane into two half-planes. Define the half-plane containing $p_{i}$ with $h(p_{i}, p_{j})$; similarly, define the half-plane containing $p_{j}$ with $h(p_{i}, p_{j})$. To connect this notion back to our first description of a Voronoi region, note that all of the points in $h(p_{i}, p_{j})$ will \emph{not} be in $p_{j}$'s region, since every point in $h(p_{i}, p_{j})$ is closer to $p_{i}$ than it is to $p_{j}$. Define set of half-planes containing $p_{i}$ as $H_{i} := \{\,h(p_{i}, p_{j}) \mid j\neq i \}$. There are $n-1$ half-planes in $H_{i}$. Consider the intersection of any two of these half-planes, $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$. The set of points lying in the intersection of $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$ are all of the points which are closer to $p_{i}$ than they are to $p_{j}$ or $p_{k}$. If we performed this intersection over all $n-1$ half-planes, we would have described the Voronoi region of $p_{i}$ exactly. So we can also describe the region as the intersection of a set of half-planes:
+    % $$V_{i} = \bigcap_{h \in H_{i}}$$ 
+    % Because the half-plane is a convex set\footnote{A set is convex if the line segment connecting any two points in the set is also in the region.} (or region), and the intersection of convex regions is also convex, we can say with confidence, nay, with certainty, that the Voronoi region is convex. In \cref{sec:a_naive_approach} we describe an algorithm to construct the Voronoi diagram using an approach which relies heavily on intersection of half-planes and convex regions.\par
+    % To summarize, every Voronoi region can be thought of as a (possibly unbounded) convex polygon whose edges are the bounding lines of the convex regions and whose vertices are the points of intersection between the bounding lines. Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. The Voronoi diagram of a set of sites P, $\mbox{Vor}(P)$, is the collection of all of these regions.
+    % We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\mathds{R}^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints).\par
+
+    % Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
+    % $v - e + f = 2.$ Applying this to $\mbox{Vor}(P)$ with an infinite vertex, which has $n$ regions, $v$ vertices, and $e$ edges we have:
+    % $$(v + 1) - e + n = 2.$$ Since every edge has exactly two endpoints and every vertex is of degree three,\footnote{This doesn't include the vertex at infinity, which will have out-degree \emph{at least} three.} we can say that $2e \geq 3(v + 1)$. Together with Euler's formula, this implies that for a $n\geq 3$, the number of vertices is at most $2n -5$ and the number of edges is at most $3n -6$. 
+  % section formalizing_the_post_office_problem (end)
   
   \section{The Voronoi Diagram and its Dual} % (fold)
   \label{sec:the_voronoi_diagram_and_its_dual}
-    While the Voronoi diagram can be computed directly with relative- though certainly not always computational- ease, it can also be computed indirectly, that is, through the construction of its dual, the \emph{Delaunay triangulation}. One of the many advantages of working with the dual is the ability to work with triangular faces instead of with polygonal regions with an unknown number of sides. Given a Voronoi diagram on $P$, $\mbox{Vor}(P)$, choose a site $p_{i} \in P$. Using $\mbox{Vor}(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it, as in \cref{fig:del_intuition1}. Do this for all the sites as in \cref{fig:del_intuition2}. If we assume that $\mbox{Vor}(P)$ contains no degeneracies, then the resulting diagram is the Delaunay Triangulation, $\mbox{Del}(P)$, as shown in \cref{fig:del_intuition}.
+    While the Voronoi diagram can be computed directly with relative--- though certainly not always computational--- ease, it can also be computed somewhat indirectly, that is, through the construction of its dual, the \emph{Delaunay subdivision}. If we assume that the set of sites $P$ is \say{well-behaved}\footnote{We'll wave our hands at this for now, and in \cref{sec:the_fine_print} we'll define more precisely what it means for the set of sites to be \say{well-behaved.}}, then the resulting diagram is the Delaunay triangulation of those sites, $\mbox{Del}(P)$. Furthermore, the Delaunay triangulation of a Voronoi diagram is unique. One of the many advantages of working with the dual is the ability to work with triangular faces instead of with polygonal regions with an unknown number of sides. \par
+
+    We can develop our intuition for the Delaunay triangulation and the primal-dual relationship by constructing $\mbox{Del}(P)$ from $\mbox{Vor}(P)$. Choose a site $p_{i} \in P$. Using $\mbox{Vor}(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it, as in \cref{fig:del_intuition1}. Do this for all the sites. The resulting diagram is the unique Delaunay Triangulation of $P$, as shown in \cref{fig:del_intuition2}.
 
     \begin{figure}[!htb]
       \centering
@@ -223,7 +298,7 @@
       \end{subtable}%
       \begin{subtable}{.475\textwidth}
         \input{figs/intro/del_intuition_done.tex}
-        \caption{All sites connected to their adjacent sites}
+        \caption{All sites connected to neighboring sites}
         \label{fig:del_intuition2}
       \end{subtable}
       \caption{Voronoi Diagram (Solid) and Delaunay Triangulation (Dashed)}
@@ -231,19 +306,18 @@
     \end{figure}
 
     % move degenerate case to a last paragraph where you can finally be honest with them
-    Note that we are being a bit cavalier with this description of the Delaunay triangulation. If four or more sites were co-circular, our result would be a Delaunay subdivision, which could be quickly modified (via the addition of edges, if necessary) to be a Delaunay triangulation. Furthermore, the Delaunay triangulation of a  Voronoi diagram whose sites are in general position is unique.\par
+    % Note that we are being a bit cavalier with this description of the Delaunay triangulation. If four or more sites were co-circular, our result would be a Delaunay subdivision, which could be quickly modified (via the addition of edges, if necessary) to be a Delaunay triangulation. Furthermore, the Delaunay triangulation of a  Voronoi diagram whose sites are in general position is unique.\par
 
-    Now, let's take a couple steps back and define the Delaunay triangulation a bit more rigorously, so we can better examine its properties and relation to the Voronoi diagram. It's useful, for our purposes, to consider the \emph{convex hull}.  This is the smallest convex region containing $P$, that is roughly, the intersection of all of the convex sets containing $P$. We will define this set as the smallest convex set generated by taking combinations of points of $P$. Precisely, given points $q_{1}$,... $q_{k}$, a \emph{convex combination} of those points is defined as $\Sigma\alpha_{i}q_{i}$ where the $\alpha_{i}$'s are non-negative and $\Sigma\alpha_{i}=1.$  So, for our point set $P$ we are interested in the convex hull  $\mbox{conv}(P)$ defined as the set
+    Let's take a couple steps back and define the Delaunay triangulation a bit more rigorously, so we can better examine its properties and relation to the Voronoi diagram. It's useful, for our purposes, to consider the \emph{convex hull}. The convex hull of a set of points $P$ is the smallest convex region containing $P$. Roughly, it is the intersection of all of the convex sets containing $P$. Precisely: given points $q_{1}$,... $q_{k}$, a \emph{convex combination} of those points is defined as $\Sigma\alpha_{i}q_{i}$, where the $\alpha_{i}$'s are non-negative and $\Sigma\alpha_{i}=1.$  So, for our point set $P$, we are interested in the convex hull, denoted $\mbox{conv}(P)$, defined as the set:
 
-     % in $\Re^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, 
+     % in $\mathds{R}^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, 
 
-    % Precisely, given $n$ points in $\Re^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, and the points generated by the combination of $p_{i}$'s are the \emph{convex set}.\cite{SHAMOS pg 90-91}
+    % Precisely, given $n$ points in $\mathds{R}^2$, define $q$ to be a special type of affine combination called a \emph{convex combination}, and the points generated by the combination of $p_{i}$'s are the \emph{convex set}.\cite{SHAMOS pg 90-91}
     \[
      \mbox{conv}(P) = \{\, \alpha_{1}p_{1} + ... + \alpha_{n}p_{n} \ \mid\ \text{for$ \,\alpha_{i} \in \Re, \; \alpha_{i} \geq 0$ and $\Sigma\alpha_{i} = 1$}\,\} 
     \]
-    \cref{fig:convex_hull} illustrates the convex hull of the same point set used in \cref{fig:del_intuition1, fig:del_intuition2}. 
-    This region of the plane is best understood in terms of a complete description of its boundary.\footnote{See \cref{fig:convex_hull}} 
-    The boundary of the Delaunay triangulation of P is the convex hull of $P$. It's important to note here that every edge in the convex hull of a set of sites is an edge in the Delaunay triangulation.
+    \Cref{fig:convex_hull} illustrates the convex hull of the same point set used in \cref{fig:del_intuition1,fig:del_intuition2}. 
+    This region of the plane is best understood in terms of a complete description of its boundary, as shown in \cref{fig:convex_hull}.\par
 
     \begin{figure}[!htb]
       \centering
@@ -252,18 +326,22 @@
       \label{fig:convex_hull}
     \end{figure}
 
-    We can confirm the delaunayhood of a triangulation in two ways. For two sites $a, b \in P$, we say that that the edge connecting them meets the delaunay property if the circle passing through $a$ and $b$ does not contain any of the other sites in $P$. An equivalent, and perhaps more common, understanding of the delaunay property operates on the faces (triangles) of the triangulation instead of its edges. It is often referred to as the \emph{empty circle condition}. The \emph{empty circle condition} stipulates that for a triangle defined by three sites $a, b, c \in P$, the circumcircle of that triangle contains no other sites in $P$.\par
+    A triangulation is a subdivision of the plane into triangular faces. More specifically, the triangulation of a point-set is a set of non-overlapping triangles where the union of the regions bounded by the triangles is the convex hull of $P$. The vertices of the triangles are taken from the point set, and each point in the set must be the vertex of at least one triangle. The boundary of the Delaunay triangulation of P is the convex hull of $P$. It's important to note here that every edge in the convex hull of a set of sites is an edge in the Delaunay triangulation.\par
 
-    So, given a triangulation, as in \cref{fig:delaunayhood_small}, one way to confirm its delaunayhood is as follows: for each edge $e$ in the triangulation, we consider the two triangles on either side of the edge.  In the case of \cref{fig:delaunayhood_small}, the triangles which share edge $e$ are $\Delta abd$ adn $\Delta bcd$. Because $a$ does not lie in the circumcircle of $\Delta bcd$, shown as a dashed line in \cref{fig:delaunayhood_small}, we say that $e$ is \emph{locally delaunay}. When every edge in the triangulation is locally delaunay, we may say that the triangulation is \emph{globally delaunay}.
+    We can confirm the Delaunayhood of a triangulation in two ways. For two sites $a, b \in P$, we say that that the edge connecting them satisfies the Delaunay property if the circle passing through $a$ and $b$ does not contain any of the other sites in $P$. An equivalent, and perhaps more common, understanding of the Delaunay property operates on the faces (triangles) of the triangulation instead of its edges. It is often referred to as the \emph{empty circle condition}. The \emph{empty circle condition} stipulates that for a triangle defined by three sites $a, b, c \in P$, the circumcircle of that triangle contains no other sites in $P$. These tests correspond to the geometric properties of the corresponding Voronoi diagram. Asking whether or not a face of the triangulation satisfies the empty circle condition is equivalent to checking whether or not a circle centered at a Voronoi vertex includes no sites and intersects with three sites.\par
+
+    So, given a triangulation, as in \cref{fig:delaunayhood_small}, one way to confirm its Delaunayhood is as follows: for each edge $e$ in the triangulation, we consider the two triangles on either side of the edge.  In the case of \cref{fig:delaunayhood_small}, the triangles which share edge $e$ are $\Delta abd$ and $\Delta bcd$. Because $a$ does not lie in the circumcircle of $\Delta bcd$, shown as a dashed line in \cref{fig:delaunayhood_small}, we say that $e$ is \emph{locally delaunay}. When every edge in the triangulation is locally Delaunay, we may say that the triangulation is \emph{globally Delaunay}.
 
     \begin{figure}[!htb]
       \centering
       \input{figs/intro/delaunayhood_small.tex}
-      \caption{Testing the delaunayhood of a small triangulation}
+      \caption{Testing the Delaunayhood of a small triangulation}
       \label{fig:delaunayhood_small}
     \end{figure}
 
-    What distinguishes the Delaunay triangulation of a set $P$ from any other triangulation of $P$ are its unique properties, which are directly related to its privileged position as the dual of the Voronoi diagram. In \cref{sec:properties_of_voronoi_and_delaunay_diagrams} we will explore some of the convenient and interesting geometric consequences of a triangulation with the Delaunay property.\par
+    What distinguishes the Delaunay triangulation of a set $P$ from any other triangulation of $P$ are its unique properties, which are directly related to its privileged position as the dual of the Voronoi diagram. 
+
+    % In \cref{sec:properties_of_voronoi_and_delaunay_diagrams} we will explore some of the convenient and interesting geometric consequences of a triangulation with the Delaunay property.\par
 
   \section{The Fine Print}
   \label{sec:the_fine_print}
@@ -312,38 +390,38 @@
 
     From the previous \cref{sec:the_voronoi_diagram_and_its_dual}, we saw that it is possible to obtain the dual of the Voronoi diagram in linear time. Thus, we can use the Voronoi diagram to solve the problem of triangulating a set of sites $P$, by returning the dual of the diagram. 
 
-    The Post Office Problem is a classic, though perhaps slightly dated, motivation for the Voronoi diagram. However, it captures one of the central use cases for the Voronoi diagram, which is its ability to answer the \emph{nearest neighbor problem}. The nearest neighbor problem can be stated as such: given a set of sites $P$, and a query point $q$, return the point in $P$ which is closest to $q$. Recall that the Voronoi diagram partitions the plane into a set of $\mid\,P\,\mid$ regions which satisfy the stipulation that every point in a given region is closer to the site associated with that region than it is to any other site. Then, given a query point $q$ and a Voronoi diagram of $P$, we can answer the nearest neighbor question by simply locating the region that $q$ is in, a question we can answer in $\mathcal{O}(\log n)$ time with linear auxilliary storage.\citep[p. 214]{shamos}\par
+    The Post Office Problem is a classic, though perhaps slightly dated, motivation for the Voronoi diagram. However, it captures one of the central use cases for the Voronoi diagram, which is its ability to answer the \emph{nearest neighbor problem}. The nearest neighbor problem can be stated as such: given a set of sites $P$, and a query point $q$, return the point in $P$ which is closest to $q$. Recall that the Voronoi diagram partitions the plane into a set of $\mid\,P\,\mid$ regions which satisfy the stipulation that every point in a given region is closer to the site associated with that region than it is to any other site. Then, given a query point $q$ and a Voronoi diagram of $P$, we can answer the nearest neighbor question by simply locating the region that $q$ is in, a question we can answer in $\mathcal{O}(\log n)$ time with linear auxiliary storage.\citep[p. 214]{shamos}\par
     
-    (Closely) related to this are the \emph{closest pair} and \emph{all nearest neighbors} problems. The closest pair problem asks, given a set of sites $P$, which pair of points $p_{i}$ and $p_{j}$ in $P$ are closest? The all nearest neighbors problem can be framed similarly: given a set of sites $P$, return a collection of pairs ($p_{i}$, $p_{j}$) such that $p_{j}$ is the nearest neighbor of $p_{i}$.\footnote{Note here that the closest pair problem is really a specification of the nearest neighbors problem where the query point $q$ is some $p_{i}$ in $P$ and not arbitrary $q$ in $\Re^2$.} When given a Voronoi diagram on those sites, the all nearest neighbors problem can be answered in linear time by recognizing that the nearest neighbor of a single site must be one of the sites with which it shares an edge. Equivalently, we can consider the Delaunay triangulation on the same set of sites, $\mbox{Del}(P)$. Recall that each vertex on the Delaunay triangulation is a site of $\mbox{Vor}(P)$. Furthermore, note that the line segment connecting a vertex $p_{i}$ of $\mbox{Del}(P)$ to its nearest neighbor is, and must be, one of the edges in $\mbox{Del}(P)$. So, if we spend time on the order of $\mathcal{O}(n)$ computing the result of the all nearest neighbors problem on $\mbox{Vor}(P)$, we will, by definition, have the answer the the closest pair problem for each site in $P$. 
+    (Closely) related to this are the \emph{closest pair} and \emph{all nearest neighbors} problems. The closest pair problem asks, given a set of sites $P$, which pair of points $p_{i}$ and $p_{j}$ in $P$ are closest? The all nearest neighbors problem can be framed similarly: given a set of sites $P$, return a collection of pairs ($p_{i}$, $p_{j}$) such that $p_{j}$ is the nearest neighbor of $p_{i}$.\footnote{Note here that the closest pair problem is really a specification of the nearest neighbors problem where the query point $q$ is some $p_{i}$ in $P$ and not arbitrary $q$ in $\mathds{R}^2$.} When given a Voronoi diagram on those sites, the all nearest neighbors problem can be answered in linear time by recognizing that the nearest neighbor of a single site must be one of the sites with which it shares an edge. Equivalently, we can consider the Delaunay triangulation on the same set of sites, $\mbox{Del}(P)$. Recall that each vertex on the Delaunay triangulation is a site of $\mbox{Vor}(P)$. Furthermore, note that the line segment connecting a vertex $p_{i}$ of $\mbox{Del}(P)$ to its nearest neighbor is, and must be, one of the edges in $\mbox{Del}(P)$. So, if we spend time on the order of $\mathcal{O}(n)$ computing the result of the all nearest neighbors problem on $\mbox{Vor}(P)$, we will, by definition, have the answer the the closest pair problem for each site in $P$. 
 
   % \section{Properties of Voronoi and Delaunay Diagrams} % (fold)
   % \label{sec:properties_of_voronoi_and_delaunay_diagrams}
   %   Here, I'll summarize some of the jargon we've been developing. I'll also touch on the geometric properties of Voronoi And Delaunay Diagrams. \cref{sec:formalizing_the_post_office_problem,sec:a_naive_approach,sec:the_voronoi_diagram_and_its_dual,sec:applications_of_voronoi_and_delaunay_diagrams} 
 
-  \section{How do we keep track of this?} % (fold)
-  \label{sec:how_do_we_keep_track_of_this}
-    Before we take the next step of our journey together, dear Reader, a note on storage: there are a couple different ways to store a Voronoi diagram. The authors of algorithms will occasionally suggest data structures which complement the algorithm approach and are space efficient. However, it is often at the discretion of the programmer to choose the structures most appropriate to their application's needs. In sum, these choices can range from devilishly clever [ref Guibas and Stolfi] to painfully ham-fisted. It is important to note that by augmenting the Voronoi diagram with a point at infinity, we can treat it as a planar graph. Consequently, any data structure fit for use with a planar graph can be used to store and create a Voronoi diagram. \par
+  % \section{How do we keep track of this?} % (fold)
+  % \label{sec:how_do_we_keep_track_of_this}
+  %   Before we take the next step of our journey together, dear Reader, a note on storage: there are a couple different ways to store a Voronoi diagram. The authors of algorithms will occasionally suggest data structures which complement the algorithm approach and are space efficient. However, it is often at the discretion of the programmer to choose the structures most appropriate to their application's needs. In sum, these choices can range from devilishly clever [ref Guibas and Stolfi] to painfully ham-fisted. It is important to note that by augmenting the Voronoi diagram with a point at infinity, we can treat it as a planar graph. Consequently, any data structure fit for use with a planar graph can be used to store and create a Voronoi diagram. \par
 
-    Depending on the approach, we might find it wise to use intermediary data structures, such as priority queues or red-black trees, as we will discover in \cref{sec:fortune_s_algorithm}. However, what we wish to focus on in this section are the structures which hold the culmination of all this work: the completed Voronoi (or Delaunay) diagram. And this much is true for any algorithm one might encounter: given a set of $n$ unique sites, $P:=\{p_{1}, p_{2}, .. p_{n}\}$, the output will be a handful of Voronoi vertices, $V$, and a bundle of Voronoi edges, $E$. 
+  %   Depending on the approach, we might find it wise to use intermediary data structures, such as priority queues or red-black trees, as we will discover in \cref{sec:fortune_s_algorithm}. However, what we wish to focus on in this section are the structures which hold the culmination of all this work: the completed Voronoi (or Delaunay) diagram. And this much is true for any algorithm one might encounter: given a set of $n$ unique sites, $P:=\{p_{1}, p_{2}, .. p_{n}\}$, the output will be a handful of Voronoi vertices, $V$, and a bundle of Voronoi edges, $E$. 
 
-    [to do: weave this in here..... use it to motivate these structures.... The mysterious \emph{point at infinity}- discussion of which I have deliberately skirted thus far- now demands explanation?(here? now? really?) We might understand the Delaunay diagram (or, if you're interested in a challenge, the corresponding Voronoi diagram) as bundles of edges, faces, and vertices. As it turns out, the incidence relationships between these precisely define the topological structure of the diagram. We may take for granted that the Voronoi and Delaunay diagrams are topologically equivalent to an undirected graph embedded in the Euclidean plane. When we add a \emph{point at infinity}, we allow ourselves to consider these diagrams as planar graphs embedded on a sphere instead. Though it doesn't immediately seem to simplify things, it allows us to use the infinite elements of the diagrams (edges and faces) the same way we use the finite elements. \par]
+  %   [to do: weave this in here..... use it to motivate these structures.... The mysterious \emph{point at infinity}- discussion of which I have deliberately skirted thus far- now demands explanation?(here? now? really?) We might understand the Delaunay diagram (or, if you're interested in a challenge, the corresponding Voronoi diagram) as bundles of edges, faces, and vertices. As it turns out, the incidence relationships between these precisely define the topological structure of the diagram. We may take for granted that the Voronoi and Delaunay diagrams are topologically equivalent to an undirected graph embedded in the Euclidean plane. When we add a \emph{point at infinity}, we allow ourselves to consider these diagrams as planar graphs embedded on a sphere instead. Though it doesn't immediately seem to simplify things, it allows us to use the infinite elements of the diagrams (edges and faces) the same way we use the finite elements. \par]
 
-    \subsection{Directed Edges}
-    \label{sub:half_edge_ds}
-      [some kind of preamble about how a variety of linked edge structures exist and here is a common one...] The \Cref{fig:half_edge} provides a visual guide for the terminology we use to traverse planar graphs and to refer to its edges and vertices. Each edge has a notion of the \emph{face} to its left. We might think of a \emph{face} as the portion of the plane that any cycle of directed edges encloses. An edge also has an idea of the \emph{next} edge in the graph and its \emph{twin}. [something about the twin, something about orientation]  In \cref{fig:half_edge}, for example, given $e$, we would access $f$ in terms of $e$ with the expression(?) $e.next.twin.face$.
+  %   \subsection{Directed Edges}
+  %   \label{sub:half_edge_ds}
+  %     [some kind of preamble about how a variety of linked edge structures exist and here is a common one...] The \Cref{fig:half_edge} provides a visual guide for the terminology we use to traverse planar graphs and to refer to its edges and vertices. Each edge has a notion of the \emph{face} to its left. We might think of a \emph{face} as the portion of the plane that any cycle of directed edges encloses. An edge also has an idea of the \emph{next} edge in the graph and its \emph{twin}. [something about the twin, something about orientation]  In \cref{fig:half_edge}, for example, given $e$, we would access $f$ in terms of $e$ with the expression(?) $e.next.twin.face$.
 
-    \begin{figure}[!htb]
-      \centering
-      \input{figs/intro/storage/hwe.tex}
-      \caption{Half Edge Terminology}
-      \label{fig:half_edge}
-    \end{figure}
-    \clearpage
+  %   \begin{figure}[!htb]
+  %     \centering
+  %     \input{figs/intro/storage/hwe.tex}
+  %     \caption{Half Edge Terminology}
+  %     \label{fig:half_edge}
+  %   \end{figure}
+  %   \clearpage
 
-    \subsection{Quad-Edge}
-    \label{sub:quad_edge}
-      Guibas and Stolfi's quad-edge data structure simultaneously represents an embedding of a planar graph, its dual, and its mirror image. It was, as we will see in \cref{sec:divide_and_conquer}, the result of an attempt to separate more distinctly the topological properties of the diagram from the geometric properties of the diagram. They note that manipulation of a Delaunay triangulation is simpler than performing the corresponding operations on a Voronoi diagram.
-      Guibas and Stolfi's quad-edge data structure is the motivation for their in-depth discussion of embeddings of subdivisions on orientable manifolds, and though a thorough summary of their discussion is (perhaps) outside the scope of this paper, I will note, briefly, they ways in which their quad-edge data structure leverages their findings. Their quad-edge structure allows one to hop between the primal, dual, and mirror-image diagrams in constant time. It bears a strong resemblance to the winged-edge and half-edge data structures, but goes a step further, and takes advantage of the fact that an edge sits at the boundary of exactly two faces and two vertices. Moving between the primal and the dual, then, is a simple matter of exchanging the conventions around the representation of faces and the vertices. (there must be a better way to put this). This is achieved through their development of an \emph{edge algebra}, which captures the topological properties of a subdivision (and allows them to refine the set of edge functions which can be used to traverse the mesh). [DIAGRAM]
+  %   \subsection{Quad-Edge}
+  %   \label{sub:quad_edge}
+  %     Guibas and Stolfi's quad-edge data structure simultaneously represents an embedding of a planar graph, its dual, and its mirror image. It was, as we will see in \cref{sec:divide_and_conquer}, the result of an attempt to separate more distinctly the topological properties of the diagram from the geometric properties of the diagram. They note that manipulation of a Delaunay triangulation is simpler than performing the corresponding operations on a Voronoi diagram.
+  %     Guibas and Stolfi's quad-edge data structure is the motivation for their in-depth discussion of embeddings of subdivisions on orientable manifolds, and though a thorough summary of their discussion is (perhaps) outside the scope of this paper, I will note, briefly, they ways in which their quad-edge data structure leverages their findings. Their quad-edge structure allows one to hop between the primal, dual, and mirror-image diagrams in constant time. It bears a strong resemblance to the winged-edge and half-edge data structures, but goes a step further, and takes advantage of the fact that an edge sits at the boundary of exactly two faces and two vertices. Moving between the primal and the dual, then, is a simple matter of exchanging the conventions around the representation of faces and the vertices. (there must be a better way to put this). This is achieved through their development of an \emph{edge algebra}, which captures the topological properties of a subdivision (and allows them to refine the set of edge functions which can be used to traverse the mesh). [DIAGRAM]
 
     % \begin{figure}[!htb]
     %   \centering
@@ -364,15 +442,63 @@
   %   In this thesis, we wish to bear witness to the effects of modifying the two aspects of two different approaches to constructing the Voronoi diagram (or the Delaunay triangulation). Further, we ask the following question, which will be further motivated by the section on divide and conquer algorithms: ``given two valid delaunay triangulations (or voronoi diagrams), merge them''. So we're trying to merge them in parallel so we can see the results and maybe say something about that. We're also thinking about the question ``is there a way to \emph{order} the randomized incremental approach in a way that allows us to have multiple workers attacking the problem while also minimizing the amount of conflict?'' And we'll see more information on that problem in the section on randomized incremental and also the section on progress with that endeavor.]
   % section statement_of_algorithm_goals_high_performance_computing_ (end)
 
-  \chapter*{Constructing the Voronoi Diagram and its Dual}
+  \chapter*{Constructing the Voronoi Diagram}
     \addcontentsline{toc}{chapter}{Constructing the Voronoi Diagram}
     \chaptermark{Constructing the Voronoi Diagram}
     \markboth{Constructing the Voronoi Diagram}{Constructing the Voronoi Diagram}
-    \setcounter{chapter}{3}
+    \setcounter{chapter}{2}
     \setcounter{section}{0}
-    In \cref{sec:formalizing_the_post_office_problem} we saw a naive algorithm for computing the Voronoi diagram of a set of $n$ sites. The time complexity of the half-plane intersection algorithm, as we discovered in \cref{sec:a_naive_approach}, is $\mathcal{O}(n^{2}\log n)$. Though it provides an intuition of the diagram, there are far more optimal approaches to the construction of the Voronoi diagram. They fall into three rough categories: incremental approaches, divide and conquer approaches, and sweepline approaches. The worst case time complexity for each of these is $\mathcal{O}(n^{2})$, $\mathcal{O}(n\log n)$ and $\mathcal{O}(n\log n)$ respectively. In this chapter, we will examine two classic algorithms to compute the Voronoi diagram: a divide and conquer algorithm, presented by Guibas and Stolfi [ref]; and Steven Fortune's sweepline algorithm. \par
+    % In \cref{sec:formalizing_the_post_office_problem} we saw a naive algorithm for computing the Voronoi diagram of a set of $n$ sites. The time complexity of the half-plane intersection algorithm, as we discovered in \cref{sec:a_naive_approach}, is $\mathcal{O}(n^{2}\log n)$. 
+    [Something about the half plane alg we are about to see and the half notion of regions as intersections of half planes from ch1 ]
+
+    Though it provides an intuition of the diagram, there are far more optimal approaches to the construction of the Voronoi diagram. They fall into three rough categories: incremental approaches, divide and conquer approaches, and sweepline approaches. The worst case time complexity for each of these is $\mathcal{O}(n^{2})$, $\mathcal{O}(n\log n)$ and $\mathcal{O}(n\log n)$ respectively. In this chapter, we will examine two classic algorithms to compute the Voronoi diagram: a divide and conquer algorithm, presented by Guibas and Stolfi [ref]; and Steven Fortune's sweepline algorithm. \par
     
     As it turns out, we can't do better than $\mathcal{O}(n\log n)$. Curious reader that you are, you might wonder: \say{Why?} And the answer is this: we can show, quite easily, in fact, that the problem of sorting numbers is \emph{reducible} to the problem of computing the Voronoi diagram. This means that given a set of integers, we can use an algorithm to construct of Voronoi diagram as a subroutine to compute the sorted set. Furthermore, it implies that we will never be able to construct the Voronoi diagram faster (in terms of complexity) than we will be able to sort integers. Thus, an immediate consequence of this reduction is a tight bound on the Voronoi diagram; it can be constructed in optimal time $\theta(n\log n)$. (Cool fact: Asymptotically, the complexity of the constructing the diagram is no more difficult than the task of finding a region.)\par
+
+  \section{Intersection of Half-Planes: A Brutal Approach} % (fold)
+  \label{sec:a_naive_approach}
+     In \cref{sec:half_plane_char}, we described a Voronoi cell, or region, as the intersection of half-planes containing the site associated with that region. In the same section, we saw that the Voronoi region is a convex region, which may or may not be unbounded. Finally, we noted that if $|P| = n$, then no region $V_{i}$ in $\mbox{Vor}(P)$ can have more than $n-1$ edges. \par
+
+     From these observations, we can cobble together a relatively intuitive algorithm for constructing $\mbox{Vor}(P)$. Recall that for any pair of sites $p_{i}$ and $p_{j}$, we refer to the half-plane containing $p_{i}$ as $h(p_{i}, p_{j})$. A half-plane can be described with an inequality of the form $ax + by + c \leq 0$. It is the region bounded by the line $ax + by + c = 0$. For visual clarification, refer to \cref{fig:one_half_plane} in \cref{sec:half_plane_char}.  
+
+     The strategy is a brutal one. For each site $p_{i}$ in $P$, we compute the set of $n-1$ half-planes containing $p_{i}$; we refer to this set as $H_{i}$. Then, we find the point of intersection (if there is one) of every unique pair of half-planes. Since $|H_{i}| = n-1$, note that there are $\frac{(n-1)(n-2)}{2}$ pairs of half planes. For example, given two half-planes $h(p_{i}, p_{j})$ and $h(p_{i}, p_{k})$, we compute the point of intersection, $inter$. In order for $inter$ to be a Voronoi vertex, it must be the case that is satisfies: $inter \leq a_x + b_y + c$ for each of the, half-planes in $H_{i}$. That is to say, that $inter$ lies within (or on the boundary of) the common intersection of all half-planes in $H_{i}$. If $inter$ satisfies this property, then it will be a vertex of the convex region we are describing. When we have performed this step for each pair of half-planes, we will have a convex set $\textit{intersection}$ consisting of at most $n-1$ points. To describe the region fully, we find the Voronoi edges of this region through computing the convex hull of $\textit{intersection}$. \Cref{sub:alg_sketch_brutal} provides a pseudocode implementation of this approach. \par
+
+     % A half-plane can be described with an inequality of the form $ax + by + c \leq 0$. It is the region bounded by the line $ax + by + c = 0$. For visual clarification, refer to \cref{fig:one_half_plane} in \cref{sec:half_plane_char}. We can find the point of intersection of a pair of half-planes by computing the intersection of the lines bounding them. A region needs to be computed for each of the $n$ sites, so computing the Voronoi diagram with this approach would take $\mathcal{O}(n^{3})$ time.
+
+
+% Our goal is to come up with a set of points whose convex hull determines the boundary of the Voronoi region $V_{p}$.
+
+    \subsection{Algorithm Sketch \& Pseudocode} % (fold)
+    \label{sub:alg_sketch_brutal}
+      \begin{algorithm}[H]
+      \caption{\textsc{VoronoiFromHalfPlanes}}\label{VoronoiHalfPlane}
+      \begin{algorithmic}[1]
+      \Require Set of sites, $P$, which are in \emph{general position}
+      \Procedure{VoronoiFromHalfPlanes}{$P$}\Comment{Construct $\mbox{Vor}(P)$}
+      \State $\mbox{Vor}(P)\gets \{\} $\Comment{Initialize empty diagram}
+      \For{$p_{i}$ in $P$}
+        \State $\textit{half\_planes}\gets$ $H_{i}$  \Comment{Set of half planes containing $p$}
+        \State $\textit{intersections}\gets \{\} $ \Comment{Set of half plane intersections}
+        % \For {q in $P - site$}
+        %   \State $hpq \gets$ \Call{HalfPlaneEqn}{$p$, $q$}
+        %   \State \Call{AddToList}{$half_planes$, $hpq$}
+        % \EndFor
+        \For{each pair of half planes, $(h_{j}, h_{k})$ in $\textit{half\_planes}$}
+          \State $inter \gets$ \Call{HalfPlaneIntersection}{$h_{j}$, $h_{k}$}
+          \State $\textit{is\_in}\gets$\Call{HalfPlaneSetContains}{$H_{i}$, $inter$} 
+          \If{$\textit{is\_in}$}
+            \State \Call{AddIntersection}{$\textit{intersections}$, $inter$}
+          \EndIf
+        \EndFor
+        \State $V_{p}\gets$\Call{ConvexHull}{$\textit{intersections}$}
+        \State \Call{AddRegion}{$\mbox{Vor}(P)$, $V_{p}$}
+      \EndFor
+      \State \textbf{return} $\mbox{Vor}(P)$
+      \EndProcedure
+      \end{algorithmic} 
+      \end{algorithm}
+
+
   
   % subsection constructing_a_voronoi_region (end)
   % section a_naive_approach (end)
@@ -395,7 +521,7 @@
 
         % subsection circle_events (end)
 
-        % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\Re^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\Re^{2}$. Note that conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
+        % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
 
         % An astute reader might wonder how exactly we construct the Voronoi diagram with nothing but a set of sites and a vague notion of a line that falls down the plane. After all, there's no obvious method by which the intersection of the sweepline with a point of interest might yield a Voronoi vertex or edge. Further, it would seem that even if we could provide such a relationship would be subject to change as soon as the sweepline encountered the next point of interest. \par
         % Herein lies the elegance of Fortune's algorithm. Consider the portion of the plane that the sweepline has already encountered, this portion constitutes a closed half-plane, $s^+$. If a site exists in $s^+$, then any point $q$ in $s^+$ which is closer to that site than it is to $s$ will not be assigned to a site below $s$. When the sweepline $s$ encounters a site $p_{i}$ we call this a \emph{site event}. We consider the locus of points which are closer to $p_{i}$ than to $s$. The set of points equidistant to $s$ and $p_{i}$ form a parabolic arc. This arc, denoted $\beta_{i}$, is added to a a sequence of parabolic arcs called the \emph{beachfront}. We will refer to the beachfront as $\beta(P)$. The crucial observation is that the points above $\beta(P)$ will be assigned to a site already encountered by $s$. \par
@@ -440,14 +566,12 @@
 
         To summarize, the beachfront is a sequence of parabolic arc segments. The size of the beachfront, that is, the number of arcs composing the beachfront, must be less than or equal to $2n-1$, where $n$ is the number of sites. Each arc is associated with a site, and there may be multiple arcs associated with the same site. As the sweepline moves downward, the equations of the parabolas governing the arcs change, triggering a shift in the breakpoints of those arcs as well. The structure of the beachfront is a function of site events and circle events. A site event occurs when the sweepline intersects with a site (i.e they both have the same y-coordinate) and a circle event occurs when the sweepline intersects with the lowest point (that is to say, the point with the minimum y-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. Looking past the horizon of the beachfront, the effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex at the intersection of two edges.\par
 
-
-
       % subsection the_beachfront (end)
 
 
     \subsection{Putting It All Together} % (fold)
     \label{sub:putting_it_all_together}
-      % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\Re^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\Re^{2}$. Note that conceptually, $s$ begins at the \say{top} of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
+      % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweepline $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the \say{top} of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
 
       Armed with an understanding of how site events and circle events effect the structure of the beachfront, we might consider ourselves sufficiently motivated to understand the particulars of how each of these parts yields information about the Voronoi diagram. We know that the sweepline travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweepline begins, we can simply order the sites by decreasing y-coordinate and initialize the event queue with that information. Unlike site events, we don't know exactly when or how many circle events will occur.\footnote{Some circle events will be \emph{false alarms}, a highly technical term we'll be defining soon. Aside from these false alarms, recall that handling a circle event adds a vertex to the finished diagram, and we know from \cref{sec:formalizing_the_post_office_problem} that an upper bound for the number of vertices is $2n-5$ for a Voronoi diagram on $n$ sites.} So, circle events complicate the problem insofar as they punctuate an otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events. \par
 
@@ -496,7 +620,7 @@
       \end{itemize}\par
       If the circle event was already deleted from the event queue, we've either already handled it, or it was an \emph{false alarm}. As we've seen, it's often the case that handling a site event has a cascading effect; wherein the event itself doesn't create a circle event, but creates a situation where one or more circle events would need to added or removed from the event queue. Similarly, handling a circle event can also lead to the creation or removal of one or more circle events, since the disappearance of an arc can lead to new combinations of triples on the beachfront.\par
 
-      \Cref{fig:construct_vorof_3} illustrates the application of Fortune's algorithm to a small set of three sites: $p_{i}$, $p_{j}$, and $p_{k}$. To understand how to handle a circle event, let's investigate this example. In \cref{fig:fortune_0,fig:fortune_1,fig:fortune_2} we are adding arcs to the beachfront by handling the site events associated with $p_{j}$, $p_{k}$, and $p_{i}$, respectively. In \cref{fig:fortune_2}, we also add a circle event to the event queue, since there are now three consecutive arcs in the beachfront with distinct sites. At this point, the circle event is the only event in the queue left to handle. \Cref{fig:fortune_3} illustrates how the arc $\alpha$ has shrunk as the sweepline has moved downward.  The dotted lines reveal how the breakpoints of $\alpha$ have shifted during this time. When the sweepline intersects with $\ell$, these edges will meet at $q$, and we will add a Voronoi vertex at $q$, as shown in \cref{fig:fortune_done}. At this point the event queue is empty, and the Voronoi diagram of $p_{i}$, $p_{j}$, and $p_{k}$ is three open regions.  However, note that the beachfront is not empty after handling this circle event. In particular, the arcs $\gamma$ and $\omega$ remain. The edge separating $V_{i}$ and $V_{j}$ is a half-infinite edge. Generally, what remains of the beachfront after all of the events have been handled are the remaining half-infinite edges. As a post-processing step of sorts, we will often determine a reasonable bounding box for the diagram, so we can determine the location in $\Re^2$ of any (half-infinite) edge endpoints going to the vertex at infinity.
+      \Cref{fig:construct_vorof_3} illustrates the application of Fortune's algorithm to a small set of three sites: $p_{i}$, $p_{j}$, and $p_{k}$. To understand how to handle a circle event, let's investigate this example. In \cref{fig:fortune_0,fig:fortune_1,fig:fortune_2} we are adding arcs to the beachfront by handling the site events associated with $p_{j}$, $p_{k}$, and $p_{i}$, respectively. In \cref{fig:fortune_2}, we also add a circle event to the event queue, since there are now three consecutive arcs in the beachfront with distinct sites. At this point, the circle event is the only event in the queue left to handle. \Cref{fig:fortune_3} illustrates how the arc $\alpha$ has shrunk as the sweepline has moved downward.  The dotted lines reveal how the breakpoints of $\alpha$ have shifted during this time. When the sweepline intersects with $\ell$, these edges will meet at $q$, and we will add a Voronoi vertex at $q$, as shown in \cref{fig:fortune_done}. At this point the event queue is empty, and the Voronoi diagram of $p_{i}$, $p_{j}$, and $p_{k}$ is three open regions.  However, note that the beachfront is not empty after handling this circle event. In particular, the arcs $\gamma$ and $\omega$ remain. The edge separating $V_{i}$ and $V_{j}$ is a half-infinite edge. Generally, what remains of the beachfront after all of the events have been handled are the remaining half-infinite edges. As a post-processing step of sorts, we will often determine a reasonable bounding box for the diagram, so we can determine the location in $\mathds{R}^2$ of any (half-infinite) edge endpoints going to the vertex at infinity.
    
       \begin{figure}[!htb]
         \centering
@@ -667,6 +791,12 @@
 
   \clearpage
 
+  \chapter*{Some Final Thoughts}
+    \addcontentsline{toc}{chapter}{Some Final Thoughts}
+    \chaptermark{Some Final Thoughts}
+    \markboth{Some Final Thoughts}{Some Final Thoughts}
+    \setcounter{chapter}{3}
+    \setcounter{section}{0}
   \section{Guibas and Stolfi: A Divide and Conquer Approach} % (fold)
   \label{sec:divide_and_conquer}
     Guibas and Stolfi's \say{Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams}, \citealp{guibas}, presents a detailed and comprehensive presentation of the Voronoi and Delaunay diagrams. They offer a divide and conquer approach to the construction of Voronoi or Delaunay diagrams-- using their quad-edge structure-- whose time and space complexity is consistent with the bounds known to be optimal in the worst case.\footnote{Recall that the Voronoi diagram of $n$ sites can be computed in $\mathcal{O}(n\log n)$ time and occupying $\mathcal{O}(n)$ space, and these bounds are TIGHT!} As we saw in \cref{sec:how_do_we_keep_track_of_this}, it's also easy for us to witness its elegance, as theirs is a data structure which represents both the Voronoi diagram and its dual simultaneously. Their quad-edge data structure, furthermore, supports the arbitrary construction and modification of any embedded graph on a two-dimensional manifold. For the purposes of computing the Delaunay triangulation (and implicitly, the Voronoi diagram)  Guibas and Stolfi introduce two geometric predicates which enforce the \say{interesting} properties; these predicates ensure that the faces (composed of edges in the graph) maintain the Delaunay property.
