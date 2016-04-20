@@ -218,37 +218,10 @@
     Note that some of the edges will be line segments, while others will extend out towards infinity. We will refer to the latter type of edge as a \emph{half infinite edge}. Since the region was the result of $n-1$ half-plane intersections, we know that the region has, at most, $n-1$ edges. \par
   % section  (end)
 
-  \section{The Voronoi Graph} % (fold)
-  \label{sec:voronoi_graph}
-    Note that the various components of a Voronoi diagram--- its edges, vertices, and regions--- relate to each other in a non-geometric way. Namely, there is an underlying combinatorial structure associated with a diagram. Consider the set of edges of a Voronoi diagram. An edge connects two Voronoi vertices. We can leverage this fact to describe the Voronoi diagram in a combinatorial way: as a graph.\par
 
-    Recall that a graph is a collection of vertices and edges. Given $\mbox{Vor}(P)$, let $C$ be the set of Voronoi vertices and let $E$ be the set of Voronoi edges. Every Voronoi edge $e$ in $E$ is a pair $(c_{i}, c_{j})$ for two distinct $c_{i}, c_{j}$  in $C$. Through describing $\mbox{Vor}(P)$ in this way, we recognize it as a graph whose embedding in $\mathds{R}^2$ satisfies the geometric characteristics of the Voronoi diagram.\par
-
-    Our attempts to consider $\mbox{Vor}(P)$ as a graph will be thwarted if we don't address the edges which do not necessarily connect two Voronoi vertices. These are the \emph{half-infinite edges}, discussed in \cref{sec:half_plane_char}. To account for this, we can introduce a vertex \say{at infinity}. Then, we assign the vertex at infinity to be second endpoint of each half infinite edge in the diagram.\Cref{fig:vertex_at_infinity} illustrates how the addition of a vertex at infinity changes the Voronoi diagram of nine sites we saw in \cref{fig:first_sight}.\par
-
-    \begin{figure}[!htb]
-      \centering
-      \input{figs/intro/vertex_at_infinity.tex}
-      \caption{Connecting Half-Infinite Edges to $v_{\infty}$}
-      \label{fig:vertex_at_infinity}
-    \end{figure}
-
-    We can leverage the properties of a planar\footnote{Recall that when a graph is planar, it can be embedded in the plane in a way that no edges in the graph intersect unless they have the same endpoints. This is clearly the case for a Voronoi diagram embedded in $\mathds{R}^2$}, graph further. Specifically, we can apply \emph{Euler's Formula} to show upper bounds on the number of vertices, edges, and faces in $\mbox{Vor}(P)$. 
-
-    \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true: $v - e + f = 2.$ Furthermore, if the graph is \emph{simple,}\footnote{A simple graph is one which does not contain multiple edges with the same endpoints or edges whose two endpoints are the same, often called a \say{loop}.} that $e \leq 3n -6$.\par
-
-    We apply Euler's Formula to slightly modified $\mbox{Vor}(P)$. Let $n = |V|$, the number of Voronoi regions; $k = |C|$, the number of vertices not including the vertex at infinity, and $m = |E|$, the number of edges.
-    $$(k + 1) - m + n = 2.$$ 
-    Since every edge has exactly two endpoints and every vertex is of degree three,\footnote{This doesn't include the vertex at infinity, which will have out-degree \emph{at least} three.} we can say that $2m \geq 3(k + 1)$. Together with Euler's formula, this implies that when $n\geq 3$, the number of vertices is at most $2n-5$ and the number of edges is at most $3n-6$. Through recognizing that the number of regions is equal to the number of sites and that the upper bounds on $k$ and $m$ correspond linearly with $n$, we can say that the Voronoi diagram has linear complexity. 
-
-    % We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\mathds{R}^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints).\par
-
-    % Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
-    % $v - e + f = 2.$ 
-
-  \section{The Voronoi Diagram and its Dual} % (fold)
-  \label{sec:the_voronoi_diagram_and_its_dual}
-    While the Voronoi diagram can be computed directly with relative--- though certainly not always computational--- ease, it can also be computed somewhat indirectly, that is, through the construction of its dual, the \emph{Delaunay subdivision}. If we assume that the set of sites $P$ is \say{well-behaved,}\footnote{We'll wave our hands at this for now, and in \cref{sec:the_fine_print} we'll define more precisely what it means for the set of sites to be \say{well-behaved.}} then the resulting diagram is the Delaunay triangulation of those sites, $\mbox{Del}(P)$. Furthermore, the Delaunay triangulation of a Voronoi diagram is unique. One of the many advantages of working with the dual is the ability to work with triangular faces instead of with polygonal regions with an unknown number of sides. \par
+  \section{The Dual} % (fold)
+  \label{sec:the_dual}
+    While the Voronoi diagram can be computed directly with relative--- though certainly not always computational--- ease, it can also be computed somewhat indirectly, that is, through the construction of its dual, the \emph{Delaunay subdivision}. If we assume that the set of sites $P$ is \say{well-behaved,}\footnote{We'll wave our hands at this for now, and in \cref{sec:the_fine_print} we'll define more precisely what it means for the set of sites to be \say{well-behaved.}} then the resulting diagram is the unique Delaunay triangulation of those sites, $\mbox{Del}(P)$. One of the many advantages of working with the dual is the ability to work with triangular faces instead of with polygonal regions with an unknown number of sides. \par
 
     We can develop our intuition for the Delaunay triangulation and the primal-dual relationship by constructing $\mbox{Del}(P)$ from $\mbox{Vor}(P)$. Choose a site $p_{i} \in P$. Using $\mbox{Vor}(P)$ as a reference, draw a line connecting $p_{i}$ to the sites of the regions adjacent to it, as in \cref{fig:del_intuition1}. Do this for all the sites. The resulting diagram is the unique Delaunay Triangulation of $P$, as shown in \cref{fig:del_intuition2}.
 
@@ -293,7 +266,7 @@
 
     We can confirm the Delaunayhood of a triangulation in two ways. For two sites $a, b \in P$, we say that that the edge connecting them satisfies the Delaunay property if the circle passing through $a$ and $b$ does not contain any of the other sites in $P$. An equivalent, and perhaps more common, understanding of the Delaunay property operates on the faces (triangles) of the triangulation instead of its edges. It is often referred to as the \emph{empty circle condition}. The \emph{empty circle condition} stipulates that for a triangle defined by three sites $a, b, c \in P$, the circumcircle of that triangle contains no other sites in $P$. These tests correspond to the geometric properties of the corresponding Voronoi diagram. Asking whether or not a face of the triangulation satisfies the empty circle condition is equivalent to checking whether or not a circle centered at a Voronoi vertex includes no sites and intersects with three sites.\par
 
-    So, given a triangulation, as in \cref{fig:delaunayhood_small}, one way to confirm its Delaunayhood is as follows: for each edge $e$ in the triangulation, we consider the two triangles on either side of the edge.  In the case of \cref{fig:delaunayhood_small}, the triangles which share edge $e$ are $\Delta abd$ and $\Delta bcd$. Because $a$ does not lie in the circumcircle of $\Delta bcd$, shown as a dashed line in \cref{fig:delaunayhood_small}, we say that $e$ is \emph{locally delaunay}. When every edge in the triangulation is locally Delaunay, we may say that the triangulation is \emph{globally Delaunay}.
+    So, given a triangulation, as in \cref{fig:delaunayhood_small}, one way to confirm its Delaunayhood is as follows: for each edge $e$ in the triangulation, we consider the two triangles on either side of the edge.  In the case of \cref{fig:delaunayhood_small}, the triangles which share edge $e$ are $\Delta abd$ and $\Delta bcd$. Because $a$ does not lie in the circumcircle of $\Delta bcd$, shown as a dashed line in \cref{fig:delaunayhood_small}, we say that $e$ is \emph{locally Delaunay}. When every edge in the triangulation is locally Delaunay, we may say that the triangulation is \emph{globally Delaunay}.
 
     \begin{figure}[!htb]
       \centering
@@ -301,10 +274,6 @@
       \caption{Testing the Delaunayhood of a small triangulation}
       \label{fig:delaunayhood_small}
     \end{figure}
-
-    What distinguishes the Delaunay triangulation of a set $P$ from any other triangulation of $P$ are its unique properties, which are directly related to its privileged position as the dual of the Voronoi diagram. 
-
-    % In \cref{sec:properties_of_voronoi_and_delaunay_diagrams} we will explore some of the convenient and interesting geometric consequences of a triangulation with the Delaunay property.\par
 
   \section{The Fine Print}
   \label{sec:the_fine_print}
@@ -346,12 +315,71 @@
 
     % subsection special_cases (end)
 
+
+    % In \cref{sec:properties_of_voronoi_and_delaunay_diagrams} we will explore some of the convenient and interesting geometric consequences of a triangulation with the Delaunay property.\par
+
+  \section{A Graph Representation} % (fold)
+  \label{sub:a_graph_rep}
+
+    When the dimension of the space in which we compute the Voronoi Diagram or Delaunay triangulation is low (i.e $d = 2,\; d=3 $), it is difficult to divorce the geometric realities of the diagram as it is represented in $\mathds{R}^d$ from the more subtle topological and combinatorial aspects of the diagrams. As the dimension increases, our ability to reason about and visualize the Voronoi diagram and Delaunay Triangulations by relying on its geometric properties diminishes. In this section, we introduce the Voronoi and Delaunay graphs, and shift our focus onto the relationships between the disparate components of the diagrams.\par
+
+    \subsection{Obtaining the Voronoi Graph} % (fold)
+    \label{sub:voronoi_graph}
+
+      The various components of a Voronoi diagram--- its edges, vertices, and regions--- relate to each other in a non-geometric way. Namely, there is an underlying combinatorial structure associated with a diagram. Consider the set of edges of a Voronoi diagram. An edge connects two Voronoi vertices. We can leverage this fact to describe the Voronoi diagram in a combinatorial way: as a graph.\par
+
+      Recall that a graph is a collection of vertices and edges. Given $\mbox{Vor}(P)$, let $C$ be the set of Voronoi vertices and let $E$ be the set of Voronoi edges. Every Voronoi edge $e$ in $E$ is a pair $(c_{i}, c_{j})$ for two distinct $c_{i}, c_{j}$  in $C$. Through describing $\mbox{Vor}(P)$ in this way, we recognize it as a graph whose embedding in $\mathds{R}^2$ satisfies the geometric characteristics of the Voronoi diagram.\par
+
+      Our attempts to consider $\mbox{Vor}(P)$ as a graph will be thwarted if we don't address the edges which do not necessarily connect two Voronoi vertices. These are the \emph{half-infinite edges}, discussed in \cref{sec:half_plane_char}. To account for this, we can introduce a vertex \say{at infinity}. Then, we assign the vertex at infinity to be second endpoint of each half infinite edge in the diagram. \Cref{fig:vertex_at_infinity} illustrates how the addition of a vertex at infinity changes the Voronoi diagram of nine sites we saw in \cref{fig:first_sight}.\par
+
+      \begin{figure}[!htb]
+        \centering
+        \input{figs/intro/vertex_at_infinity.tex}
+        \caption{Connecting Half-Infinite Edges to $v_{\infty}$}
+        \label{fig:vertex_at_infinity}
+      \end{figure}
+
+
+    % subsection voronoi_grapn (end)
+
+    \subsection{An Upper Bound} % (fold)
+    \label{sub:an_upper_bound}
+
+      We can leverage the properties of a planar\footnote{Recall that when a graph is planar, it can be embedded in the plane in a way that no edges in the graph intersect unless they have the same endpoints. This is clearly the case for a Voronoi diagram embedded in $\mathds{R}^2$} graph further. Specifically, we can apply \emph{Euler's Formula} to show upper bounds on the number of vertices, edges, and faces in $\mbox{Vor}(P)$. 
+
+      \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true: $v - e + f = 2.$ Furthermore, if the graph is \emph{simple,}\footnote{A simple graph is one which does not contain multiple edges with the same endpoints or edges whose two endpoints are the same, often called a \say{loop}.} that $e \leq 3n -6$.\par
+
+      We apply Euler's Formula to slightly modified $\mbox{Vor}(P)$. Let $n = |V|$, the number of Voronoi regions; $k = |C|$, the number of vertices not including the vertex at infinity, and $m = |E|$, the number of edges.
+      $$(k + 1) - m + n = 2.$$ 
+      Since every edge has exactly two endpoints and every vertex is of degree three,\footnote{This doesn't include the vertex at infinity, which will have out-degree \emph{at least} three.} we can say that $2m \geq 3(k + 1)$. Together with Euler's formula, this implies that when $n\geq 3$, the number of vertices is at most $2n-5$ and the number of edges is at most $3n-6$. Through recognizing that the number of regions is equal to the number of sites and that the upper bounds on $k$ and $m$ correspond linearly with $n$, we can say that the Voronoi diagram has linear complexity. 
+
+    \subsection{The Delaunay Graph} % (fold)
+    \label{sub:delaunay_graph}
+      From a programmer's perspective, working with the Delaunay graph is simpler than working with the Voronoi diagram. This is in part because there is no tidying up to do: there are no bounding boxes to compute, or edges which need to be reigned in. An edge in the Delaunay triangulation connects two sites, which are the vertices of the graph. Given $\mbox{Vor}(P)$ as a reference, note that there is a Delaunay edge connecting two sites $p_{i}$ and $p_{j}$ if and only if $V_{i}$ and $V_{j}$ are regions which share a bounding edge in $\mbox{Vor}(P)$. However, a preference for working with the Delaunay graph might also be attributed to the ease associated with working with exclusively triangular faces. \par
+
+      Though an undirected graph of a Delaunay triangulation is certainly useful, more often than not we will opt to represent it as a \emph{directed graph}. A directed graph is much like the (undirected) graph we described earlier, with the additional constraint that the edge pair connecting two sites is ordered. We can easily transform an undirected graph into a directed graph: for each edge $e_{ij} = (p_{i}, p_{j})$ in the undirected graph, we add $e_{ij} = (p_{i}, p_{j})$ and $e_{ji} = (p_{j}, p_{i})$ to the directed graph. 
+
+      [can i talk abt this]
+
+
+      % Once we determine the topological (or combinatorial) properties of the either diagram, we can compute and enforce the geometric properties (the mapping of vertices to locations in $\Re^2$) in linear time, \citealp[p. 74]{guibas}.\par
+
+      % When we introduced the Delaunay triangulation in \cref{sec:the_dual} we defined the \emph{empty circle property}, or condition. We can systematically determine whether or not the embedding of a graph is \emph{globally Delaunay} by checking that each face is \emph{locally Delaunay}, meaning that the circumcircle passing through the vertices of the face is empty.\par
+    
+    % subsection delaunay_graph (end)
+
+    % We know that $\mbox{Vor}(P)$ will have $n$ regions; and we can put an upper bound on the number of edges and vertices it has by recognizing that a Voronoi diagram in $\mathds{R}^2$ is \emph{nearly} a planar graph. We make the Voronoi diagram of $P$ into a planar graph by introducing a vertex ``at infinity''. Then, we assign the vertex at infinity to be the source (or destination, when appropriate) to the half infinite edges (that is to say, all edges without two endpoints).\par
+
+    % Note that the size of the Voronoi graph is linear in the number of sites. \emph{Euler's Formula} states that any planar graph with $v$ vertices, $e$ edges, and $f$ faces (regions, for our purposes) the following is true:
+    % $v - e + f = 2.$ 
+    % subsection an_upper_bound (end)
+
   % section the_voronoi_diagram_and_its_dual (end)
   \section{Applications of the Voronoi and Delaunay Diagram} % (fold)
   \label{sec:applications_of_voronoi_and_delaunay_diagrams}
     Beyond the intrinsic allure of the Voronoi diagram and its straight line dual, the Delaunay triangulation, lies a fascinating set of linear time reductions to some of the central proximity problems. This means that if we take the time to pre-process a set of sites into a Voronoi diagram, then we can answer many different questions in linear (or better!) time. This is especially significant when the time complexity of answering that question is greater than $\mathcal{O}(n)$.\par 
 
-    From the previous \cref{sec:the_voronoi_diagram_and_its_dual}, we saw that it is possible to obtain the dual of the Voronoi diagram in linear time. Thus, we can use the Voronoi diagram to solve the problem of triangulating a set of sites $P$, by returning the dual of the diagram. 
+    From the previous \cref{sec:the_dual}, we saw that it is possible to obtain the dual of the Voronoi diagram in linear time. Thus, we can use the Voronoi diagram to solve the problem of triangulating a set of sites $P$, by returning the dual of the diagram. 
 
     The Post Office Problem is a classic, though perhaps slightly dated, motivation for the Voronoi diagram. However, it captures one of the central use cases for the Voronoi diagram, which is its ability to answer the \emph{nearest neighbor problem}. The nearest neighbor problem can be stated as such: given a set of sites $P$, and a query point $q$, return the point in $P$ which is closest to $q$. Recall that the Voronoi diagram partitions the plane into a set of $\mid\,P\,\mid$ regions which satisfy the stipulation that every point in a given region is closer to the site associated with that region than it is to any other site. Then, given a query point $q$ and a Voronoi diagram of $P$, we can answer the nearest neighbor question by simply locating the region that $q$ is in, a question we can answer in $\mathcal{O}(\log n)$ time with linear auxiliary storage.\citep[p. 214]{shamos}\par
     
@@ -431,16 +459,16 @@
 
         We call the points of interest \emph{events}, and there are two types of events we concern ourselves with. The first type, the \emph{site event}, is the simplest. When the sweep line encounters a site, we learn that the Voronoi diagram will have one more region, and we'll also discover two of its bounding edges. In \cref{sub:putting_it_all_together}, we will take a closer look at how to handle a site event. The other type of event is called a \emph{circle event}. When the sweep line intersects with the location associated with the circle event, it signals the addition of a new Voronoi vertex. In \cref{sub:putting_it_all_together}, we'll see how those come about and what it means to handle a circle event.\par
 
-        Finally, to store these upcoming events we might keep them in a \emph{priority queue}, which keeps the events sorted by descending y-coordinate (since the sweep line is traveling \say{down} the plane). Note that we know about all of site events in advance, but we may need to add and remove circle events as necessary. A priority queue will allow us to maintain the sorted order and perform these kinds of operations in optimal time. 
+        Finally, to store these upcoming events we might keep them in a \emph{priority queue}, which keeps the events sorted by descending $y$-coordinate (since the sweep line is traveling \say{down} the plane). Note that we know about all of site events in advance, but we may need to add and remove circle events as necessary. A priority queue will allow us to maintain the sorted order and perform these kinds of operations in optimal time. 
 
         % subsection circle_events (end)
 
-        % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweep line $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
+        % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweep line $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the ``top'' of the plane, but in practice, it is sufficient that $s$ be initialized with a $y$-coordinate greater than the site with the largest $y$-coordinate.\par
 
         % An astute reader might wonder how exactly we construct the Voronoi diagram with nothing but a set of sites and a vague notion of a line that falls down the plane. After all, there's no obvious method by which the intersection of the sweep line with a point of interest might yield a Voronoi vertex or edge. Further, it would seem that even if we could provide such a relationship would be subject to change as soon as the sweep line encountered the next point of interest. \par
         % Herein lies the elegance of Fortune's algorithm. Consider the portion of the plane that the sweep line has already encountered, this portion constitutes a closed half-plane, $s^+$. If a site exists in $s^+$, then any point $q$ in $s^+$ which is closer to that site than it is to $s$ will not be assigned to a site below $s$. When the sweep line $s$ encounters a site $p_{i}$ we call this a \emph{site event}. We consider the locus of points which are closer to $p_{i}$ than to $s$. The set of points equidistant to $s$ and $p_{i}$ form a parabolic arc. This arc, denoted $\beta_{i}$, is added to a a sequence of parabolic arcs called the \emph{beachfront}. We will refer to the beachfront as $\beta(P)$. The crucial observation is that the points above $\beta(P)$ will be assigned to a site already encountered by $s$. \par
 
-        % To answer this question, let's first make a brief digression and introduce the second structure that Fortune's algorithm employs: the \emph{event queue}. Armed with an understanding of how site events and circle events effect the structure of the beachfront, we can consider ourselves sufficiently motivated to define a structure that keeps track of these kinds of events. We know that the sweep line travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweep line begins, we can simply order the sites by decreasing y-coordinate and initialize the event queue with that infomation. Unlike site events, we don't know exactly when or how many circle events will occur\footnote{Though we can provide an upper bound, see \cref{vertex_bounds}}, so they complicate the problem insofar as they punctuate the otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events.  Circle events are added to event queue for every triple of consecutive arcs on the beachfront. So when a site event triggers a new arc on the beachfront, we need to check a couple of things, namely, whether or not the new arc:
+        % To answer this question, let's first make a brief digression and introduce the second structure that Fortune's algorithm employs: the \emph{event queue}. Armed with an understanding of how site events and circle events effect the structure of the beachfront, we can consider ourselves sufficiently motivated to define a structure that keeps track of these kinds of events. We know that the sweep line travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweep line begins, we can simply order the sites by decreasing $y$-coordinate and initialize the event queue with that infomation. Unlike site events, we don't know exactly when or how many circle events will occur\footnote{Though we can provide an upper bound, see \cref{vertex_bounds}}, so they complicate the problem insofar as they punctuate the otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events.  Circle events are added to event queue for every triple of consecutive arcs on the beachfront. So when a site event triggers a new arc on the beachfront, we need to check a couple of things, namely, whether or not the new arc:
         % \begin{itemize}
         % \item invalidates one or more circle events already in the event queue; or
         % \item creates one or more circle events
@@ -478,16 +506,16 @@
 
         % To understand how the beachfront plays a role in constructing the Voronoi diagram, let's consider times where the structure of the beachfront changes. New arcs are added to the beachfront whenever a site event occurs. At the moment where the new arc, $\omega$, is inserted into the beachfront, it is a simple vertical line (or a parabola of no width). If there is an arc above $\alpha_{i}$, $\alpha_{i}$ will only intersect it at one point since the beachfront is x-monotone. To insert $\alpha_{i}$ into the beachfront, we split the arc above it into two parabolic arcs and insert $\alpha_{i}$ in between the split arcs. We record the points where $\alpha_{i}$ intersects with the arcs adjacent to it, and we refer to these points as \emph{breakpoints}\footnote{Note that this means that the right breakpoint of $\alpha_{i}$ is the same as the left breakpoint of the arc which is adjacent on the right. Similarly, the right breakpoint of the arc adjacent to $\alpha_{i}$ on the left is equal to $\alpha_{i}$'s left breakpoint.} As $s$ moves downward, the breakpoints of each arc in the beachfront $\alpha(P)$ change since the parabola that governs the arc widens. Another way to understand this is to recognize that that parabola whose corresponding arc is $\alpha_{i}$ has as its focus the site $p_{i}$ and $s$ as its directrix. If we were to draw lines that tracked the movement of the breakpoints for the beachfront as the sweep line descended, they would each trace out the Voronoi edges. So we know that arcs get added to the beachfront whenever a site event occurs, in fact, the \emph{only} time an arc gets added to the beachfront is when a site event occurs. [And we can prove that!] \par
 
-        To summarize, the beachfront is a sequence of parabolic arc segments. The size of the beachfront, that is, the number of arcs composing the beachfront, must be less than or equal to $2n-1$, where $n$ is the number of sites. Each arc is associated with a site, and there may be multiple arcs associated with the same site. As the sweep line moves downward, the equations of the parabolas governing the arcs change, triggering a shift in the breakpoints of those arcs as well. The structure of the beachfront is a function of site events and circle events. A site event occurs when the sweep line intersects with a site (i.e they both have the same y-coordinate) and a circle event occurs when the sweep line intersects with the lowest point (that is to say, the point with the minimum y-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. Looking past the horizon of the beachfront, the effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex at the intersection of two edges.\par
+        To summarize, the beachfront is a sequence of parabolic arc segments. The size of the beachfront, that is, the number of arcs composing the beachfront, must be less than or equal to $2n-1$, where $n$ is the number of sites. Each arc is associated with a site, and there may be multiple arcs associated with the same site. As the sweep line moves downward, the equations of the parabolas governing the arcs change, triggering a shift in the breakpoints of those arcs as well. The structure of the beachfront is a function of site events and circle events. A site event occurs when the sweep line intersects with a site (i.e they both have the same $y$-coordinate) and a circle event occurs when the sweep line intersects with the lowest point (that is to say, the point with the minimum $y$-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. Looking past the horizon of the beachfront, the effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex at the intersection of two edges.\par
 
       % subsection the_beachfront (end)
 
 
     \subsection{Putting It All Together} % (fold)
     \label{sub:putting_it_all_together}
-      % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweep line $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the \say{top} of the plane, but in practice, it is sufficient that $s$ be initialized with a y-coordinate greater than the site with the largest y-coordinate.\par
+      % To gain an understanding of how each of these pieces fit together, it's easiest to apply it to a set of sites. Let $P:=\{p_{1}, p_{2}, .. p_{n}\}$ be the a set of $n$ distinct points in $\mathds{R}^{2}$. Then, define the sweep line $s$ to be a horizontal line in $\mathds{R}^{2}$. Note that conceptually, $s$ begins at the \say{top} of the plane, but in practice, it is sufficient that $s$ be initialized with a $y$-coordinate greater than the site with the largest $y$-coordinate.\par
 
-      Armed with an understanding of how site events and circle events effect the structure of the beachfront, we might consider ourselves sufficiently motivated to understand the particulars of how each of these parts yields information about the Voronoi diagram. We know that the sweep line travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweep line begins, we can simply order the sites by decreasing y-coordinate and initialize the event queue with that information. Unlike site events, we don't know exactly when or how many circle events will occur.\footnote{Some circle events will be \emph{false alarms}, a highly technical term we'll be defining soon. Aside from these false alarms, recall that handling a circle event adds a vertex to the finished diagram, and we know from \cref{sec:voronoi_graph} that an upper bound for the number of vertices is $2n-5$ for a Voronoi diagram on $n$ sites.} So, circle events complicate the problem insofar as they punctuate an otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events. \par
+      Armed with an understanding of how site events and circle events effect the structure of the beachfront, we might consider ourselves sufficiently motivated to understand the particulars of how each of these parts yields information about the Voronoi diagram. We know that the sweep line travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweep line begins, we can simply order the sites by decreasing $y$-coordinate and initialize the event queue with that information. Unlike site events, we don't know exactly when or how many circle events will occur.\footnote{Some circle events will be \emph{false alarms}, a highly technical term we'll be defining soon. Aside from these false alarms, recall that handling a circle event adds a vertex to the finished diagram, and we know from \cref{sub:voronoi_graph} that an upper bound for the number of vertices is $2n-5$ for a Voronoi diagram on $n$ sites.} So, circle events complicate the problem insofar as they punctuate an otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events. \par
 
       Circle events must be sought out. Recall that a unique circle is defined by three non-collinear points. Circle events trigger the removal of an arc from the beachfront and the addition of a vertex at the center of the circle, which is also the point where the edges traced out by the breakpoints of the removed arc meet. We define a circle event for every triple of consecutive arcs on the beachfront. This means that we need to check for new circle events whenever the sequence of arcs in the beachfront changes.\par
 
@@ -583,31 +611,11 @@
         \caption{Constructing the Voronoi Diagram of three sites}
         \label{fig:construct_vorof_3}
       \end{figure}
-
-      % \Cref{fig:construct_vorof_3} illustrates the application of Fortune's algorithm to a small set of three sites: $p_{i}$, $p_{j}$, and $p_{k}$. To understand how to handle a circle event, let's investigate this example. In \cref{fig:fortune_0,fig:fortune_1,fig:fortune_2} we are adding arcs to the beachfront by handling the site events associated with $p_{j}$, $p_{k}$, and $p_{i}$, respectively. In \cref{fig:fortune_2}, we also add a circle event to the event queue, since there are now three consecutive arcs in the beachfront with distinct sites. At this point, there only 
-
-     % To summarize, the beachfront is a sequence of parabolic arc segments. The size of the beachfront, that is, the number of arcs composing the beachfront, must be less than or equal to $2n-1$, where $n$ is the number of sites. The only time an arc can be added to the beachfront is via a site event. Each arc is associated with a parabola defined by a site and the sweep line. As the sweep line moves downward, the equations of the parabolas governing the arcs change, triggering a shift in the breakpoints of those arcs as well. The breakpoints trace out the Voronoi edges, which intersect at voronoi vertices. The vertices of the Voronoi diagram are added when we handle circle events, and a given vertex is located precisely the center of the circle associated with the event.\par
-
-      % The second way the beachfront's structure changes is when an arc disappears. The disappearance of an arc coincides with the second type of event, called a \emph{circle event}. We'll define the notion of a circle event by studying a small portion of the beachfront. Consider the arcs $\alpha$, $\delta$, and $\gamma$ defined by three sites $p_{i}$, $p_{j}$, and $p_{k}$. Define the circle, $C$ with the three sites $p_{i}$, $p_{j}$, $p_{k}$. [You should probably remind the reader why $\alpha$ and $\gamma$ are not arcs from the same site, also why the circle contains no sites] Though the reasons aren't immediately obvious, we want to keep track of two points: the center of the circle, $q$, and the lowest point of the circle, $l$. If $\delta$ is the arc that is shrinking, when does it disappear? Recall that the center of the circle, $q$, is equidistant from $p_{i}$, $p_{j}$, $p_{k}$ and $l$. When the sweep line, $s$, reaches $l$, the arcs correspoinding to $p_{i}$ and $p_{k}$, $\alpha$ and $\gamma$, respectively, intersect at $q$. [Do I need to explain in more detail why, or can I *just* include a diagram]. At this point, the right breakpoint of $\alpha$ and the left breakpoint of $\gamma$ become equal to the left and right breakpoints of $\delta$, $\delta$ disappears. The edges traced out by the breakpoints of $\delta$ meet at $q$ and $q$ becomes a Voronoi vertex.\par
-      % To summarize, a site event occurs when the sweep line intersects with a site (i.e they both have the same y-coordinate) and a circle event occurs when the sweep line intersects with the lowest point (that is to say, the point with the minimum y-coordinate) of a circle. Arcs are added to the beachfront when site events occur, and removed when circle events occur. The effect of an adding an arc is the growth of a new edge, and the effect of removing an arc is the addition of a vertex.\par
-      % It's important to note that in this example, we assumed that $p_{i}$, $p_{j}$, $p_{k}$ were non-collinear sites, since the circle defined by three collinear points would be a circle of infinite radius (that is to say, a line). Moreover, we glossed over the possibility that $C$ contained any other sites. How would any number of sites on the interior of $C$ affect the circle event itself? \par 
-      % To answer this question, let's first make a brief digression and introduce the second structure that Fortune's algorithm employs: the \emph{event queue}. Armed with an understanding of how site events and circle events effect the structure of the beachfront, we can consider ourselves sufficiently motivated to define a structure that keeps track of these kinds of events. We know that the sweep line travels downward, handling site and circle events as it encounters them. In fact, we know a lot about the site events; since we know all the sites before the sweep line begins, we can simply order the sites by decreasing y-coordinate and initialize the event queue with that infomation. Unlike site events, we don't know exactly when or how many circle events will occur\footnote{Though we can provide an upper bound, see \cref{vertex_bounds}}, so they complicate the problem insofar as they punctuate the otherwise predictable order of site events. What we do know is that we'd like to maintain an event queue, which consists of---and is ordered by---all of the site events and the known circle events.  Circle events are added to event queue for every triple of consecutive arcs on the beachfront. So when a site event triggers a new arc on the beachfront, we need to check a couple of things, namely, whether or not the new arc:
-      % \begin{itemize}
-      % \item invalidates one or more circle events already in the event queue; or
-      % \item creates one or more circle events
-      % \end{itemize}. Often, handling a site event often has a cascading effect, wherein the event itself doesn't create a circle event, but it might create a situation where one or more circle events would need to added or removed from the event queue. Similarly, handling a circle event can also lead to the creation or removal of one or more circle events, since the disappearance of an arc can lead to new combinations of triples on the beachfront. Note that a circle event exists in the event queue if and only if it satisfies:
-      % \begin{itemize}
-      % \item the property that the circle defined by the sites corresponding to the triple of arcs intersects the sweep line; and
-      % \item hasn't already been deleted from the event queue
-      % \end{itemize}.
-
-      % [Probably don't need this anymore .... Now that we have an event queue to keep track of the order of circle and site events, we can look back at our initial example. Let $p_{m}$ be a site located somewhere on the interior of our original circle, $C$. As $s$ crept downward, the site event corresponding to $p_{m}$ would have been handled before circle event at $l$. As a result, an arc $\beta$ would have been inserted somewhere between $\alpha$, $\delta$, and $\gamma$. More specifically, the arc directly above $p_{m}$ would have been split into two arcs. The only exception to this would be the edge case where $p_{m}$'s x-coordinate was exactly the same as either of the breakpoints of $\delta$. In that case, the arc wouldn't have split $\delta$; it would have been inserted directly in between $\delta$ and the appropriate adjacent arc. If this were the case, the triple of arcs whose corresponding sites had defined the circle would no longer exist, so the circle event would be invalid. In the former scenario, the new arc would have created at least one new triple of arcs, which would have prompted the creation of more circles, and thus cicle events. It's possible to show [do i have to?] that at least one of these new circle events would have been handled before our original circle event...]
-    % subsection putting_it_all_together (end)
   \clearpage
 
   \subsection{Algorithm Pseudocode} % (fold)
   \label{sub:sweep_algorithm_pseudocode}
-    \nameref{VoronoiSweepline} and its supporting procedures, \nameref{HandleSiteEvent} and \nameref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. Other supporting procedures, such as \textsc{NextEvent, RemoveCircle, SplitArcInsert, GetLeftArc, GetRightArc, DetectCircleEvent, AddEdge}, among others, will allow us to gloss over the details of the code and to focus on the intention of the procedure at hand. The vertex and edge structure for $\mbox{Vor}(P)$ will use a doubly connected edge list (DCEL), as described in \cref{sub:half_edge_ds}. A common structure used to maintain the beachfront, $\beta(P)$, is some flavor of a balanced binary search tree (BBST); \citealp{deberg} uses a Red-Black Tree, and we assume the same. As we saw in \cref{ssub:events}, the event queue, $Q$, will be a priority queue, which can be implemented in a multitude of ways.\par
+    \nameref{VoronoiSweepline} and its supporting procedures, \nameref{HandleSiteEvent} and \nameref{HandleCircleEvent}, provide a pseudocode implementation of Fortune's algorithm. Other supporting procedures, such as \textsc{NextEvent, RemoveCircle, SplitArcInsert, GetLeftArc, GetRightArc, DetectCircleEvent, AddEdge}, among others, will allow us to gloss over the details of the code and to focus on the intention of the procedure at hand. The vertex and edge structure for $\mbox{Vor}(P)$ will use a doubly connected edge list (DCEL), as described in \cref{sub:half_edge_ds}. A common structure used to maintain the beachfront, $\beta(P)$, is some flavor of a balanced binary search tree; \citealp{deberg} uses a Red-Black Tree, and we assume the same. As we saw in \cref{ssub:events}, the event queue, $Q$, will be a priority queue, which can be implemented in a multitude of ways.\par
     
     \begin{algorithm}[H]
     \caption{\textsc{VoronoiSweepline}}\label{VoronoiSweepline}
@@ -629,7 +637,7 @@
     \end{algorithmic} 
     \end{algorithm}
 
-    \nameref{VoronoiSweepline} is the conductor of this symphony. In lines \ref{init_q}, \ref{init_e}, and \ref{init_b}, we initialize our major structures. $\beta$ is an empty RB-Tree, and E is an empty list of directed half edges. After this step, $Q$ is a priority queue populated with the site events. The main goal of the \nameref{VoronoiSweepline} procedure is to handle all of the events in the event queue. As we will see in \nameref{HandleSiteEvent} and \nameref{HandleCircleEvent}, calls to \textsc{DetectCircleEvent, RemoveCircleFor} and \textsc{RemoveCircle} will add and remove circle events from the event queue as necessary. As long as there are events in $Q$, we assign the variable $e$ to the result of calling \textsc{NextEvent} with $Q$ as an argument. The \textsc{NextEvent} function returns the event with the highest priority-- that is to say, with the maximum y-coordinate-- from $Q$.\par
+    \nameref{VoronoiSweepline} is the conductor of this symphony. In lines \ref{init_q}, \ref{init_e}, and \ref{init_b}, we initialize our major structures. $\beta$ is an empty RB-Tree, and E is an empty list of directed half edges. After this step, $Q$ is a priority queue populated with the site events. The main goal of the \nameref{VoronoiSweepline} procedure is to handle all of the events in the event queue. As we will see in \nameref{HandleSiteEvent} and \nameref{HandleCircleEvent}, calls to \textsc{DetectCircleEvent, RemoveCircleFor} and \textsc{RemoveCircle} will add and remove circle events from the event queue as necessary. As long as there are events in $Q$, we assign the variable $e$ to the result of calling \textsc{NextEvent} with $Q$ as an argument. The \textsc{NextEvent} function returns the event with the highest priority-- that is to say, with the maximum $y$-coordinate-- from $Q$.\par
 
     \begin{algorithm}[H]
     \caption{\textsc{HandleSiteEvent}}\label{HandleSiteEvent}
@@ -713,19 +721,91 @@
     \markboth{Constructing the Delaunay Triangulation}{Constructing the Delaunay Triangulation}
     \setcounter{chapter}{3}
     \setcounter{section}{0}
-  \section{A Divide and Conquer Approach} % (fold)
+
+    One of the earliest goals of this thesis was to survey the state of high performance implementations which could handle the task of computing the Voronoi diagram on millions of points. We sought a foundation, and perhaps, inspiration, for an algorithm which could be adapted to parallelization on the GPU. Parallelism aims to embody the adage that many hands make light work. An algorithm with high degree of parallelism prides itself on its ability to execute multiple tasks simultaneously. We think of a task as a collection of statements which need to be executed; usually this is done by the same thread which is executing the main program, but sometimes it's appropriate to delegate this bit of work to another thread, or even to another computer. We'll gloss over the particulars of various ways parallelism can be incorporated. \par
+
+    Thinking back to the brute force approach to constructing the Voronoi diagram presented in \cref{sec:a_naive_approach}, we see opportunities to introduce parallelism. As it currently stands, the approach proposes to construct the Voronoi region for each site, one after the other. This is in line with any algorithm not concerned with parallelism or concurrency: we have one worker executing all of the tasks. However, if we recognize that the tasks of computing Voronoi regions can be executed independently of each other--- as they clearly are in our brute force approach--- then we might wonder: \say{why not have $n$ workers computing just one region all at the same time?} Because the tasks were so clearly independent of each other, we call the parallel solution an \emph{embarrassingly parallel} one. \par
+
+    Introducing parallelism into the aforementioned approach is simplified by virtue of the fact that the approach is a brutal one. Recall that the runtime of \nameref{VoronoiFromHalfPlanes} is $\mathcal{O}(n^3)$, despite the facts that the Voronoi diagram has linear complexity and the optimal time for construction is $\mathcal{O}(n\log n)$. In short, we \emph{must} be doing extra work. We are interested in opportunities to introduce a degree of parallelism to approaches which are already running in optimal time, or, at least closer to optimal than $\mathcal{O}(n^3)$. Often, approaches which might be good candidates for parallelization are those which leverage the a divide-and-conquer paradigm. To investigate this further, we turn to Guibas and Stolfi's approach to constructing the Delaunay triangulation. 
+
+
+  \section{A Divide-and-Conquer Approach} % (fold)
   \label{sec:divide_and_conquer}
-    Guibas and Stolfi's \say{Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams}, \citealp{guibas}, presents a detailed and comprehensive presentation of the Voronoi and Delaunay diagrams. They offer a divide and conquer approach to the construction of Voronoi or Delaunay diagrams-- using their quad-edge structure-- whose time and space complexity is consistent with the bounds known to be optimal in the worst case.\footnote{Recall that the Voronoi diagram of $n$ sites can be computed in $\mathcal{O}(n\log n)$ time and occupying $\mathcal{O}(n)$ space, and these bounds are TIGHT!} As we saw in \cref{sec:how_do_we_keep_track_of_this}, it's also easy for us to witness its elegance, as theirs is a data structure which represents both the Voronoi diagram and its dual simultaneously. Their quad-edge data structure, furthermore, supports the arbitrary construction and modification of any embedded graph on a two-dimensional manifold. For the purposes of computing the Delaunay triangulation (and implicitly, the Voronoi diagram)  Guibas and Stolfi introduce two geometric predicates which enforce the \say{interesting} properties; these predicates ensure that the faces (composed of edges in the graph) maintain the Delaunay property.
+    Guibas and Stolfi's \say{Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams}, \citealp{guibas}, presents a detailed and comprehensive presentation of the Voronoi and Delaunay diagrams. They offer a divide-and-conquer approach to the construction of Voronoi or Delaunay diagrams whose time and space complexity is consistent with the bounds known to be optimal in the worst case.\footnote{Recall that the Voronoi diagram of $n$ sites can be computed in $\mathcal{O}(n\log n)$ time and occupying $\mathcal{O}(n)$ space, and these bounds are TIGHT!} For the purposes of computing the Delaunay triangulation (and implicitly, the Voronoi diagram)  Guibas and Stolfi introduce two geometric predicates which enforce the \say{interesting} properties; these predicates ensure that the faces (composed of edges in the graph) maintain the Delaunay property. \par 
+    
+    A significant byproduct of Guibas and Stolfi's contribution is their quad-edge data structure. It is praised for its its elegance, since it represents both the primal and the dual (for our purposes, the Delaunay Triangulation and the Voronoi diagram) simultaneously. This allows us to hop from one to another in constant time by reversing the conventions around the representation of faces and vertices.\par
 
-  \subsection{Algorithm Sketch}
+  \subsection{Overview}
   \label{sub:gs_sketch}
-    Like other divide and conquer algorithms, Guibas and Stolfi's approach to constructing a Delaunay Triangulation relies on repeated partitioning of the problem's data until each partition conforms to a trivial (or base) case.
+    Like other divide-and-conquer algorithms, Guibas and Stolfi's approach to constructing a Delaunay Triangulation relies on repeated partitioning of the problem's data until each partition conforms to a trivial (or base) case.\par
 
-    So, given a set of sites and a desire to compute the Delaunay triangulation of that set, we begin. Though \say{divide and conquer} might lead you to believe that this approach consists of two stages, Guibas and Stolfi proceeds in three stages. First, we have the \say{split,} or \say{divide,} stage, in which we split the large problem of computing the Delaunay of $P$ into smaller subproblems. The second stage involves two recursive steps: we apply Guibas and Stolfi's algorithm to each of the two partitions and thus compute the Delaunay triangulation of each. Finally, we proceed to the \say{merge} phase, which carefully combines the triangulations of the partitions into a final triangulation on all $n$ sites. The algorithm is implemented recursively, and we will discuss how the algorithm leverages recursion and handles these base cases shortly. \par
+    Given a set of sites and a desire to compute the Delaunay triangulation of that set, we begin. Though \say{divide-and-conquer} might lead you to believe that this approach consists of two stages, Guibas and Stolfi proceeds in three stages. First, we have the \textsc{Split} stage, in which we divide the large problem of computing the Delaunay of $P$ into two smaller subproblems. The algorithm is implemented recursively, and we will discuss how the algorithm leverages recursion and handles these base cases shortly. The second stage involves two recursive steps: we compute the Delaunay triangulation of each subproblem. Finally, we proceed to the \nameref{del_merge} phase, which carefully combines the triangulations of the partitions into a final triangulation on all $n$ sites. \par
+
+    \nameref{divconq_del} provides a pseudocode implementation of the divide-and-conquer algorithm presented in Guibas and Stolfi's paper [TAKE OUT?, \citealp{guibas}]. The corresponding procedure for the dual is described in Shamos and Preparata's text, \citealp{shamos}[PAGE NUMBER].\par
+
+    Because we are using Guibas’ and Stolfi’s quad-edge data structure, the operations around creating and manipulating the edge list are more complex than they would be if we were using a doubly connected edge list. [However, using their structure not only gives us constant time access to both the Voronoi and Delaunay diagrams on $P$, it also allows us to dive a little more deeply into the topological underpinnings of subdivisions and manifolds.] \nameref{divconq_del} computes the Delaunay triangulation on a set of sites; however, it doesn't return return the entire edge structure. When we return $D$ at any point in \nameref{divconq_del}, we are returning two \say{handles} into the mesh. More precisely, we return the convex hull edge in the clockwise direction whose source is the rightmost vertex and the convex hull edge in the counterclockwise direction whose source is the leftmost vertex.\par 
+
+    \begin{algorithm}[H]
+    \caption{\textsc{GS-Delaunay}}\label{divconq_del}
+    \begin{algorithmic}[1]
+    \Require Set of sites, $P$, which are in \emph{general position}
+    \Procedure{GS-Delaunay}{$P$}\Comment{Construct $D_{P}$}
+    \If{$|P|$ is 2} \Comment{First Base Case}
+      \State \textbf{return} \Call{Delaunay-2}{$P$}\label{bc_1}
+    \ElsIf{$|P|$ is 3} \Comment{Second Base Case}
+      \State \textbf{return} \Call{Delaunay-3}{$P$}\label{bc_2}
+    \Else \Comment{Recursive Case}
+      \State $x\gets$\Call{Median-Lex}{$\{x\mid(x,y)\in\;P\}$}\label{rc}
+      \State $L, R,\gets$ \Call{Split}{$P$, $x$}\Comment{Partition $P$ according to $x$}\label{split}
+      \State $D_{L} \gets$ \Call{GS-Delaunay}{$L$}
+      \Statex[2] $D_{R} \gets$ \Call{GS-Delaunay}{$R$}
+      \State $D_{P}\gets$ \Call{Merge}{$D_{L}$, $D_{R}$}  \Comment{Merge sub-diagrams}\label{merge}
+      \State \textbf{return} $D_{P}$\label{fin}
+    \EndIf
+    \EndProcedure
+    \end{algorithmic} 
+    \end{algorithm}
+
+    We assume three things of $P$: that the $x$-coordinate of each site in $P$ is unique; that the sites are in \emph{general position},\footnote{As discussed in \cref{sub:general_position}.} meaning that there will be no degenerate cases for us to handle; and that not all sites are collinear, a special case we covered in \cref{sub:special_case}. Given $P$, \nameref{divconq_del} computes $\mbox{Del}(P)$ by splitting the problem into subproblems and then merging the results pairwise. Lines \ref{bc_1} and \ref{bc_2} handle the base cases of the algorithm, which we will discuss in-depth in \cref{sub:handling_the_base_cases}. \par
+
+    The final chunk of pseudocode, lines \ref{rc} to \ref{fin}, handle the recursive case. When there are more than three sites in $P$, we need to break the problem down further. We call \textsc{Median-Lex}, which takes set of the $x$-coordinates from the sites in $P$ and returns the median value. In line \ref{split}, we pass this value--- along with $P$--- to another helper function, \textsc{Split}. \textsc{Split} returns two sets of sites, $L$ and $R$ (where $L = {p \mid p.x \leq x}$). Then, we make the calls to \nameref{divconq_del} on both $L$ and $R$. Finally, in line \ref{merge}, we merge the results with a call to \nameref{del_merge} and return the result. In \cref{sub:merging}, we dive into the \par
+
+  \subsubsection{Geometric Predicates}
+  \label{ssub:geo_pred}
+    When we introduced the Delaunay triangulation in \cref{sec:the_dual} we defined the \emph{empty circle property}, or condition. We can systematically determine whether or not the embedding of a graph in $\mathds{R}^2$ is \emph{globally Delaunay} by checking that each face is \emph{locally Delaunay}, meaning that the circumcircle passing through the vertices of the face is empty. Guibas and Stolfi refer to this as the \textsc{InCircle} test.\par
+
+    The \textsc{InCircle} test takes as its arguments four sites, $A$, $B$, $C$, and $D$, and envisions a counterclockwise oriented circle $ABC$ and a lonely point $D$. It is defined by Guibas and Stolfi as follows: \say{\textsc{InCircle}($A$, $B$, $C$, $D$) is defined to be true if and only if point $D$ is interior to the region of the plane that is bounded by the oriented circle $ABC$ and lies to the left of it.} [CITATION w/ pg]
+  
+    If we wish to think about it in terms of the coordinates of each site $A$, $B$, $C$, and $D$, the \textsc{InCircle} predicate is equivalent to:
+    $$
+    \textsc{InCircle}(A,B,C,D) =
+    \begin{vmatrix}
+    x_{A} & y_{A} & x_{A}^2 + y_{A}^2 & 1 \\
+    x_{B} & y_{B} & x_{B}^2 + y_{B}^2 & 1 \\
+    x_{C} & y_{C} & x_{C}^2 + y_{C}^2 & 1 \\  
+    x_{D} & y_{D} & x_{D}^2 + y_{D}^2 & 1 \\  
+    \end{vmatrix} > 0.
+    $$  
+
+    Recognize that \textsc{InCircle} is precisely the circle test we performed in \cref{sec:the_dual} and saw in \cref{fig:delaunayhood_small}. We rely on the \textsc{InCircle} test heavily during the merge procedure in two ways. When the \textsc{InCircle} test is applied to an existing face $\Delta ABC$ in the graph, and an appropriate vertex $D$, passing the test indicates that the embedding of that particular facet will not be \emph{locally Delaunay}, so we'll need to change something before proceeding. When we attempt to triangulate the region between two adjacent, non-overlapping triangulations, the \textsc{InCircle} test helps us compose the triangles which are added to the result.\par
+
+    The second geometric predicate used by Guibas and Stolfi is \textsc{CCW}. It is, in a sense, an orientation test. We say that three vertices $A$, $B$, and $C$, are ordered in a counterclockwise fashion if the result of $\textsc{CCW}(A, B, C) > 0$. This predicate can be implemented as:
+    $$
+    \textsc{CCW}(A,B,C) =
+    \begin{vmatrix}
+    x_{A} & y_{A} & 1 \\
+    x_{B} & y_{B} & 1 \\
+    x_{C} & y_{C} & 1 \\  
+    \end{vmatrix} > 0.
+    $$  
+
+    This test can also be thought of as an indicator of whether or not the point $C$ lies to the left of the line obtained from the edge going from $A$ to $B$. If $\textsc{CCW}(A,B,C) > 0$, it does, if $\textsc{CCW}(A,B,C) = 0$, the three points are collinear. To be exhaustive, if $\textsc{CCW}(A,B,C) < 0$, then $C$ lies on the right. 
+
 
   \subsubsection{Split!}
   \label{ssub:split}
-    We assume two things: that the $x$-coordinate of each site in $P$ is unique, and that the sites are in \emph{general position},\footnote{As discussed in \cref{sec:general_position}.} meaning that there will be no degenerate cases for us to handle. We seek a vertical line by which we will recursively partition the set of sites. This yields a left site set and a right site set, $L$ and $R$, respectively. We sort the sites by x-coordinate and choose the median value. \Cref{fig:del_partition0} illustrates how the recursive splitting of $P$ plays out. Note that in this example, some of the sites have very similar x-coordinates. In cases where we can't assume $x$-coordinates are unique, we may break the \say{tie}, so to speak, by comparing the $y$-coordinates of the sites. \Cref{fig:del_partition1} illustrates how subproblems of size two or three are triangulated. \par 
+    We seek a vertical line by which we will recursively partition the set of sites. This yields a left site set and a right site set, $L$ and $R$, respectively. We sort the sites by $x$-coordinate and choose the median value. \Cref{fig:del_partition0} illustrates how the recursive splitting of $P$ plays out. Note that in this example, some of the sites have very similar $x$-coordinates. In cases where we can't assume $x$-coordinates are unique, we may break the \say{tie}, so to speak, by comparing the $y$-coordinates of the sites. This is a called a lexicographic ordering of the coordinates. \Cref{fig:del_partition1} illustrates how subproblems of size two or three are triangulated. \par
+
     \begin{figure}[!htb]
     \centering
       \begin{subtable}{\textwidth}
@@ -745,13 +825,18 @@
       \label{fig:div_and_triangulate}
     \end{figure}
 
-    Note that once the size of the set of sites we are operating on reaches two or three, we do not try to partition it further. At this stage, we consider sets of sites with size two or three to be subproblems which conform to one of two base cases. The concept of a base case is central to recursive algorithms, because the base case(s) of a recursive algorithm are what ensure that the algorithm terminates-- that no further recursive calls are made. In Guibas and Stolfi's divide and conquer algorithm, we have two base cases: the situations where $|P|$ is either two or three. When either of these is true, we immediately recognize that the Delaunay triangulation of $P$ is trivial. In the case of two sites, it is a line segment connecting the two sites; in the case of three sites, it is the triple of segments connecting the sites into a triangle.\par
+    Note that once the size of the set of sites we are operating on reaches two or three, we do not partition further. At this stage, we consider sets of sites with size two or three to be subproblems which conform to one of two base cases. When either of these is true, we immediately recognize that the Delaunay triangulation is trivial: in the case of two sites, it is a line segment connecting the two sites; in the case of three sites, it is the triple of segments connecting the sites into a triangle.\par
 
-    To summarize, we began with a set of sites, $P$, where $\mid P\mid = n$. We sorted the sites by x-coordinate, and split the set of sites into left and right halves according to the median x-value. We continued to do this until the solution to the problem was a trivial one, at which point we returned the triangulation. At this point, we have a collection of valid Delaunay diagrams on subsets of $P$; our next task will be to understand how they can be combined into the final triangulation $D_{P}$.
+    To summarize, we begin with a set of sites, $P$, where $|P| = n$. We sort the sites by $x$-coordinate, and split the set of sites into left and right halves according to the median x-value. We continue until the subproblem sizes are trivial to solve, at which point we triangulate each subproblem. At this point, we have a collection of valid Delaunay diagrams on small partitions of $P$; our next task will be to understand how they can be combined into the final triangulation $\mbox{Del}(P)$.\par
 
   \subsubsection{Merge!}
   \label{ssub:merge}
-    The merge step of Guibas and Stolfi's algorithm is one of the more computationally expensive portions of their approach, and we'll soon understand why. This stage aims to knit the triangulations together pairwise in the order they were partitioned while also maintaining the Delaunay property. So for a given pair of diagrams, say $D_{L}$ and $D_{R}$, the task of determining how $D_{L}$ and $D_{R}$ are connected falls to the merge step of the algorithm. Any given merge step, then, operates on two adjacent, valid, Delaunay triangulations, which have been separated by a known bisector, which we discussed in \cref{subsub:Divide}. To provide you, dear Reader, with a visual intuition of what the merge step entails, I have included \cref{fig:del_merge_not_final}. \Cref{fig:del_merge0} illustrates the first iteration of the merge step; it knits together the eight subproblems in \cref{fig:del_partition1} into four subproblems. \Cref{fig:del_merge1} shows results of the second pass: it combines the diagrams to the left of the dashed vertical line into a single diagram, and, in a similar fashion, combines the pair to the right of the line as well. Note that the dotted lines in \cref{fig:del_partition0,fig:del_partition1} are edges which had to be removed in order to maintain the delaunayhood of the merged diagram.  One of our goals in this section will be understand how Guibas and Stolfi apply the \emph{empty circle property}-- introduced in \cref{sec:the_voronoi_diagram_and_its_dual}-- to determine which, if any, edges need to be removed during the merge process.\par
+    The merge step of Guibas and Stolfi's algorithm is one of the more computationally expensive portions of their approach, and we'll soon understand why. This stage knits two triangulations together to compute the Delaunay triangulation of their combined point sets. 
+
+    Let $L$ and $R$ be partitions of $P$, as described in \cref{ssub:split}. We are given $\mbox{Del}(L)$ and $\mbox{Del}(R)$, Delaunay triangulations of the point-sets $L$ and $R$, respectively. We wish to compute $\mbox{Del}(L \cup R)$. For brevity, we refer to $\mbox{Del}(L)$ and $\mbox{Del}(R)$ equivalently as $D_{L}$ and $D_{R}$.\par
+
+    To provide you, dear Reader, with a visual intuition of what the merge step entails, I have included \cref{fig:del_merge_not_final}. \Cref{fig:del_merge0} illustrates the first iteration of the merge step; it knits together the eight triangulations in \cref{fig:del_partition1} into four triangulations. \Cref{fig:del_merge1} shows results of the second pass: it combines the diagrams to the left of the dashed vertical line into a single diagram, and combines the pair to the right of the line in a similar fashion. The dotted lines in \cref{fig:del_partition0,fig:del_partition1} are edges which had to be removed in order to maintain the Delaunayhood of the merged diagram.\par
+
 
     \begin{figure}[!htb]
     \centering
@@ -772,230 +857,36 @@
       \label{fig:del_merge_not_final}
     \end{figure}
 
-    To understand precisely how the merge step works, we will break it down into two more steps. First, we find the \emph{lower common tangent} of $D_{L}$ and $D_{R}$. The lower common tangent is the lowest line which is\begin{inparaenum}[\itshape a\upshape)] a) tangent to the polygons formed by the boundary of the convex hull; and b) the line does not intersect either polygon.\end{inparaenum} For our purposes the lower common tangent is also the edge which spans $D_{L}$ and $D_{R}$ and is the first valid edge of the merged result, $D_{P}$, as in \cref{fig:lct}. We know this edge to be valid because the lower and upper common tangents of $D_{L}$ and $D_{R}$ can easily be shown to be edges of the convex hull of the sites in $P$, that is, $L \cup R$. The lower common tangent can be found in linear time in the combined sizes of the hulls of $L$ and $R$. Once we have the lower common tangent, we wish to determine what the first \emph{cross-edge} will be. We will think of the cross edges as the edges which connect $D_{L}$ and $D_{R}$, and if we choose them carefully, we can maintain the delaunayhood of the diagram.\par
-
-    \begin{figure}[!htb]
-      \centering
-      \input{figs/ch1/guibas/lct.tex}
-      \caption{Lower Common Tangent, $lct$, of $D_{L}$ and $D_{R}$}
-      \label{fig:lct}
-    \end{figure}
-
-    So, how do we choose these edges? Given \emph{basel}, the directed edge connecting $D_{L}$ and $D_{R}$, whose endpoints are those of $lct$, as in \cref{fig:lct}; we will perform the second part of the merge step, which utilizes the notion of a \emph{rising bubble} to maintain the Delaunay property. The name reflects the conceptual actions we're about to perform: the rising bubble exists in the algorithm as the series of circle tests performed (roughly) along the vertical line separating $D_{L}$ and $D_{R}$. Recall that we can perform a series of circle tests to enforce the Delaunay condition, which states that a triangulation is Delaunay if and only if the circumcircle of every interior triangle is point-free (that is, contains no other sites).
-
-    Before we create the \emph{rising bubble}, recall that \emph{basel} is a directed half-edge\footnote{As discussed in \cref{sec:how_do_we_keep_track_of_this}.} going from $rdi.twin.source$ to $ldo.source$, as in \cref{fig:del_knit_0}. The first circle we create uses the left and right endpoints of \emph{basel}. Recall that the vertices of the diagram we are using are located in $D_{R}$ and $D_{L}$, respectively. Since \emph{basel} is a directed edge, the vertices which serve as two inputs to our circle test can also be referred to as \emph{basel.source} and \emph{basel.twin.source}.\par
-
-    We introduce two more edges which we will use throughout this portion of the algorithm. $\ell$ is the next edge in $D_{L}$ to be encountered by the rising bubble. Similarly, $r$ is the next edge in $D_{R}$ to be encountered by the bubble. At the outset of this procedure, we set $\ell$ to be \emph{basel.twin.onext()} where \emph{onext()} is conveniently defined to be a function which returns the next edge out of the vertex \emph{basel.twin.source}. At this point, we'd like to know whether or not $\ell$ is valid edge. \par 
-
-    What does it mean for an edge to be \emph{valid}? A candidate edge is valid if the edge is located \say{above} \emph{basel}. That is to say, if we took the destination vertex of a given edge $e$ (which we can get easily with \emph{e.twin.source}) and the endpoints of \emph{basel}, the three vertices need to be ordered in a counterclockwise orientation. This predicate, referred to by Guibas and Stolfi as \textsc{CCW} is implemented as:
-    $$
-    CCW(A,B,C) =
-    \begin{vmatrix}
-    x_{A} & y_{A} & 1 \\
-    x_{B} & y_{B} & 1 \\
-    x_{C} & y_{C} & 1 \\  
-    \end{vmatrix} > 0.
-    $$  
-
-    So, in the case of determining whether or not $\ell$ is valid, we check its validity by ensuring that \textsc{CCW}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is greater than 0. If $\ell$ is valid, then we may continue to the next step, which involves \say{pruning} $D_{L}$ in an appropriate way. What we need to do is consider whether or not any of edges from \emph{$\ell.source$}-- including $\ell$-- intersect with the cross edge we'd like the insert. To do this we use the \textsc{InCircle} test, the second geometric predicate that Guibas and Stolfi use. 
-
-    The \textsc{InCircle} test takes as its arguments four sites, $A$, $B$, $C$, and $D$, and envisions a counterclockwise oriented circle $ABC$ and a lonely point $D$. The \textsc{InCircle} is defined by Guibas and Stolfi as follows: \say{\textsc{InCircle}($A$, $B$, $C$, $D$) is defined to be true if and only if point $D$ is interior to the region of the plane that is bounded by the oriented circle $ABC$ and lies to the left of it.} 
-  
-    If we wish to think about it in terms of the coordinates of $A$, $B$, $C$, and $D$, the \textsc{InCircle} predicate is equivalent to:
-    $$
-    InCircle(A,B,C,D) =
-    \begin{vmatrix}
-    x_{A} & y_{A} & x_{A}^2 + y_{A}^2 & 1 \\
-    x_{B} & y_{B} & x_{B}^2 + y_{B}^2 & 1 \\
-    x_{C} & y_{C} & x_{C}^2 + y_{C}^2 & 1 \\  
-    x_{D} & y_{D} & x_{D}^2 + y_{D}^2 & 1 \\  
-    \end{vmatrix} > 0.
-    $$  
-
-    Now the notion of using circles to enforce, or as we might say \emph{witness}, the delaunayhood of a certain edge, is not new. The \textsc{InCircle} predicate is precisely the circle test we performed in \cref{sec:the_voronoi_diagram_and_its_dual} and saw in \cref{fig:delaunayhood_small}. When we apply this notion of the \textsc{InCircle} to determining whether or not $\ell$ will remain in the merged diagram $D_{P}$, we will do so as follows: if \textsc{InCircle}($basel.twin.source$, $basel.source$, $\ell.twin.source$, $\ell.onext().twin.source$) then $\ell.onext().twin.source$ is in the circle defined by \emph{basel.twin.source}, $basel.source$, and $\ell.twin.source$, which means that we must delete the edge $\ell$ and set the new value of $\ell$ to be $\ell.onext()$. We continue to do this, deleting edges as necessary, until the \textsc{InCircle} test fails. Then, we repeat an analagous procedure for $r$.
-
-    [final summarizing paragraph...]
-
-    \begin{figure}[!htb]
-      \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit0.tex}
-        \caption{First edge, $basel$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{CCW}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is true. That is to say, $\ell.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
-        \label{fig:del_knit0}
-      \end{subtable}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit1.tex}
-        \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $v$ in not in the circle defined by $\ell.twin.source$, $basel.twin.source$, and $basel.source$.}
-        \label{fig:del_knit1}
-      \end{subtable}
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit2.tex}
-        \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
-        \label{fig:del_knit2}
-      \end{subtable}
-    \end{figure}
-
-    % \clearpage
-    \begin{figure}[!htb]
-      \ContinuedFloat
-      \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit3.tex}
-        \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.source$, $basel.twin.source$, and $basel.source$.}
-        \label{fig:del_knit3}
-      \end{subtable}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit4.tex}
-        \caption{Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is not in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns false.}
-        \label{fig:del_knit4}
-      \end{subtable}
-      %
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit5.tex}
-        \caption{Due to the result of the \textsc{InCircle} test, we update \emph{basel}'s destination to $\ell.twin.source$. We also update $\ell$ to $basel.twin.onext()$.}
-        \label{fig:del_knit5}
-      \end{subtable}
-    \end{figure}
-
-    \begin{figure}[!htb]
-      \ContinuedFloat
-      \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit6.tex}
-        \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.source$, is contained in the circle represented by the dashed lines. It is.}
-        \label{fig:del_knit6}
-      \end{subtable}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit7.tex}
-        \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
-        \label{fig:del_knit7}
-      \end{subtable}
-      % \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
-      % \label{fig:del_knit_all}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit8.tex}
-        \caption{We perform the same test again, checking to see if $v$ is contained in the dashed circle. This time, it is not, so we know that $\ell$ will be in $D_{P}$.}
-        \label{fig:del_knit8}
-      \end{subtable}
-    \end{figure}
-
-    \begin{figure}[!htb]
-      \ContinuedFloat
-      \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit9.tex}
-        \caption{We consider the right side again, noting that $r$ is still valid. We may note that $u$ has not been reassigned. However, since $basel$ has changed, we need to check that $u$ is not in the circle formed by $r.twin.source$, $basel.twin.source$, and $basel.source$. Here, it is not.}
-        \label{fig:del_knit9}
-      \end{subtable}
-    
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit10.tex}
-        \caption{Again, since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns true.}
-        \label{fig:del_knit10}
-      \end{subtable}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit11.tex}
-        \caption{Because the \textsc{InCircle} test returned true, we update $basel$ so that its source is now $r.twin.source$. We also add the old $basel$ edge to $D_{P}$. Finally, we update $r$.}
-        \label{fig:del_knit11}
-      \end{subtable}
-    \end{figure}
-
-    \begin{figure}[!htb]
-      \ContinuedFloat
-      \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit12.tex}
-        \caption{We continue in this manner until we reach the ``top'', that is, until the point when we reach the upper common tangent, shown here as $uct$. This will occur when both $l$ and $r$ are invalid.}
-        \label{fig:del_knit12}
-      \end{subtable}
-
-    % \end{figure}
-    % \begin{figure}[!htb]
-    %   \ContinuedFloat
-    %   \centering
-      \begin{subtable}{\textwidth}
-        \centering
-        \input{figs/ch1/guibas/knit_done.tex}
-        \caption{The finished diagram, $D_{P}$}
-        \label{fig:del_knit_done}
-      \end{subtable}
-      \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
-      \label{fig:del_knit_all}
-    \end{figure}
-
-    \clearpage
+    In \cref{sub:merging}, we walk through the particulars of constructing the merged diagram; we discuss \nameref{del_merge}, a pseudocode implementation of the process. As an example, we step through the process of knitting together the last pair of triangulations $D_{L}$ and $D_{R}$, shown in \cref{fig:del_merge1}. When we are finished, we will have formed $D_{P}$, the Delaunay triangulation on the original point-set, $P$.\par 
 
 
-  \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
-  \label{sub:divide_and_conquer_algorithm_pseudocode}
-    \nameref{divconq_del} and its supporting procedures \nameref{del_merge} and \nameref{del_lct} provide a pseudocode implementation of the divide and conquer algorithm presented in Guibas and Stolfi's paper, \citealp{guibas}. The corresponding procedure for the dual is described in Shamos and Preparata's text, \citealp{shamos}.\par
-
-    Because we are using Guibas’ and Stolfi’s quad-edge data structure, the operations around creating and manipulating the edge list are more complex than they would be if we were using a doubly connected edge list. However, using their structure not only gives us constant time access to both the Voronoi and Delaunay diagrams on $P$, it also allows us to dive a little more deeply into the topological underpinnings of subdivisions and manifolds.  \nameref{divconq_del} computes the Delaunay triangulation on a set of sites; however, it doesn’t return return the entire edge structure. When we return $D$ at any point in \nameref{divconq_del}, we are returning two \say{handles} into the mesh. More precisely, we return the convex hull edge in the clockwise direction whose source is the rightmost vertex and the convex hull edge in the counterclockwise direction whose source is the leftmost vertex.\par
-    
-    \begin{algorithm}[H]
-    \caption{\textsc{DelDivConq}}\label{divconq_del}
+  \subsection{Handling the Base Cases} % (fold)
+  \label{sub:handling_the_base_cases}
+    Like all recursive procedures which intend to end, \nameref{divconq_del} has base cases. \nameref{bc_del_2} and \nameref{bc_del_3} provide the pseudocode for each case. As we saw in \cref{ssub:split}, the triangulation of two sites is a line segment, and the triangulation of three sites is a triangle. \par
+    % The concept of a base case is central to recursive algorithms, because the base case(s) of a recursive algorithm are what ensure that the algorithm terminates-- that no further recursive calls are made. In Guibas and Stolfi's divide-and-conquer algorithm, we have two base cases: the situations where $|P|$ is either two or three. 
+    \begin{algorithm}[!htb]
+    \caption{\textsc{Delaunay-2}}\label{bc_del_2}
     \begin{algorithmic}[1]
     \Require Set of sites, $P$, which are in \emph{general position}
-    \Procedure{DelDivConq}{$P$}\Comment{Construct $D_{P}$}
-    \If{$|P|$ is 2} \Comment{First Base Case}\label{bc_1}
-      \State $p_{1}$, $p_{2}\gets$ \Call{Sort}{P} \label{sort_1}
-      \State $edge\gets$\Call{MakeEdge}{}\label{make_edge1}
-      \State $edge.org$, $edge.dest \gets p_{1}$, $p_{2}$
-      \State \textbf{return} $edge$, $edge.twin$ \label{return_1}
-    \ElsIf{$|P|$ is 3} \Comment{Second Base Case}\label{bc_2}
-      \State $p_{1}$, $p_{2}$, $p_{3}\gets$ \Call{Sort}{P}\label{sort_2}
-      \State $e1\gets$\Call{MakeEdge}{}
+    \Procedure{Delaunay-2}{$P$}\Comment{Construct $D_{P}$}
+      \State $p_{1}$, $p_{2}\gets$ \Call{Sort-Lex}{P} \label{sort_1}
+      \State $e\gets$\Call{MakeEdge}{$ $}\label{make_edge1}
+      \State $e.org$, $e.dest \gets p_{1}$, $p_{2}$
+      \State \textbf{return} $e$, $e.twin$ \label{return_1}
+    \EndProcedure
+    \end{algorithmic} 
+    \end{algorithm}
+
+    To determine the direction and orientation of the directed edge corresponding to this line segment, we first make a call to \textsc{Sort-Lex}(P) , which returns the set of sites sorted according to $x$-coordinate. In line \ref{make_edge1}, assign $e$ to the result of \textsc{MakeEdge}. \textsc{MakeEdge} creates a generic, unconnected quad-edge. [ TAKE OUT? Recall the various attributes and functions on quad-edges covered in \cref{sub:quad_edge}. At this point, $e$ has the following properties: $e.org \neq e.dest$, $e.left = e.right$, $e.lnext = e.rnext = e.twin$, and $e.onext = e.oprev = e$.] Now that we have made a single edge, $e$ we return the pair $e$, $e.twin$. Since the diagram consists of just this single edge, $e$, $e.twin$ are the oppositely oriented leftmost and rightmost edges we should return.
+
+
+    \begin{algorithm}[!htb]
+    \caption{\textsc{Delaunay-3}}\label{bc_del_3}
+    \begin{algorithmic}[1]
+    \Require Set of sites, $P$, which are in \emph{general position}
+    \Procedure{Delaunay-3}{$P$}\Comment{Construct $D_{P}$}
+      \State $p_{1}$, $p_{2}$, $p_{3}\gets$ \Call{Sort-Lex}{P}\label{sort_2}
+      \State $e1\gets$\Call{MakeEdge}{$ $}
       \State $e2\gets$\Call{MakeEdge}{$ $}
       \State \Call{Splice}{$e1.twin$, $e2$} \label{splice}
       \State $e1.org\gets p_{1}$
@@ -1009,111 +900,527 @@
       \Else \Comment{Case where are sites collinear}
         \State \textbf{return} $e1$, $e2.twin$ \label{return_2}
       \EndIf
-    \Else \Comment{Recursive Case}\label{rc}
-      \State $x\gets$\Call{Median}{$\{x\mid(x,y)\in\;P\}$}
-      \State $L, R,\gets$ \Call{Split}{$P$, $x$}\Comment{Partition $P$ according to $x$}\label{split}
-      \State $D_{L} \gets$ \Call{DelDivConq}{$L$}
-      \Statex[2] $D_{R} \gets$ \Call{DelDivConq}{$R$}
-      \State $D\gets$ \Call{DelMerge}{$D_{L}$, $D_{R}$}  \Comment{Merge sub-diagrams}
-      \State \textbf{return} $D$\label{fin}
-    \EndIf
     \EndProcedure
     \end{algorithmic} 
     \end{algorithm}
 
-    As we saw in \cref{sub:gs_sketch}, the \nameref{divconq_del} is a recursive procedure which takes a set of sites $P$  in general position. We will also assume that not all sites are collinear, as special case we covered in \cref{sub:special_case}. Given $P$, \nameref{divconq_del} computes $\mbox{Del}(P)$ by splitting the problem into subproblems and then merging the results pairwise. Like all recursive procedures which intend to end, \nameref{divconq_del} has base cases. \par
+    A slightly more complex base case is outlined in \nameref{bc_del_3}. Our goal in this case is to try to form a triangle (composed of edges) with the correct orientation.  As in the previous case, our first order of business is to sort the sites by $x$-coordinate and assign them to $p_{1}$, $p_{2}$, and $p_{3}$, respectively. We make two generic edges, $e1$ and $e2$. \par
 
-    Lines \ref{bc_1} to \ref{return_1} outline the first base case. When the number of sites we are hoping to triangulate is equal to two, then the triangulation is a line segment. To determine the direction and orientation of the directed edge corresponding to this line segment, we first make a call to \textsc{Sort}(P) , which returns the set of sites sorted according to x-coordinate. In line \ref{make_edge1}, assign $edge$ to the result of \textsc{MakeEdge}. \textsc{MakeEdge} creates a generic, unconnected quad-edge. Recall the various attributes and functions on quad-edges covered in \cref{sub:quad_edge}. At this point, $edge$ has the following properties: $edge.org \neq edge.dest$, $edge.left = edge.right$, $edge.lnext = edge.rnext = edge.twin$, and $edge.onext = edge.oprev = e$. Now that we have made a single edge, $edge$ we return the pair $edge$, $edge.twin$. Since the diagram consists of just this single edge, $edge$, $edge.twin$ are the oppositely oriented leftmost and rightmost edges we should return.
+    The call to \textsc{Splice} on line \ref{splice} is something of a mysterious one. \textsc{Splice} takes as its arguments two $a$ and $b$, and operates on the rings of edges at the origins of $a$ and $b$. It also operates on rings of edges whose origins are the left faces of $a$ and $b$. If $a$ and $b$ have different origins, \textsc{Splice} has the effect of combining and ordering them appropriately. If the origins are the same, \textsc{Splice} has the effect of splitting the ring of edges around the origin. It then does the same thing for the rings (of edges) whose origins are $a.left$ or $b.left$. \par
 
-    A slightly more complex base case, where there are only three sites in $P$, is outlined in lines \ref{bc_2} to \ref{return_2}. Our goal in this case is to try to form a triangle of edges with the correct orientation.  As in the previous case, our first order of business is to sort the sites by x-coordinate and assign them to $p_{1}$, $p_{2}$, and $p_{3}$, respectively. We make two generic edges, $e1$ and $e2$. \par
+    [TAKE OUT? At this point (line \ref{splice}), $e1$ and $e2$ are totally disconnected from the mesh, so the effect of \textsc{Splice} is that it sets $e1.twin$ to be in the same ring as $e2$. In this particular case, if we were working with a doubly connected edge list, this could be done by setting $e1.twin.next$ to $e2$ and then by setting $e2.next$ to $e1.twin$. However, since we are working with a quad-edge structure, a bit more care has to be taken to ensure that these operations propagate appropriately to the dual. This is the last we'll see of \textsc{Splice}, as it will only be used implicitly (via the \textsc{Connect} procedure) for the remainder of our discussion.\par]
 
-    The call to \textsc{Splice} on \ref{splice} is a mysterious one. \textsc{Splice} takes as its arguments two quad edges, $a$ and $b$, and operates on the rings of edges at the origins of $a$ and $b$. It also operates on rings of edges whose origins are the left faces of $a$ and $b$. If $a$ and $b$ have different origins, \textsc{Splice} has the effect of combining and ordering them appropriately. If the origins are the same, \textsc{Splice} has the effect of splitting the ring of edges around the origin. It then does the same thing for the rings (of edges) whose origins are $a.left$ or $b.left$. \par
+    After updating the source and destination vertices of the edges, we perform the \textsc{CCW} test to determine the orientation of the triangle. This also determines the correct pair of edges for us to return. We create the final edge of the triangle with the \textsc{Connect} procedure. \textsc{Connect} takes two edges, $a$ and $b$, and returns an edge, $e$, whose source is $a.dest$ and whose destination is $b.org$. At this point, the left faces of $a$, $b$, and $e$ are the same.\par
 
-    At this point (line \ref{splice}), $e1$ and $e2$ are totally disconnected from the subdivision, so the effect of \textsc{Splice} is that it sets $e1.twin$ to be in the same ring as $e2$. In this particular case, if we were working with a doubly connected edge list, this could be done by setting $e1.twin.next$ to $e2$ and then by setting $e2.next$ to $e1.twin$. However, since we are working with a quad-edge structure, a bit more care has to be taken to ensure that these operations propagate appropriately to the dual. This is the last we'll see of \textsc{Splice}, as it will only be used implicitly (via the \textsc{Connect} procedure) in the rest of this \nameref{divconq_del}.\par
+    With the base cases handled and a vision of what remains to be accomplished, we consider ourselves equipped to move on to the final task at hand: joining two valid triangulations. \par
 
-    After updating the source and destination vertices of the edges, we perform the \textsc{CCW} test to determine the orientation of the triangle. This also allows us to return the correct pair of edges. We create the final edge of the triangle with the \textsc{Connect} procedure. \textsc{Connect} takes two edges, $a$ and $b$, and returns an edge, $e$, whose source is $a.dest$ and whose destination is $b.org$. At this point, the left faces of $a$, $b$, and $e$ are the same. \par
+  \subsection{Merging} % (fold)
+  \label{sub:merging}
 
-    The final chunk of pseudocode, lines \ref{rc} to \ref{fin}, handle the recursive case. When there are more than three sites in $P$, we need to break the problem down further. We call \textsc{Median}, which takes set of the x-coordinates from the sites in $P$ and returns the median value. In line \ref{split}, we pass this value--- along with $P$--- to another helper function, \textsc{Split}. \textsc{Split} returns two sets of sites, $L$ and $R$ (where $L = {p \mid p.x \leq x}$). Then, we make the calls to \nameref{divconq_del} on both $L$ and $R$. Finally, we merge the results with \nameref{del_merge} and return the result.\par
+    We revisit the topic of merging, asking \say{How are $D_{L}$ and $D_{R}$ connected?} We can make significant headway by breaking this question down further: \say{Will every edge in $D_{L}$ and $D_{R}$ be in $D_{P}$?} and \say{How do we start finding the edges which connect $D_{L}$ and $D_{R}$?} In an effort to demystify the merge step somewhat, we apply the process to the particular $D_{L}$ and $D_{R}$\footnote{Last seen in \cref{fig:del_merge_not_final}.} we'd have otherwise abandoned in \cref{ssub:merge}.\par
 
-    \begin{algorithm}[H]
-    \caption{\textsc{DelMerge}}\label{del_merge}
-     \begin{algorithmic}[1]
-    \Procedure{DelMerge}{$D_{L}$, $D_{R}$}
-    \State $ldo$, $ldi\gets D_{L}$
-    \State $rdi$, $rdo\gets D_{R}$
-    \State $basel\gets$ \Call{DelLCT}{$ldi$, $rdi$}\label{lct}
-    \If {$ldi.org$ is $ldo.org$}
-      \State $ldo\gets basel.sym$
-    \EndIf
-    \If {$rdi.org$ is $rdo.org$}
-      \State $rdo\gets basel$
-    \EndIf
-    \Loop \label{rb}
-      \State $\ell\gets basel.sym.onext$
-      \If{\Call{Valid}{$\ell$}} \label{valid_l}
-        \While{\Call{InCircle}{$basel.dest$, $basel.org$, $\ell.dest$, $\ell.onext.dest$}}\label{rm_l}
-          \State $next\_\ell \gets \ell.onext$
-          \State \Call{DeleteEdge}{$\ell$}
-          \State $\ell \gets new\_\ell$
-        \EndWhile
-      \EndIf
-      \State $r \gets basel.oprev$
-      \If{\Call{Valid}{$\ell$}}
-        \While{\Call{InCircle}{$basel.dest$, $basel.org$, $r.dest$, $r.oprev.dest$}}\label{rm_r}
-          \State $next\_r \gets r.oprev$
-          \State \Call{DeleteEdge}{$r$}
-          \State $r \gets new\_r$
-        \EndWhile
-      \EndIf
-      \If{not \Call{Valid}{$\ell$} and not \Call{Valid}{$r$}} \Comment{$basel$ is UCT}\label{ce}
-        \State exit loop
-      \EndIf
-      \If{not \Call{Valid}{$\ell$} or \par
-        \hskip\algorithmicindent\hskip\algorithmicindent(\Call{Valid}{$r$} and \Call{InCircle}{$\ell.dest$, $\ell.org$, $r.org$, $r.dest$})}\label{ce_1}
-        \State $basel\gets$ \Call{Connect}{$r$, $basel.sym$} \label{ce_add1}
-      \Else
-        \State $basel\gets$ \Call{Connect}{$basel.sym$, $\ell.sym$} \label{ce_add2}
-      \EndIf
-    \EndLoop \label{rb_end}
-    \State \textbf{return} $ldo$, $rdo$
-    \EndProcedure
-    \end{algorithmic} 
-    \end{algorithm}
+    To understand how these questions correspond to the merge process, we break up the process of merging into two steps. Our first order of business is to find an edge which spans $D_{L}$ and $D_{R}$ (i.e, has one endpoint in each triangulation) and will certainly be in $D_{P}$. We'll refer to edges of this type as \emph{cross-edges}. Then, we will use that cross-edge as a foothold, allowing us to enter the \emph{rising bubble} stage: the tasks of pruning out the invalid edges in $D_{L}$ and $D_{R}$, and creating the appropriate cross-edges.\par 
 
-    \nameref{del_merge} takes two valid Delaunay triangulations and knits them together. Recall that $D_{L}$ and $D_{R}$ are each pairs of edges. In particular, keep in mind that $ldi$ is the convex hull edge coming out of the rightmost vertex in $D_{L}$, going in the counterclockwise direction. $rdi$ is the convex hull edge coming out of the leftmost vertex in $D_{R}$, going in the clockwise direction. We know that all of the vertices in $D_{L}$ are left of the vertices in $D_{R}$, so $ldi$ is to the left of $rdi$. Furthermore, we know that the convex hulls of $D_{L}$ and $D_{R}$ are not overlapping. As we saw in \cref{ssub:merge}, the lower common tangent of $D_{L}$ and $D_{R}$ is a convex hull edge, which we know must be in the merged result, $D$. \par
+    % \nameref{del_merge} illustrates the pseudocode for this process. It will function as a reference and a generalization of the steps we will walk through to merge $D_{L}$ and $D_{R}$. 
 
-    This is as good a place to start as any. We begin by calling \nameref{del_lct} in line \ref{lct}, which returns $basel$, the appropriately directed and oriented quad-edge connecting the vertices of the lower common tangent. Conceptually, our goal is to walk the respective hulls of the adjacent diagrams until we find the lower common tangent. This is done with a series of \textsc{CCW} tests. The first \textsc{CCW} test on line \ref{left_of} is equivalent to asking whether or not the source of $rdi$ is left of $ldi$. If $rdi.org$ is to the left of $ldi$, then we need to take a step (in the clockwise direction) along the hull. This is accomplished in line \ref{inc_ldi} where we update $ldi$'s value to $ldi.lnext$. Recall that $ldi.lnext$ points to the next edge which has the same left face as $ldi$. Since the left face of $ldi$ is the region exterior to the convex hull, $ldi.lnext$ is the next edge on the hull. If the value of this \textsc{CCW} is not positive, we ask whether or not $ldi.org$ is right of $rdi$. If it is, then we advance $rdi$ to the next edge---in the counterclockwise direction---on the hull of the right triangulation. Similar to our process with $ldi$, we make the corresponding note that $rdi.rnext$ is the next edge with the same right face as $rdi$, and is the next hull edge on $D_{R}$.\par
+    % \begin{algorithm}[!htb]
+    %   \caption{\textsc{Merge}}\label{del_merge}
+    %    \begin{algorithmic}[1]
+    %   \Procedure{Merge}{$D_{L}$, $D_{R}$}
+    %   \State $ldo$, $ldi\gets D_{L}$
+    %   \State $rdi$, $rdo\gets D_{R}$
+    %   \State $basel\gets$ \Call{Lower-Common-Tangent}{$ldi$, $rdi$}\label{lct}
+    %   \If {$ldi.org$ is $ldo.org$}
+    %     \State $ldo\gets basel.twin$
+    %   \EndIf
+    %   \If {$rdi.org$ is $rdo.org$}
+    %     \State $rdo\gets basel$
+    %   \EndIf
+    %   \Loop \label{rb}
+    %     \State $\ell\gets basel.twin.onext$
+    %     \If{\Call{Valid}{$\ell$}} \label{valid_l}
+    %       \While{\Call{InCircle}{$basel.dest$, $basel.org$, $\ell.dest$, $\ell.onext.dest$}}\label{rm_l}
+    %         \State $next\_\ell \gets \ell.onext$
+    %         \State \Call{DeleteEdge}{$\ell$}
+    %         \State $\ell \gets new\_\ell$
+    %       \EndWhile
+    %     \EndIf
+    %     \State $r \gets basel.oprev$
+    %     \If{\Call{Valid}{$\ell$}}
+    %       \While{\Call{InCircle}{$basel.dest$, $basel.org$, $r.dest$, $r.oprev.dest$}}\label{rm_r}
+    %         \State $next\_r \gets r.oprev$
+    %         \State \Call{DeleteEdge}{$r$}
+    %         \State $r \gets new\_r$
+    %       \EndWhile
+    %     \EndIf
+    %     \If{not \Call{Valid}{$\ell$} and not \Call{Valid}{$r$}} \Comment{$basel$ is UCT}\label{ce}
+    %       \State exit loop
+    %     \EndIf
+    %     \If{not \Call{Valid}{$\ell$} or \par
+    %       \hskip\algorithmicindent\hskip\algorithmicindent(\Call{Valid}{$r$} and \Call{InCircle}{$\ell.dest$, $\ell.org$, $r.org$, $r.dest$})}\label{ce_1}
+    %       \State $basel\gets$ \Call{Connect}{$r$, $basel.twin$} \label{ce_add1}
+    %     \Else
+    %       \State $basel\gets$ \Call{Connect}{$basel.twin$, $\ell.twin$} \label{ce_add2}
+    %     \EndIf
+    %   \EndLoop \label{rb_end}
+    %   \State \textbf{return} $ldo$, $rdo$
+    %   \EndProcedure
+    %   \end{algorithmic} 
+    %   \end{algorithm}
+    
 
-    We loop in this fashion, advancing $ldi$ and $rdi$ in the appropriate manner until both \textsc{CCW} tests fail. Note that when both tests fail, the line determined by the endpoints of $ldi$ will not intersect with $D_{R}$ and the corresponding line for $rdi$ will not intersect with $D_{L}$. So we know that the line whose endpoints are $rdi.org$ and $ldi.org$ is tangent to both triangulations. We create this edge, $basel$, and return it in line \ref{lct_fin}\par
+    \subsubsection{The First Cross-Edge} % (fold)
+    \label{ssub:the_first_cross_edge}
 
-    Stepping back into \nameref{del_merge}, we can now begin the journey upward: we're at the \say{rising bubble} stage, lines \ref{rb} through \ref{rb_end}. \Cref{fig:del_knit_all} on page \pageref{fig:del_knit_all} illustrates this process. The idea behind this loop is to begin with $\ell$ and $r$, which are edges on hulls of their respective triangulations. At the first iteration of the loop, we set $\ell$ to the next outgoing edge whose source is $basel.twin.org$, meaning that $\ell$ is the edge on the convex hull of $D_{L}$ who shares its source vertex with the quad-edge representing the lower common tangent. We do a an analogous thing with $r$. As we iterate through the loop, $\ell$ and $r$ are always set to the convex hull edge whose respective sources are shared with the \say{uppermost} known cross-edge that the time, $basel$. We need to determine whether or not these edges will remain in the final diagram, and subsequently, the appropriate edge which will span $D_{L}$ and $D_{R}$. In line \ref{valid_l} we check to see whether or not $\ell$ is valid with \textsc{Valid}. Recall that \textsc{Valid} is a helper function that tells us whether or not an edge is above $basel$. 
+      At the risk of being pedantic, note that deep as we are into the task of merging $D_{L}$ and $D_{R}$ to form $D_{P}$, we cannot lose sight of the fact that merging $D_{L}$ and $D_{R}$ the last step in the process of triangulating the point set $P$. And by that, I mean to encourage you to recall that the triangulation of $P$ is bounded by the the convex hull of $P$ $\textit{conv}(P)$.\par
 
-    If $\ell$ is a valid edge, we enter a loop in line \ref{rm_l} which we assess whether or not $\ell$ can remain in the merged diagram. This is accomplished with an \textsc{InCircle} test. Recall that $onext$ points to the next edge (in counterclockwise direction) whose source is $ldi.org$. If $ldi.onext.dest$ is contained in the circle defined by the endpoints of $basel$ and the destination of $\ell$, then we know that creating a face with these vertices would result in a face which is not locally Delaunay. So we remove the offending edge, and update $\ell$ to point to the next edge with the same source.\par
+      This gives us insight into the task of determining the \say{first} cross-edge to span $D_{L}$ and $D_{R}$, accomplished in line \ref{lct} of \nameref{del_merge}. One thing we can be sure of is the fact that the edges composing the boundary of $\textit{conv}(P)$ will be in $D_{P}$. Consider the \emph{lower common tangent} of $D_{L}$ and $D_{R}$, shown in \cref{fig:lct} as \textit{lct}. The lower common tangent is the lowest line which is both tangent to the polygons formed by the boundary of the convex hull and does not intersect either polygon. Since $D_{L}$ and $D_{R}$ are Delaunay triangulations on disjoint subsets of $P$ and since $L \cup R = P$, an edge whose endpoints correspond to the points of tangency of \textit{lct}, also lies on the boundary of $\textit{conv}(P)$. We'll refer to this edge as $b$. \par
 
-    When we exit this loop, we know that $\ell$ will be in the merged result. We wish to do the same for $r$; this is accomplished in the loop beginning at line \ref{rm_r}. The only change is that if we fail the \textsc{InCircle} test, we remove the edge $r$ and update $r$ to $r.oprev$, where $oprev$ is the next edge in the clockwise direction with the same source as $r$.\par
+      \begin{figure}[!htb]
+        \centering
+        \input{figs/ch1/guibas/lct.tex}
+        \caption{Lower Common Tangent, $lct$, of $D_{L}$ and $D_{R}$}
+        \label{fig:lct}
+      \end{figure}
 
-    Finally, we have reached line \ref{ce}, where we can say that we have a grasp on two edges, $\ell$ and $r$, which will be in the merged result. Note that since we might have deleted some edges, $\ell$ and $r$ might not be edges on the convex hull of their respective triangulations. We know that one of the endpoints of new spanning edge will be either $basel.org$ or $basel.dest$. We also know that the other endpoint of the new edge will be either $r.dest$ or $\ell.dest$. There are two possible triangles: $basel.source$, $basel.dest$, $\ell.dest$; and $basel.source$, $basel.dest$, $r.dest$. The if statements following line \ref{ce} determine and create the appropriate cross edge. Precisely, if $\ell$ and $r$ are not valid, then neither of them are above $basel$, so we must be at the upper common tangent, and thus have no need to create a cross edge. In \ref{ce_1} we check to see if one or both of the following is true: $\ell$ is not valid\footnote{Meaning that $\ell$'s destination is an endpoint of $basel$, so we can't create a triangle with $basel.source$, $basel.dest$, $\ell.dest$.}; or $r$ is valid, and the triangle formed by $\ell.dest$, $\ell.org$ and $r.dest$ contains a site (namely, $r.oprev.dest$). Since this triangle would not be locally delaunay, we create the triangle $r.dest$, $basel.dest$, $basel.org$ by adding an edge with \textsc{Connect} in line \ref{ce_add1}. We update $basel$ to be this edge, which is the \say{uppermost} edge spanning $D_{L}$ and $D_{R}$. If neither of these cases holds, then we know $basel.source$, $basel.dest$, $\ell.dest$ to be a triangle which is locally Delaunay, and we return the edge reflecting that in line \ref{ce_add2}. 
 
-    \begin{algorithm}[H]
-    \caption{\textsc{DelLCT}}\label{del_lct}
-     \begin{algorithmic}[1]
-    \Procedure{DelLCT}{$ldi$, $rdi$}
-    \Loop
-      \If{\Call{CCW}{$rdi.org$, $ldi.org$, $ldi.dest$}} \label{left_of}
-        \State $ldi\gets ldi.lnext$ \label{inc_ldi}
-      \ElsIf{\Call{CCW}{$ldi.org$, $rdi.dest$, $rdi.org$}} \label{right_of}
-        \State $rdi\gets rdi.rnext$
-      \Else
-        \State $basel\gets$\Call{Connect}{rdi.sym, ldi}
-        \State \textbf{return} $basel$ \label{lct_fin}
-      \EndIf
-    \EndLoop
-    \EndProcedure
-    \end{algorithmic} 
-    \end{algorithm}
+      \begin{algorithm}[!htb]
+        \caption{\textsc{Lower-Common-Tangent}}\label{del_lct}
+         \begin{algorithmic}[1]
+        \Procedure{Lower-Common-Tangent}{$ldi$, $rdi$}
+        \Loop
+          \If{\Call{CCW}{$rdi.org$, $ldi.org$, $ldi.dest$}} \label{left_of}
+            \State $ldi\gets ldi.lnext$ \label{inc_ldi}
+          \ElsIf{\Call{CCW}{$ldi.org$, $rdi.dest$, $rdi.org$}} \label{right_of}
+            \State $rdi\gets rdi.rnext$
+          \Else
+            \State $basel\gets$\Call{Connect}{rdi.twin, ldi}
+            \State \textbf{return} $basel$ \label{lct_fin}
+          \EndIf
+        \EndLoop
+        \EndProcedure
+        \end{algorithmic} 
+        \end{algorithm}
+
+      \nameref{del_lct} provides the pseudocode for finding the lower common tangent of $D_{L}$ and $D_{R}$. We are given $ldi$ and $rdi$. Originally, $ldi$ is the convex hull edge in the clockwise direction whose origin is the rightmost vertex in $D_{L}$. Correspondingly, $rdi$ is the convex hull edge in the counterclockwise direction whose source is the leftmost vertex in $D_{R}$. Conceptually, our goal is to walk \say{down} the respective hulls of the adjacent diagrams until we find their lower common tangent. This is done with a series of \textsc{CCW} tests. The first \textsc{CCW} test on line \ref{left_of} is equivalent to asking whether or not the source of $rdi$ is left of $ldi$. If $rdi.org$ is to the left of $ldi$, then we need to take a step (in the clockwise direction) along the hull of $L$. This is accomplished in line \ref{inc_ldi} where we update $ldi$'s value to $ldi.lnext$. Recall that $ldi.lnext$ points to the next edge which has the same left face as $ldi$. Since the left face of $ldi$ is the region exterior to the convex hull, $ldi.lnext$ is the next edge on the hull. If the value of this \textsc{CCW} is not positive, we ask whether or not $ldi.org$ is right of $rdi$. If it is, then we advance $rdi$ to the next edge---in the counterclockwise direction---on the hull of $R$. Similar to our process with $ldi$, we make the corresponding note that $rdi.rnext$ is the next edge with the same right face as $rdi$.\par
+
+      We loop in this fashion, advancing $ldi$ and $rdi$ in the appropriate manner until both \textsc{CCW} tests fail. When both tests fail, the line along $ldi$ will not intersect with $D_{R}$ and the corresponding line for $rdi$ will not intersect with $D_{L}$. So we know that the line whose endpoints are $rdi.org$ and $ldi.org$ is tangent to both triangulations. We create this edge, $b$, and return it in line \ref{lct_fin}. As evidenced by the pseudocode above, we also note that the lower common tangent can be found in linear time in the combined sizes of the hulls of $L$ and $R$. \par
+    % end the_first_cross_edge
+
+    \subsubsection{The Rising Bubble} % (fold)
+    \label{ssub:the_rising_bubble}
+
+      Satisfied that we have found $b$, the first cross-edge, we enter the \emph{rising bubble stage}. The name reflects the conceptual actions we're about to perform: the rising bubble exists as the series of circle tests performed (roughly) along the vertical bisector separating $D_{L}$ and $D_{R}$.\par
+      
+      We introduce two more edges which we will use throughout this portion of the algorithm. $\ell$ is the next edge in $D_{L}$ to be \say{encountered} by the rising bubble. Similarly, $r$ is the next edge in $D_{R}$ to be encountered by the bubble. As illustrated in \cref{fig:del_knit0}, at the outset of this procedure, we set $\ell$ to be \emph{b.twin.onext()} where \emph{onext()} is conveniently defined to be a function which returns the next edge out of the vertex \emph{b.twin.org}. Our preliminary goal is to update $\ell$ and $r$ (removing edges from either diagram if necessary) until the quadrilateral formed by \textit{b.dest, b.org, r.dest, $\ell$.dest} is one that we can triangulate without disrupting either $D_{L}$ or $D_{R}$.\par 
+
+      \begin{figure}[!htb]
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit0.tex}
+          \caption{First edge, $b$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{CCW}(\textit{$\ell$.twin.org, b.dest, b.org}) is true. That is to say, \textit{$\ell$.twin.org, b.dest, b.org} is a counterclockwise ordering.}
+          \label{fig:del_knit0}
+        \end{subtable}
+      \end{figure}
+
+      Dear Reader, if you've developed an intuition about the Delaunay triangulation (or, perhaps you've peeked at the final figure), you might harbor a hunch that the triangle formed by \textit{b.org, b.dest, $\ell$.dest} should be in the final triangulation $D_{P}$. And while this is the case here, it won't always be this easy: as we hinted at in \cref{ssub:merge}, there will be occasions in which the edge encountered by the bubble needs to be removed. To that end, we perform some preliminary checks on the edge be encountered by the rising bubble, $\ell$, in our current example. The first thing we check is whether or not $\ell$ is a valid edge. \par
+
+      % to end: copied up to predicates section in overview
+      What does it mean for an edge to be \emph{valid}? Generally, an edge is valid if the edge is located \say{above} \emph{b}. That is to say, if we took the destination vertex of a given edge $e$ along with the source and destination of $b$, the three vertices--- \textit{e.dest, b.dest, b.org}--- need to be ordered in a counterclockwise orientation. \par
+
+      So, we check $\ell$'s validity by ensuring that $\textsc{CCW}(\textit{$\ell$.dest, b.dest, b.org}) > 0$ holds true, and it does. Since $\ell$ is valid, we continue to the next step, which involves determining if any edges incident to \textit{$\ell$.org} need to be deleted. We determine whether or not $\ell$ needs to be deleted with an \textsc{InCircle} test. 
+
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit1.tex}
+          \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the \emph{rising bubble} which we say has \say{witnessed} that $v$ in not in the circle defined by $\ell.twin.org$, $basel.twin.org$, and $basel.org$.}
+          \label{fig:del_knit1}
+        \end{subtable}
+      \end{figure}
+
+
+      % What we need to do is consider whether or not any of edges from \emph{$\ell.org$}-- including $\ell$-- intersect with the cross edge we'd like the insert. To do this we use the \textsc{InCircle} test, the second geometric predicate that Guibas and Stolfi use. 
+
+      % The \textsc{InCircle} test takes as its arguments four sites, $A$, $B$, $C$, and $D$, and envisions a counterclockwise oriented circle $ABC$ and a lonely point $D$. The \textsc{InCircle} is defined by Guibas and Stolfi as follows: \say{\textsc{InCircle}($A$, $B$, $C$, $D$) is defined to be true if and only if point $D$ is interior to the region of the plane that is bounded by the oriented circle $ABC$ and lies to the left of it.} 
+    
+      % If we wish to think about it in terms of the coordinates of $A$, $B$, $C$, and $D$, the \textsc{InCircle} predicate is equivalent to:
+      % $$
+      % InCircle(A,B,C,D) =
+      % \begin{vmatrix}
+      % x_{A} & y_{A} & x_{A}^2 + y_{A}^2 & 1 \\
+      % x_{B} & y_{B} & x_{B}^2 + y_{B}^2 & 1 \\
+      % x_{C} & y_{C} & x_{C}^2 + y_{C}^2 & 1 \\  
+      % x_{D} & y_{D} & x_{D}^2 + y_{D}^2 & 1 \\  
+      % \end{vmatrix} > 0.
+      % $$  
+
+      Now the notion of using circles to enforce, or as we might say \emph{witness}, the delaunayhood of a certain edge, is not new. The \textsc{InCircle} predicate is precisely the circle test we performed in \cref{sec:the_dual} and saw in \cref{fig:delaunayhood_small}. When we apply this notion of the \textsc{InCircle} to determining whether or not $\ell$ will remain in the merged diagram $D_{P}$, we will do so as follows: if \textsc{InCircle}($basel.twin.org$, $basel.org$, $\ell.twin.org$, $\ell.onext().twin.org$) then $\ell.onext().twin.org$ is in the circle defined by \emph{basel.twin.org}, $basel.org$, and $\ell.twin.org$, which means that we must delete the edge $\ell$ and set the new value of $\ell$ to be $\ell.onext()$. We continue to do this, deleting edges as necessary, until the \textsc{InCircle} test fails. Then, we repeat an analagous procedure for $r$.
+
+      [final summarizing paragraph...]
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+          \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit2.tex}
+          \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.org$, $basel.twin.org$, $basel.org$ is a counterclockwise ordering.}
+          \label{fig:del_knit2}
+        \end{subtable}
+      \end{figure}
+
+      % \clearpage
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit3.tex}
+          \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.org$, $basel.twin.org$, and $basel.org$.}
+          \label{fig:del_knit3}
+        \end{subtable}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit4.tex}
+          \caption{Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.org$, $\ell.org$, $r.org$, $r.twin.org$). Note that $r.twin.org$ is not in the circle formed by $\ell.twin.org$, $\ell.org$, $r.org$, so \textsc{InCircle} returns false.}
+          \label{fig:del_knit4}
+        \end{subtable}
+        %
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit5.tex}
+          \caption{Due to the result of the \textsc{InCircle} test, we update \emph{basel}'s destination to $\ell.twin.org$. We also update $\ell$ to $basel.twin.onext()$.}
+          \label{fig:del_knit5}
+        \end{subtable}
+      \end{figure}
+
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit6.tex}
+          \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.org$, is contained in the circle represented by the dashed lines. It is.}
+          \label{fig:del_knit6}
+        \end{subtable}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit7.tex}
+          \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
+          \label{fig:del_knit7}
+        \end{subtable}
+        % \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+        % \label{fig:del_knit_all}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit8.tex}
+          \caption{We perform the same test again, checking to see if $v$ is contained in the dashed circle. This time, it is not, so we know that $\ell$ will be in $D_{P}$.}
+          \label{fig:del_knit8}
+        \end{subtable}
+      \end{figure}
+
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit9.tex}
+          \caption{We consider the right side again, noting that $r$ is still valid. We may note that $u$ has not been reassigned. However, since $basel$ has changed, we need to check that $u$ is not in the circle formed by $r.twin.org$, $basel.twin.org$, and $basel.org$. Here, it is not.}
+          \label{fig:del_knit9}
+        \end{subtable}
+      
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit10.tex}
+          \caption{Again, since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.org$, $\ell.org$, $r.org$, $r.twin.org$). Note that $r.twin.org$ is in the circle formed by $\ell.twin.org$, $\ell.org$, $r.org$, so \textsc{InCircle} returns true.}
+          \label{fig:del_knit10}
+        \end{subtable}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit11.tex}
+          \caption{Because the \textsc{InCircle} test returned true, we update $basel$ so that its source is now $r.twin.org$. We also add the old $basel$ edge to $D_{P}$. Finally, we update $r$.}
+          \label{fig:del_knit11}
+        \end{subtable}
+      \end{figure}
+
+      \begin{figure}[!htb]
+        \ContinuedFloat
+        \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit12.tex}
+          \caption{We continue in this manner until we reach the ``top'', that is, until the point when we reach the upper common tangent, shown here as $uct$. This will occur when both $l$ and $r$ are invalid.}
+          \label{fig:del_knit12}
+        \end{subtable}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        \begin{subtable}{\textwidth}
+          \centering
+          \input{figs/ch1/guibas/knit_done.tex}
+          \caption{The finished diagram, $D_{P}$}
+          \label{fig:del_knit_done}
+        \end{subtable}
+        \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+        \label{fig:del_knit_all}
+      \end{figure}
+
+    \subsubsection{Algorithm Pseudocode} % (fold)
+    \label{ssub:algorithm_pseudocode}
+
+      [DOUBLE CHECK EDGE ORIENTATION IN GUIBAS]\nameref{del_merge} takes two valid Delaunay triangulations, $D_{L}$ and $D_{R}$, and knits them together to form $D_{L \cup R}$, the Delaunay triangulation on their combined point set. In particular, keep in mind that $ldi$ is the convex hull edge coming out of the rightmost vertex in $D_{L}$, going in the clockwise direction. In addition, $rdi$ is the convex hull edge coming out of the leftmost vertex in $D_{R}$, going in the counterclockwise direction.\par
+
+
+      \begin{algorithm}[!htb]
+        \caption{\textsc{Merge}}\label{del_merge}
+         \begin{algorithmic}[1]
+        \Procedure{Merge}{$D_{L}$, $D_{R}$}
+        \State $ldo$, $ldi\gets D_{L}$
+        \State $rdi$, $rdo\gets D_{R}$
+        \State $b\gets$ \Call{Lower-Common-Tangent}{$ldi$, $rdi$}\label{lct}
+        \State $b_dup \gets b$
+        \Loop \label{rb} \Comment{Rising bubble portion}
+          \State $\ell\gets b.twin.onext$
+          \If{\Call{Valid}{$\ell$}} \label{valid_l}
+            \While{\Call{InCircle}{$b.dest$, $b.org$, $\ell.dest$, $\ell.onext.dest$}}\label{rm_l}
+              \State $\ell' \gets \ell.onext$
+              \State \Call{DeleteEdge}{$\ell$}
+              \State $\ell \gets \ell'$
+            \EndWhile
+          \EndIf
+          \State $r \gets b.oprev$
+          \If{\Call{Valid}{$\ell$}}
+            \While{\Call{InCircle}{$b.dest$, $b.org$, $r.dest$, $r.oprev.dest$}}\label{rm_r}
+              \State $r' \gets r.oprev$
+              \State \Call{DeleteEdge}{$r$}
+              \State $r \gets r'$
+            \EndWhile
+          \EndIf
+          \If{not \Call{Valid}{$\ell$} and not \Call{Valid}{$r$}} \Comment{$b$ is UCT}\label{ce}
+            \State exit loop
+          \EndIf
+          \If{not \Call{Valid}{$\ell$} or \par
+            \hskip\algorithmicindent\hskip\algorithmicindent(\Call{Valid}{$r$} and \Call{InCircle}{$\ell.dest$, $\ell.org$, $r.org$, $r.dest$})}\label{ce_1}
+            \State $b\gets$ \Call{Connect}{$r$, $b.twin$} \label{ce_add1}
+          \Else
+            \State $b\gets$ \Call{Connect}{$b.twin$, $\ell.twin$} \label{ce_add2}
+          \EndIf
+        \EndLoop \label{rb_end}
+        \If {$ldi.org$ is $ldo.org$}
+          \State $ldo\gets b.twin$
+        \EndIf
+        \If {$rdi.org$ is $rdo.org$}
+          \State $rdo\gets b$
+        \EndIf
+        \State \textbf{return} $ldo$, $rdo$
+        \EndProcedure
+        \end{algorithmic} 
+        \end{algorithm}
+
+        We begin by calling \nameref{del_lct} in line \ref{lct}, which returns $b$, the appropriately directed and oriented quad-edge connecting the vertices of the lower common tangent. Stepping back into \nameref{del_merge}, we can now begin the journey upward: we're at the \say{rising bubble} stage, lines \ref{rb} through \ref{rb_end}. \Cref{fig:del_knit_all} on page \pageref{fig:del_knit_all} illustrates this process. The idea behind this loop is to begin with $\ell$ and $r$, which are edges on hulls of their respective triangulations. At the first iteration of the loop, we set $\ell$ to the next outgoing edge whose source is $b.twin.org$, meaning that $\ell$ is the edge on the convex hull of $D_{L}$ who shares its source vertex with the quad-edge representing the lower common tangent. We do a an analogous thing with $r$. As we iterate through the loop, $\ell$ and $r$ are always set to the convex hull edge whose respective sources are shared with the \say{uppermost} known cross-edge that the time, $b$. We need to determine whether or not these edges will remain in the final diagram, and subsequently, the appropriate edge which will span $D_{L}$ and $D_{R}$. In line \ref{valid_l} we check to see whether or not $\ell$ is valid with \textsc{Valid}. \textsc{Valid} is a helper function built on top of \textsc{CCW} that tells us whether or not an edge is above $b$. 
+
+        If $\ell$ is a valid edge, we enter a loop in line \ref{rm_l} which we assess whether or not $\ell$ can remain in the merged diagram. This is accomplished with an \textsc{InCircle} test. Recall that $onext$ points to the next edge (in counterclockwise direction) whose source is $ldi.org$. If $ldi.onext.dest$ is contained in the circle defined by the endpoints of $b$ and the destination of $\ell$, then we know that creating a face with these vertices would result in a face which is not locally Delaunay. So we remove the offending edge, and update $\ell$ to point to the next edge with the same source.\par
+
+        When we exit this loop, we know that $\ell$ will be in the merged result. We wish to do the same for $r$; this is accomplished in the loop beginning at line \ref{rm_r}. The only change is that if we fail the \textsc{InCircle} test, we remove the edge $r$ and update $r$ to $r.oprev$, where $oprev$ is the next edge in the clockwise direction with the same source as $r$.\par
+
+        Finally, we have reached line \ref{ce}, where we can say that we have a grasp on two edges, $\ell$ and $r$, which will be in the merged result. Note that since we might have deleted some edges, $\ell$ and $r$ might not be edges on the convex hull of their respective triangulations. We know that one of the endpoints of new spanning edge will be either $b.org$ or $b.dest$. We also know that the other endpoint of the new edge will be either $r.dest$ or $\ell.dest$. There are two possible triangles: $b.org$, $b.dest$, $\ell.dest$; and $b.org$, $b.dest$, $r.dest$. The if statements following line \ref{ce} determine and create the appropriate cross edge. Precisely, if $\ell$ and $r$ are not valid, then neither of them are above $b$, so we must be at the upper common tangent, and thus have no need to create a cross edge. In \ref{ce_1} we check to see if one or both of the following is true: $\ell$ is not valid\footnote{Meaning that $\ell$'s destination is an endpoint of $b$, so we can't create a triangle with $b.org$, $b.dest$, $\ell.dest$.}; or $r$ is valid, and the triangle formed by $\ell.dest$, $\ell.org$ and $r.dest$ contains a site (namely, $r.oprev.dest$). Since this triangle would not be locally Delaunay, we create the triangle $r.dest$, $b.dest$, $b.org$ by adding an edge with \textsc{Connect} in line \ref{ce_add1}. We update $b$ to be this edge, which is the \say{uppermost} edge spanning $D_{L}$ and $D_{R}$. If neither of these cases holds, then we know $b.org$, $b.dest$, $\ell.dest$ to be a triangle which is locally Delaunay, and we return the edge reflecting that in line \ref{ce_add2}. Whew.
+
+      % \begin{figure}[!htb]
+        % \centering
+        % \begin{subtable}{\textwidth}
+        %   \centering
+        %   \input{figs/ch1/guibas/knit0.tex}
+        %   \caption{First edge, $basel$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{CCW}($\ell.twin.org$, $basel.twin.org$, $basel.org$) is true. That is to say, $\ell.twin.org$, $basel.twin.org$, $basel.org$ is a counterclockwise ordering.}
+        %   \label{fig:del_knit0}
+        % \end{subtable}
+
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+        % \begin{subtable}{\textwidth}
+        %   \centering
+        %   \input{figs/ch1/guibas/knit1.tex}
+        %   \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $v$ in not in the circle defined by $\ell.twin.org$, $basel.twin.org$, and $basel.org$.}
+        %   \label{fig:del_knit1}
+        % \end{subtable}
+      % \end{figure}
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit2.tex}
+      %     \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.org$, $basel.twin.org$, $basel.org$ is a counterclockwise ordering.}
+      %     \label{fig:del_knit2}
+      %   \end{subtable}
+      % \end{figure}
+
+      % % \clearpage
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit3.tex}
+      %     \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.org$, $basel.twin.org$, and $basel.org$.}
+      %     \label{fig:del_knit3}
+      %   \end{subtable}
+
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit4.tex}
+      %     \caption{Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.org$, $\ell.org$, $r.org$, $r.twin.org$). Note that $r.twin.org$ is not in the circle formed by $\ell.twin.org$, $\ell.org$, $r.org$, so \textsc{InCircle} returns false.}
+      %     \label{fig:del_knit4}
+      %   \end{subtable}
+      %   %
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit5.tex}
+      %     \caption{Due to the result of the \textsc{InCircle} test, we update \emph{basel}'s destination to $\ell.twin.org$. We also update $\ell$ to $basel.twin.onext()$.}
+      %     \label{fig:del_knit5}
+      %   \end{subtable}
+      % \end{figure}
+
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit6.tex}
+      %     \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.org$, is contained in the circle represented by the dashed lines. It is.}
+      %     \label{fig:del_knit6}
+      %   \end{subtable}
+
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit7.tex}
+      %     \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
+      %     \label{fig:del_knit7}
+      %   \end{subtable}
+      %   % \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+      %   % \label{fig:del_knit_all}
+
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit8.tex}
+      %     \caption{We perform the same test again, checking to see if $v$ is contained in the dashed circle. This time, it is not, so we know that $\ell$ will be in $D_{P}$.}
+      %     \label{fig:del_knit8}
+      %   \end{subtable}
+      % \end{figure}
+
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit9.tex}
+      %     \caption{We consider the right side again, noting that $r$ is still valid. We may note that $u$ has not been reassigned. However, since $basel$ has changed, we need to check that $u$ is not in the circle formed by $r.twin.org$, $basel.twin.org$, and $basel.org$. Here, it is not.}
+      %     \label{fig:del_knit9}
+      %   \end{subtable}
+      
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit10.tex}
+      %     \caption{Again, since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.org$, $\ell.org$, $r.org$, $r.twin.org$). Note that $r.twin.org$ is in the circle formed by $\ell.twin.org$, $\ell.org$, $r.org$, so \textsc{InCircle} returns true.}
+      %     \label{fig:del_knit10}
+      %   \end{subtable}
+
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit11.tex}
+      %     \caption{Because the \textsc{InCircle} test returned true, we update $basel$ so that its source is now $r.twin.org$. We also add the old $basel$ edge to $D_{P}$. Finally, we update $r$.}
+      %     \label{fig:del_knit11}
+      %   \end{subtable}
+      % \end{figure}
+
+      % \begin{figure}[!htb]
+      %   \ContinuedFloat
+      %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit12.tex}
+      %     \caption{We continue in this manner until we reach the ``top'', that is, until the point when we reach the upper common tangent, shown here as $uct$. This will occur when both $l$ and $r$ are invalid.}
+      %     \label{fig:del_knit12}
+      %   \end{subtable}
+
+      % % \end{figure}
+      % % \begin{figure}[!htb]
+      % %   \ContinuedFloat
+      % %   \centering
+      %   \begin{subtable}{\textwidth}
+      %     \centering
+      %     \input{figs/ch1/guibas/knit_done.tex}
+      %     \caption{The finished diagram, $D_{P}$}
+      %     \label{fig:del_knit_done}
+      %   \end{subtable}
+      %   \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+      %   \label{fig:del_knit_all}
+      % \end{figure}
+
+      \clearpage
+% section the_rising_bubble (end)
+
   
-  % subsection divide_and_conquer_algorithm_pseudocode (end)
-
+% section algorithm_pseudocode (end)
   \section{Some Final Thoughts} % (fold)
   \label{sec:some_final_thoughts}
 
@@ -1130,3 +1437,553 @@
 \bibliography{ifj_thesis}
 % Finally, an index would go here... but it is also optional.
 \end{document}
+
+
+
+
+% subsection merging (end)
+
+% subsection handing_the_base_cases (end)
+
+  % \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
+  % \label{sub:divide_and_conquer_algorithm_pseudocode}
+    % \nameref{divconq_del} and its supporting procedures \nameref{del_merge} and \nameref{del_lct} provide a pseudocode implementation of the divide-and-conquer algorithm presented in Guibas and Stolfi's paper, \citealp{guibas}. The corresponding procedure for the dual is described in Shamos and Preparata's text, \citealp{shamos}.\par
+
+    % Because we are using Guibas’ and Stolfi’s quad-edge data structure, the operations around creating and manipulating the edge list are more complex than they would be if we were using a doubly connected edge list. However, using their structure not only gives us constant time access to both the Voronoi and Delaunay diagrams on $P$, it also allows us to dive a little more deeply into the topological underpinnings of subdivisions and manifolds.  \nameref{divconq_del} computes the Delaunay triangulation on a set of sites; however, it doesn’t return return the entire edge structure. When we return $D$ at any point in \nameref{divconq_del}, we are returning two \say{handles} into the mesh. More precisely, we return the convex hull edge in the clockwise direction whose source is the rightmost vertex and the convex hull edge in the counterclockwise direction whose source is the leftmost vertex.\par
+    
+    % \begin{algorithm}[H]
+    % \caption{\textsc{GS-Delaunay}}\label{divconq_del}
+    % \begin{algorithmic}[1]
+    % \Require Set of sites, $P$, which are in \emph{general position}
+    % \Procedure{GS-Delaunay}{$P$}\Comment{Construct $D_{P}$}
+    % \If{$|P|$ is 2} \Comment{First Base Case}\label{bc_1}
+    %   \State $p_{1}$, $p_{2}\gets$ \Call{Sort-Lex}{P} \label{sort_1}
+    %   \State $edge\gets$\Call{MakeEdge}{}\label{make_edge1}
+    %   \State $edge.org$, $edge.dest \gets p_{1}$, $p_{2}$
+    %   \State \textbf{return} $edge$, $edge.twin$ \label{return_1}
+    % \ElsIf{$|P|$ is 3} \Comment{Second Base Case}\label{bc_2}
+    %   \State $p_{1}$, $p_{2}$, $p_{3}\gets$ \Call{Sort-Lex}{P}\label{sort_2}
+    %   \State $e1\gets$\Call{MakeEdge}{}
+    %   \State $e2\gets$\Call{MakeEdge}{$ $}
+    %   \State \Call{Splice}{$e1.twin$, $e2$} \label{splice}
+    %   \State $e1.org\gets p_{1}$
+    %   \State $e1.dest\gets p_{2}$; $b1.org\gets p_{2}$
+    %   \State $e2.dest\gets p_{3}$
+    %   \State $e3\gets$\Call{Connect}{e2, e1}
+    %   \If{\Call{CCW}{$p_{1}$, $p_{2}$, $p_{3}$}} \Comment{Make a triangle}
+    %     \State \textbf{return} $e1$, $e2.twin$
+    %   \ElsIf{\Call{CCW}{$p_{1}$, $p_{3}$, $p_{2}$}}
+    %     \State \textbf{return} $e3$, $e3.twin$
+    %   \Else \Comment{Case where are sites collinear}
+    %     \State \textbf{return} $e1$, $e2.twin$ \label{return_2}
+    %   \EndIf
+    % \Else \Comment{Recursive Case}\label{rc}
+    %   \State $x\gets$\Call{Median}{$\{x\mid(x,y)\in\;P\}$}
+    %   \State $L, R,\gets$ \Call{Split}{$P$, $x$}\Comment{Partition $P$ according to $x$}\label{split}
+    %   \State $D_{L} \gets$ \Call{GS-Delaunay}{$L$}
+    %   \Statex[2] $D_{R} \gets$ \Call{GS-Delaunay}{$R$}
+    %   \State $D\gets$ \Call{Merge}{$D_{L}$, $D_{R}$}  \Comment{Merge sub-diagrams}
+    %   \State \textbf{return} $D$\label{fin}
+    % \EndIf
+    % \EndProcedure
+    % \end{algorithmic} 
+    % \end{algorithm}
+
+    % As we saw in \cref{sub:gs_sketch}, the \nameref{divconq_del} is a recursive procedure which takes a set of sites $P$  in general position. We will also assume that not all sites are collinear, as special case we covered in \cref{sub:special_case}. Given $P$, \nameref{divconq_del} computes $\mbox{Del}(P)$ by splitting the problem into subproblems and then merging the results pairwise. Like all recursive procedures which intend to end, \nameref{divconq_del} has base cases. \par
+
+    % Lines \ref{bc_1} to \ref{return_1} outline the first base case. When the number of sites we are hoping to triangulate is equal to two, then the triangulation is a line segment. To determine the direction and orientation of the directed edge corresponding to this line segment, we first make a call to \textsc{Sort-Lex}(P) , which returns the set of sites sorted according to $x$-coordinate. In line \ref{make_edge1}, assign $edge$ to the result of \textsc{MakeEdge}. \textsc{MakeEdge} creates a generic, unconnected quad-edge. Recall the various attributes and functions on quad-edges covered in \cref{sub:quad_edge}. At this point, $edge$ has the following properties: $edge.org \neq edge.dest$, $edge.left = edge.right$, $edge.lnext = edge.rnext = edge.twin$, and $edge.onext = edge.oprev = e$. Now that we have made a single edge, $edge$ we return the pair $edge$, $edge.twin$. Since the diagram consists of just this single edge, $edge$, $edge.twin$ are the oppositely oriented leftmost and rightmost edges we should return.
+
+    % A slightly more complex base case, where there are only three sites in $P$, is outlined in lines \ref{bc_2} to \ref{return_2}. Our goal in this case is to try to form a triangle of edges with the correct orientation.  As in the previous case, our first order of business is to sort the sites by $x$-coordinate and assign them to $p_{1}$, $p_{2}$, and $p_{3}$, respectively. We make two generic edges, $e1$ and $e2$. \par
+
+    % The call to \textsc{Splice} on \ref{splice} is a mysterious one. \textsc{Splice} takes as its arguments two quad-edges, $a$ and $b$, and operates on the rings of edges at the origins of $a$ and $b$. It also operates on rings of edges whose origins are the left faces of $a$ and $b$. If $a$ and $b$ have different origins, \textsc{Splice} has the effect of combining and ordering them appropriately. If the origins are the same, \textsc{Splice} has the effect of splitting the ring of edges around the origin. It then does the same thing for the rings (of edges) whose origins are $a.left$ or $b.left$. \par
+
+    % At this point (line \ref{splice}), $e1$ and $e2$ are totally disconnected from the subdivision, so the effect of \textsc{Splice} is that it sets $e1.twin$ to be in the same ring as $e2$. In this particular case, if we were working with a doubly connected edge list, this could be done by setting $e1.twin.next$ to $e2$ and then by setting $e2.next$ to $e1.twin$. However, since we are working with a quad-edge structure, a bit more care has to be taken to ensure that these operations propagate appropriately to the dual. This is the last we'll see of \textsc{Splice}, as it will only be used implicitly (via the \textsc{Connect} procedure) in the rest of this \nameref{divconq_del}.\par
+
+    % After updating the source and destination vertices of the edges, we perform the \textsc{CCW} test to determine the orientation of the triangle. This also allows us to return the correct pair of edges. We create the final edge of the triangle with the \textsc{Connect} procedure. \textsc{Connect} takes two edges, $a$ and $b$, and returns an edge, $e$, whose source is $a.dest$ and whose destination is $b.org$. At this point, the left faces of $a$, $b$, and $e$ are the same. \par
+
+    % The final chunk of pseudocode, lines \ref{rc} to \ref{fin}, handle the recursive case. When there are more than three sites in $P$, we need to break the problem down further. We call \textsc{Median-Lex}, which takes set of the $x$-coordinates from the sites in $P$ and returns the median value. In line \ref{split}, we pass this value--- along with $P$--- to another helper function, \textsc{Split}. \textsc{Split} returns two sets of sites, $L$ and $R$ (where $L = {p \mid p.x \leq x}$). Then, we make the calls to \nameref{divconq_del} on both $L$ and $R$. Finally, we merge the results with \nameref{del_merge} and return the result.\par
+
+    % \begin{algorithm}[H]
+    % \caption{\textsc{Merge}}\label{del_merge}
+    %  \begin{algorithmic}[1]
+    % \Procedure{Merge}{$D_{L}$, $D_{R}$}
+    % \State $ldo$, $ldi\gets D_{L}$
+    % \State $rdi$, $rdo\gets D_{R}$
+    % \State $basel\gets$ \Call{Lower-Common-Tangent}{$ldi$, $rdi$}\label{lct}
+    % \If {$ldi.org$ is $ldo.org$}
+    %   \State $ldo\gets basel.twin$
+    % \EndIf
+    % \If {$rdi.org$ is $rdo.org$}
+    %   \State $rdo\gets basel$
+    % \EndIf
+    % \Loop \label{rb}
+    %   \State $\ell\gets basel.sym.onext$
+    %   \If{\Call{Valid}{$\ell$}} \label{valid_l}
+    %     \While{\Call{InCircle}{$basel.dest$, $basel.org$, $\ell.dest$, $\ell.onext.dest$}}\label{rm_l}
+    %       \State $next\_\ell \gets \ell.onext$
+    %       \State \Call{DeleteEdge}{$\ell$}
+    %       \State $\ell \gets new\_\ell$
+    %     \EndWhile
+    %   \EndIf
+    %   \State $r \gets basel.oprev$
+    %   \If{\Call{Valid}{$\ell$}}
+    %     \While{\Call{InCircle}{$basel.dest$, $basel.org$, $r.dest$, $r.oprev.dest$}}\label{rm_r}
+    %       \State $next\_r \gets r.oprev$
+    %       \State \Call{DeleteEdge}{$r$}
+    %       \State $r \gets new\_r$
+    %     \EndWhile
+    %   \EndIf
+    %   \If{not \Call{Valid}{$\ell$} and not \Call{Valid}{$r$}} \Comment{$basel$ is UCT}\label{ce}
+    %     \State exit loop
+    %   \EndIf
+    %   \If{not \Call{Valid}{$\ell$} or \par
+    %     \hskip\algorithmicindent\hskip\algorithmicindent(\Call{Valid}{$r$} and \Call{InCircle}{$\ell.dest$, $\ell.org$, $r.org$, $r.dest$})}\label{ce_1}
+    %     \State $basel\gets$ \Call{Connect}{$r$, $basel.sym$} \label{ce_add1}
+    %   \Else
+    %     \State $basel\gets$ \Call{Connect}{$basel.sym$, $\ell.sym$} \label{ce_add2}
+    %   \EndIf
+    % \EndLoop \label{rb_end}
+    % \State \textbf{return} $ldo$, $rdo$
+    % \EndProcedure
+    % \end{algorithmic} 
+    % \end{algorithm}
+
+    % \nameref{del_merge} takes two valid Delaunay triangulations and knits them together. Recall that $D_{L}$ and $D_{R}$ are each pairs of edges. In particular, keep in mind that $ldi$ is the convex hull edge coming out of the rightmost vertex in $D_{L}$, going in the counterclockwise direction. $rdi$ is the convex hull edge coming out of the leftmost vertex in $D_{R}$, going in the clockwise direction. We know that all of the vertices in $D_{L}$ are left of the vertices in $D_{R}$, so $ldi$ is to the left of $rdi$. Furthermore, we know that the convex hulls of $D_{L}$ and $D_{R}$ are not overlapping. As we saw in \cref{ssub:merge}, the lower common tangent of $D_{L}$ and $D_{R}$ is a convex hull edge, which we know must be in the merged result, $D$. \par
+
+    % This is as good a place to start as any. We begin by calling \nameref{del_lct} in line \ref{lct}, which returns $basel$, the appropriately directed and oriented quad-edge connecting the vertices of the lower common tangent. Conceptually, our goal is to walk the respective hulls of the adjacent diagrams until we find the lower common tangent. This is done with a series of \textsc{Ccw} tests. The first \textsc{Ccw} test on line \ref{left_of} is equivalent to asking whether or not the source of $rdi$ is left of $ldi$. If $rdi.org$ is to the left of $ldi$, then we need to take a step (in the clockwise direction) along the hull. This is accomplished in line \ref{inc_ldi} where we update $ldi$'s value to $ldi.lnext$. Recall that $ldi.lnext$ points to the next edge which has the same left face as $ldi$. Since the left face of $ldi$ is the region exterior to the convex hull, $ldi.lnext$ is the next edge on the hull. If the value of this \textsc{Ccw} is not positive, we ask whether or not $ldi.org$ is right of $rdi$. If it is, then we advance $rdi$ to the next edge---in the counterclockwise direction---on the hull of the right triangulation. Similar to our process with $ldi$, we make the corresponding note that $rdi.rnext$ is the next edge with the same right face as $rdi$, and is the next hull edge on $D_{R}$.\par
+
+    % We loop in this fashion, advancing $ldi$ and $rdi$ in the appropriate manner until both \textsc{Ccw} tests fail. Note that when both tests fail, the line determined by the endpoints of $ldi$ will not intersect with $D_{R}$ and the corresponding line for $rdi$ will not intersect with $D_{L}$. So we know that the line whose endpoints are $rdi.org$ and $ldi.org$ is tangent to both triangulations. We create this edge, $basel$, and return it in line \ref{lct_fin}\par
+
+    % Stepping back into \nameref{del_merge}, we can now begin the journey upward: we're at the \say{rising bubble} stage, lines \ref{rb} through \ref{rb_end}. \Cref{fig:del_knit_all} on page \pageref{fig:del_knit_all} illustrates this process. The idea behind this loop is to begin with $\ell$ and $r$, which are edges on hulls of their respective triangulations. At the first iteration of the loop, we set $\ell$ to the next outgoing edge whose source is $basel.twin.org$, meaning that $\ell$ is the edge on the convex hull of $D_{L}$ who shares its source vertex with the quad-edge representing the lower common tangent. We do a an analogous thing with $r$. As we iterate through the loop, $\ell$ and $r$ are always set to the convex hull edge whose respective sources are shared with the \say{uppermost} known cross-edge that the time, $basel$. We need to determine whether or not these edges will remain in the final diagram, and subsequently, the appropriate edge which will span $D_{L}$ and $D_{R}$. In line \ref{valid_l} we check to see whether or not $\ell$ is valid with \textsc{Valid}. Recall that \textsc{Valid} is a helper function that tells us whether or not an edge is above $basel$. 
+
+    % If $\ell$ is a valid edge, we enter a loop in line \ref{rm_l} which we assess whether or not $\ell$ can remain in the merged diagram. This is accomplished with an \textsc{InCircle} test. Recall that $onext$ points to the next edge (in counterclockwise direction) whose source is $ldi.org$. If $ldi.onext.dest$ is contained in the circle defined by the endpoints of $basel$ and the destination of $\ell$, then we know that creating a face with these vertices would result in a face which is not locally Delaunay. So we remove the offending edge, and update $\ell$ to point to the next edge with the same source.\par
+
+    % When we exit this loop, we know that $\ell$ will be in the merged result. We wish to do the same for $r$; this is accomplished in the loop beginning at line \ref{rm_r}. The only change is that if we fail the \textsc{InCircle} test, we remove the edge $r$ and update $r$ to $r.oprev$, where $oprev$ is the next edge in the clockwise direction with the same source as $r$.\par
+
+    % Finally, we have reached line \ref{ce}, where we can say that we have a grasp on two edges, $\ell$ and $r$, which will be in the merged result. Note that since we might have deleted some edges, $\ell$ and $r$ might not be edges on the convex hull of their respective triangulations. We know that one of the endpoints of new spanning edge will be either $basel.org$ or $basel.dest$. We also know that the other endpoint of the new edge will be either $r.dest$ or $\ell.dest$. There are two possible triangles: $basel.org$, $basel.dest$, $\ell.dest$; and $basel.source$, $basel.dest$, $r.dest$. The if statements following line \ref{ce} determine and create the appropriate cross edge. Precisely, if $\ell$ and $r$ are not valid, then neither of them are above $basel$, so we must be at the upper common tangent, and thus have no need to create a cross edge. In \ref{ce_1} we check to see if one or both of the following is true: $\ell$ is not valid\footnote{Meaning that $\ell$'s destination is an endpoint of $basel$, so we can't create a triangle with $basel.source$, $basel.dest$, $\ell.dest$.}; or $r$ is valid, and the triangle formed by $\ell.dest$, $\ell.org$ and $r.dest$ contains a site (namely, $r.oprev.dest$). Since this triangle would not be locally delaunay, we create the triangle $r.dest$, $basel.dest$, $basel.org$ by adding an edge with \textsc{Connect} in line \ref{ce_add1}. We update $basel$ to be this edge, which is the \say{uppermost} edge spanning $D_{L}$ and $D_{R}$. If neither of these cases holds, then we know $basel.source$, $basel.dest$, $\ell.dest$ to be a triangle which is locally Delaunay, and we return the edge reflecting that in line \ref{ce_add2}. 
+
+    % \begin{algorithm}[H]
+    % \caption{\textsc{Lower-Common-Tangent}}\label{del_lct}
+    %  \begin{algorithmic}[1]
+    % \Procedure{Lower-Common-Tangent}{$ldi$, $rdi$}
+    % \Loop
+    %   \If{\Call{CCW}{$rdi.org$, $ldi.org$, $ldi.dest$}} \label{left_of}
+    %     \State $ldi\gets ldi.lnext$ \label{inc_ldi}
+    %   \ElsIf{\Call{CCW}{$ldi.org$, $rdi.dest$, $rdi.org$}} \label{right_of}
+    %     \State $rdi\gets rdi.rnext$
+    %   \Else
+    %     \State $basel\gets$\Call{Connect}{rdi.sym, ldi}
+    %     \State \textbf{return} $basel$ \label{lct_fin}
+    %   \EndIf
+    % \EndLoop
+    % \EndProcedure
+    % \end{algorithmic} 
+    % \end{algorithm}
+
+
+  % \chapter*{Constructing the Delaunay Triangulation}
+  %   \addcontentsline{toc}{chapter}{Constructing the Delaunay Triangulation}
+  %   \chaptermark{Constructing the Delaunay Triangulation}
+  %   \markboth{Constructing the Delaunay Triangulation}{Constructing the Delaunay Triangulation}
+  %   \setcounter{chapter}{3}
+  %   \setcounter{section}{0}
+  % \section{A Divide and Conquer Approach} % (fold)
+  % \label{sec:divide_and_conquer}
+  %   Guibas and Stolfi's \say{Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams}, \citealp{guibas}, presents a detailed and comprehensive presentation of the Voronoi and Delaunay diagrams. They offer a divide-and-conquer approach to the construction of Voronoi or Delaunay diagrams-- using their quad-edge structure-- whose time and space complexity is consistent with the bounds known to be optimal in the worst case.\footnote{Recall that the Voronoi diagram of $n$ sites can be computed in $\mathcal{O}(n\log n)$ time and occupying $\mathcal{O}(n)$ space, and these bounds are TIGHT!} As we saw in \cref{sec:how_do_we_keep_track_of_this}, it's also easy for us to witness its elegance, as theirs is a data structure which represents both the Voronoi diagram and its dual simultaneously. Their quad-edge data structure, furthermore, supports the arbitrary construction and modification of any embedded graph on a two-dimensional manifold. For the purposes of computing the Delaunay triangulation (and implicitly, the Voronoi diagram)  Guibas and Stolfi introduce two geometric predicates which enforce the \say{interesting} properties; these predicates ensure that the faces (composed of edges in the graph) maintain the Delaunay property.
+
+  % \subsection{Algorithm Sketch}
+  % \label{sub:gs_sketch}
+  %   Like other divide-and-conquer algorithms, Guibas and Stolfi's approach to constructing a Delaunay Triangulation relies on repeated partitioning of the problem's data until each partition conforms to a trivial (or base) case.
+
+  %   So, given a set of sites and a desire to compute the Delaunay triangulation of that set, we begin. Though \say{divide-and-conquer} might lead you to believe that this approach consists of two stages, Guibas and Stolfi proceeds in three stages. First, we have the \say{split,} or \say{divide,} stage, in which we split the large problem of computing the Delaunay of $P$ into smaller subproblems. The second stage involves two recursive steps: we apply Guibas and Stolfi's algorithm to each of the two partitions and thus compute the Delaunay triangulation of each. Finally, we proceed to the \say{merge} phase, which carefully combines the triangulations of the partitions into a final triangulation on all $n$ sites. The algorithm is implemented recursively, and we will discuss how the algorithm leverages recursion and handles these base cases shortly. \par
+
+  % \subsubsection{Split!}
+  % \label{ssub:split}
+  %   We assume two things: that the $x$-coordinate of each site in $P$ is unique, and that the sites are in \emph{general position},\footnote{As discussed in \cref{sec:general_position}.} meaning that there will be no degenerate cases for us to handle. We seek a vertical line by which we will recursively partition the set of sites. This yields a left site set and a right site set, $L$ and $R$, respectively. We sort the sites by $x$-coordinate and choose the median value. \Cref{fig:del_partition0} illustrates how the recursive splitting of $P$ plays out. Note that in this example, some of the sites have very similar $x$-coordinates. In cases where we can't assume $x$-coordinates are unique, we may break the \say{tie}, so to speak, by comparing the $y$-coordinates of the sites. \Cref{fig:del_partition1} illustrates how subproblems of size two or three are triangulated. \par 
+  %   \begin{figure}[!htb]
+  %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/partition_0.tex}
+  %       \caption{Choosing the partitions of $P$. The filled circles are the sites of $P$, and the unfilled circles are the sites projected onto the x-axis. The darkest vertical line is the first partition, separating $P$ into $L$ and $R$. The two gray lines are the partitions of the resulting subproblems, and the four lightest lines the medians separating the four subproblems generated from the gray lines.}
+  %       \label{fig:del_partition0}
+  %     \end{subtable}
+
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/partition_1.tex}
+  %       \caption{Solving (triangulating) the subproblems.}
+  %       \label{fig:del_partition1}
+  %     \end{subtable}
+  %     \caption{Dividing $P$ into subproblems we know how to solve}
+  %     \label{fig:div_and_triangulate}
+  %   \end{figure}
+
+  %   Note that once the size of the set of sites we are operating on reaches two or three, we do not try to partition it further. At this stage, we consider sets of sites with size two or three to be subproblems which conform to one of two base cases. The concept of a base case is central to recursive algorithms, because the base case(s) of a recursive algorithm are what ensure that the algorithm terminates-- that no further recursive calls are made. In Guibas and Stolfi's divide and conquer algorithm, we have two base cases: the situations where $|P|$ is either two or three. When either of these is true, we immediately recognize that the Delaunay triangulation of $P$ is trivial. In the case of two sites, it is a line segment connecting the two sites; in the case of three sites, it is the triple of segments connecting the sites into a triangle.\par
+
+  %   To summarize, we began with a set of sites, $P$, where $\mid P\mid = n$. We sorted the sites by $x$-coordinate, and split the set of sites into left and right halves according to the median x-value. We continued to do this until the solution to the problem was a trivial one, at which point we returned the triangulation. At this point, we have a collection of valid Delaunay diagrams on subsets of $P$; our next task will be to understand how they can be combined into the final triangulation $D_{P}$.
+
+  % \subsubsection{Merge!}
+  % \label{ssub:merge}
+  %   The merge step of Guibas and Stolfi's algorithm is one of the more computationally expensive portions of their approach, and we'll soon understand why. This stage aims to knit the triangulations together pairwise in the order they were partitioned while also maintaining the Delaunay property. So for a given pair of diagrams, say $D_{L}$ and $D_{R}$, the task of determining how $D_{L}$ and $D_{R}$ are connected falls to the merge step of the algorithm. Any given merge step, then, operates on two adjacent, valid, Delaunay triangulations, which have been separated by a known bisector, which we discussed in \cref{subsub:Divide}. To provide you, dear Reader, with a visual intuition of what the merge step entails, I have included \cref{fig:del_merge_not_final}. \Cref{fig:del_merge0} illustrates the first iteration of the merge step; it knits together the eight subproblems in \cref{fig:del_partition1} into four subproblems. \Cref{fig:del_merge1} shows results of the second pass: it combines the diagrams to the left of the dashed vertical line into a single diagram, and, in a similar fashion, combines the pair to the right of the line as well. Note that the dotted lines in \cref{fig:del_partition0,fig:del_partition1} are edges which had to be removed in order to maintain the delaunayhood of the merged diagram.  One of our goals in this section will be understand how Guibas and Stolfi apply the \emph{empty circle property}-- introduced in \cref{sec:the_dual}-- to determine which, if any, edges need to be removed during the merge process.\par
+
+  %   \begin{figure}[!htb]
+  %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/merge_0.tex}
+  %       \caption{Merging the adjacent subproblems. Note the gray dotted line segment in the second pair from the left. We needed to remove that edge in order to maintain the Delaunay property of the merged result of the pair.}
+  %       \label{fig:del_merge0}
+  %     \end{subtable}
+
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/merge_1.tex}
+  %       \caption{Merging the adjacent pairs from \cref{fig:del_merge0}. Again, the dotted line segments are removed to maintain the Delaunay propertry.}
+  %       \label{fig:del_merge1}
+  %     \end{subtable}
+  %     \caption{Merging subproblems pairwise.}
+  %     \label{fig:del_merge_not_final}
+  %   \end{figure}
+
+  %   To understand precisely how the merge step works, we will break it down into two more steps. First, we find the \emph{lower common tangent} of $D_{L}$ and $D_{R}$. The lower common tangent is the lowest line which is\begin{inparaenum}[\itshape a\upshape)] a) tangent to the polygons formed by the boundary of the convex hull; and b) the line does not intersect either polygon.\end{inparaenum} For our purposes the lower common tangent is also the edge which spans $D_{L}$ and $D_{R}$ and is the first valid edge of the merged result, $D_{P}$, as in \cref{fig:lct}. We know this edge to be valid because the lower and upper common tangents of $D_{L}$ and $D_{R}$ can easily be shown to be edges of the convex hull of the sites in $P$, that is, $L \cup R$. The lower common tangent can be found in linear time in the combined sizes of the hulls of $L$ and $R$. Once we have the lower common tangent, we wish to determine what the first \emph{cross-edge} will be. We will think of the cross edges as the edges which connect $D_{L}$ and $D_{R}$, and if we choose them carefully, we can maintain the delaunayhood of the diagram.\par
+
+  %   \begin{figure}[!htb]
+  %     \centering
+  %     \input{figs/ch1/guibas/lct.tex}
+  %     \caption{Lower Common Tangent, $lct$, of $D_{L}$ and $D_{R}$}
+  %     \label{fig:lct}
+  %   \end{figure}
+
+  %   So, how do we choose these edges? Given \emph{basel}, the directed edge connecting $D_{L}$ and $D_{R}$, whose endpoints are those of $lct$, as in \cref{fig:lct}; we will perform the second part of the merge step, which utilizes the notion of a \emph{rising bubble} to maintain the Delaunay property. The name reflects the conceptual actions we're about to perform: the rising bubble exists in the algorithm as the series of circle tests performed (roughly) along the vertical line separating $D_{L}$ and $D_{R}$. Recall that we can perform a series of circle tests to enforce the Delaunay condition, which states that a triangulation is Delaunay if and only if the circumcircle of every interior triangle is point-free (that is, contains no other sites).
+
+  %   Before we create the \emph{rising bubble}, recall that \emph{basel} is a directed half-edge\footnote{As discussed in \cref{sec:how_do_we_keep_track_of_this}.} going from $rdi.twin.source$ to $ldo.source$, as in \cref{fig:del_knit_0}. The first circle we create uses the left and right endpoints of \emph{basel}. Recall that the vertices of the diagram we are using are located in $D_{R}$ and $D_{L}$, respectively. Since \emph{basel} is a directed edge, the vertices which serve as two inputs to our circle test can also be referred to as \emph{basel.source} and \emph{basel.twin.source}.\par
+
+  %   We introduce two more edges which we will use throughout this portion of the algorithm. $\ell$ is the next edge in $D_{L}$ to be encountered by the rising bubble. Similarly, $r$ is the next edge in $D_{R}$ to be encountered by the bubble. At the outset of this procedure, we set $\ell$ to be \emph{basel.twin.onext()} where \emph{onext()} is conveniently defined to be a function which returns the next edge out of the vertex \emph{basel.twin.source}. At this point, we'd like to know whether or not $\ell$ is valid edge. \par 
+
+  %   What does it mean for an edge to be \emph{valid}? A candidate edge is valid if the edge is located \say{above} \emph{basel}. That is to say, if we took the destination vertex of a given edge $e$ (which we can get easily with \emph{e.twin.source}) and the endpoints of \emph{basel}, the three vertices need to be ordered in a counterclockwise orientation. This predicate, referred to by Guibas and Stolfi as \textsc{Ccw} is implemented as:
+  %   $$
+  %   CCW(A,B,C) =
+  %   \begin{vmatrix}
+  %   x_{A} & y_{A} & 1 \\
+  %   x_{B} & y_{B} & 1 \\
+  %   x_{C} & y_{C} & 1 \\  
+  %   \end{vmatrix} > 0.
+  %   $$  
+
+  %   So, in the case of determining whether or not $\ell$ is valid, we check its validity by ensuring that \textsc{Ccw}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is greater than 0. If $\ell$ is valid, then we may continue to the next step, which involves \say{pruning} $D_{L}$ in an appropriate way. What we need to do is consider whether or not any of edges from \emph{$\ell.source$}-- including $\ell$-- intersect with the cross edge we'd like the insert. To do this we use the \textsc{InCircle} test, the second geometric predicate that Guibas and Stolfi use. 
+
+  %   The \textsc{InCircle} test takes as its arguments four sites, $A$, $B$, $C$, and $D$, and envisions a counterclockwise oriented circle $ABC$ and a lonely point $D$. The \textsc{InCircle} is defined by Guibas and Stolfi as follows: \say{\textsc{InCircle}($A$, $B$, $C$, $D$) is defined to be true if and only if point $D$ is interior to the region of the plane that is bounded by the oriented circle $ABC$ and lies to the left of it.} 
+  
+  %   If we wish to think about it in terms of the coordinates of $A$, $B$, $C$, and $D$, the \textsc{InCircle} predicate is equivalent to:
+  %   $$
+  %   InCircle(A,B,C,D) =
+  %   \begin{vmatrix}
+  %   x_{A} & y_{A} & x_{A}^2 + y_{A}^2 & 1 \\
+  %   x_{B} & y_{B} & x_{B}^2 + y_{B}^2 & 1 \\
+  %   x_{C} & y_{C} & x_{C}^2 + y_{C}^2 & 1 \\  
+  %   x_{D} & y_{D} & x_{D}^2 + y_{D}^2 & 1 \\  
+  %   \end{vmatrix} > 0.
+  %   $$  
+
+  %   Now the notion of using circles to enforce, or as we might say \emph{witness}, the delaunayhood of a certain edge, is not new. The \textsc{InCircle} predicate is precisely the circle test we performed in \cref{sec:the_dual} and saw in \cref{fig:delaunayhood_small}. When we apply this notion of the \textsc{InCircle} to determining whether or not $\ell$ will remain in the merged diagram $D_{P}$, we will do so as follows: if \textsc{InCircle}($basel.twin.source$, $basel.source$, $\ell.twin.source$, $\ell.onext().twin.source$) then $\ell.onext().twin.source$ is in the circle defined by \emph{basel.twin.source}, $basel.source$, and $\ell.twin.source$, which means that we must delete the edge $\ell$ and set the new value of $\ell$ to be $\ell.onext()$. We continue to do this, deleting edges as necessary, until the \textsc{InCircle} test fails. Then, we repeat an analagous procedure for $r$.
+
+  %   [final summarizing paragraph...]
+
+  %   \begin{figure}[!htb]
+  %     \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit0.tex}
+  %       \caption{First edge, $basel$, of $D_{P}$ and $\ell$, candidate edge in $D_{L}$. Note that $\ell$ is considered to be valid because \textsc{Ccw}($\ell.twin.source$, $basel.twin.source$, $basel.source$) is true. That is to say, $\ell.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+  %       \label{fig:del_knit0}
+  %     \end{subtable}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit1.tex}
+  %       \caption{Evaluating whether or not $\ell$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $v$ in not in the circle defined by $\ell.twin.source$, $basel.twin.source$, and $basel.source$.}
+  %       \label{fig:del_knit1}
+  %     \end{subtable}
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit2.tex}
+  %       \caption{Similarly, now we evaluate whether or not $r$ will be in $D_{P}$. Note that it is a valid edge, since $r.twin.source$, $basel.twin.source$, $basel.source$ is a counterclockwise ordering.}
+  %       \label{fig:del_knit2}
+  %     \end{subtable}
+  %   \end{figure}
+
+  %   % \clearpage
+  %   \begin{figure}[!htb]
+  %     \ContinuedFloat
+  %     \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit3.tex}
+  %       \caption{Evaluating whether or not $r$ will be in $D_{P}$. The dashed arc is a portion of the ``rising bubble'' which we say has \emph{witnessed} that $u$ in not in the circle defined by $r.twin.source$, $basel.twin.source$, and $basel.source$.}
+  %       \label{fig:del_knit3}
+  %     \end{subtable}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit4.tex}
+  %       \caption{Since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is not in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns false.}
+  %       \label{fig:del_knit4}
+  %     \end{subtable}
+  %     %
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit5.tex}
+  %       \caption{Due to the result of the \textsc{InCircle} test, we update \emph{basel}'s destination to $\ell.twin.source$. We also update $\ell$ to $basel.twin.onext()$.}
+  %       \label{fig:del_knit5}
+  %     \end{subtable}
+  %   \end{figure}
+
+  %   \begin{figure}[!htb]
+  %     \ContinuedFloat
+  %     \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit6.tex}
+  %       \caption{We continue this process noting that $\ell$ is a valid edge. Because this is the case, we check to see if $v$, that is, $\ell.onext().twin.source$, is contained in the circle represented by the dashed lines. It is.}
+  %       \label{fig:del_knit6}
+  %     \end{subtable}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit7.tex}
+  %       \caption{Because $v$ is contained in the circle, we need to remove $l$ and set the new value of $l$ to $l.onext()$, and making the analagous change for $v$. Note $l.onext()$ is also shown as a directed edge.}
+  %       \label{fig:del_knit7}
+  %     \end{subtable}
+  %     % \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+  %     % \label{fig:del_knit_all}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit8.tex}
+  %       \caption{We perform the same test again, checking to see if $v$ is contained in the dashed circle. This time, it is not, so we know that $\ell$ will be in $D_{P}$.}
+  %       \label{fig:del_knit8}
+  %     \end{subtable}
+  %   \end{figure}
+
+  %   \begin{figure}[!htb]
+  %     \ContinuedFloat
+  %     \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit9.tex}
+  %       \caption{We consider the right side again, noting that $r$ is still valid. We may note that $u$ has not been reassigned. However, since $basel$ has changed, we need to check that $u$ is not in the circle formed by $r.twin.source$, $basel.twin.source$, and $basel.source$. Here, it is not.}
+  %       \label{fig:del_knit9}
+  %     \end{subtable}
+    
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit10.tex}
+  %       \caption{Again, since $\ell$ and $r$ are both valid we perform \textsc{InCircle}($\ell.twin.source$, $\ell.source$, $r.source$, $r.twin.source$). Note that $r.twin.source$ is in the circle formed by $\ell.twin.source$, $\ell.source$, $r.source$, so \textsc{InCircle} returns true.}
+  %       \label{fig:del_knit10}
+  %     \end{subtable}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit11.tex}
+  %       \caption{Because the \textsc{InCircle} test returned true, we update $basel$ so that its source is now $r.twin.source$. We also add the old $basel$ edge to $D_{P}$. Finally, we update $r$.}
+  %       \label{fig:del_knit11}
+  %     \end{subtable}
+  %   \end{figure}
+
+  %   \begin{figure}[!htb]
+  %     \ContinuedFloat
+  %     \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit12.tex}
+  %       \caption{We continue in this manner until we reach the ``top'', that is, until the point when we reach the upper common tangent, shown here as $uct$. This will occur when both $l$ and $r$ are invalid.}
+  %       \label{fig:del_knit12}
+  %     \end{subtable}
+
+  %   % \end{figure}
+  %   % \begin{figure}[!htb]
+  %   %   \ContinuedFloat
+  %   %   \centering
+  %     \begin{subtable}{\textwidth}
+  %       \centering
+  %       \input{figs/ch1/guibas/knit_done.tex}
+  %       \caption{The finished diagram, $D_{P}$}
+  %       \label{fig:del_knit_done}
+  %     \end{subtable}
+  %     \caption{Knitting together $D_{L}$ and $D_{R}$ to form $D_{P}$}
+  %     \label{fig:del_knit_all}
+  %   \end{figure}
+
+  %   \clearpage
+
+
+  % \subsection{Divide and Conquer Algorithm Pseudocode} % (fold)
+  % \label{sub:divide_and_conquer_algorithm_pseudocode}
+  %   \nameref{divconq_del} and its supporting procedures \nameref{del_merge} and \nameref{del_lct} provide a pseudocode implementation of the divide and conquer algorithm presented in Guibas and Stolfi's paper, \citealp{guibas}. The corresponding procedure for the dual is described in Shamos and Preparata's text, \citealp{shamos}.\par
+
+  %   Because we are using Guibas’ and Stolfi’s quad-edge data structure, the operations around creating and manipulating the edge list are more complex than they would be if we were using a doubly connected edge list. However, using their structure not only gives us constant time access to both the Voronoi and Delaunay diagrams on $P$, it also allows us to dive a little more deeply into the topological underpinnings of subdivisions and manifolds.  \nameref{divconq_del} computes the Delaunay triangulation on a set of sites; however, it doesn’t return return the entire edge structure. When we return $D$ at any point in \nameref{divconq_del}, we are returning two \say{handles} into the mesh. More precisely, we return the convex hull edge in the clockwise direction whose source is the rightmost vertex and the convex hull edge in the counterclockwise direction whose source is the leftmost vertex.\par
+    
+  %   \begin{algorithm}[H]
+  %   \caption{\textsc{GS-Delaunay}}\label{divconq_del}
+  %   \begin{algorithmic}[1]
+  %   \Require Set of sites, $P$, which are in \emph{general position}
+  %   \Procedure{GS-Delaunay}{$P$}\Comment{Construct $D_{P}$}
+  %   \If{$|P|$ is 2} \Comment{First Base Case}\label{bc_1}
+  %     \State $p_{1}$, $p_{2}\gets$ \Call{Sort-Lex}{P} \label{sort_1}
+  %     \State $edge\gets$\Call{MakeEdge}{}\label{make_edge1}
+  %     \State $edge.org$, $edge.dest \gets p_{1}$, $p_{2}$
+  %     \State \textbf{return} $edge$, $edge.twin$ \label{return_1}
+  %   \ElsIf{$|P|$ is 3} \Comment{Second Base Case}\label{bc_2}
+  %     \State $p_{1}$, $p_{2}$, $p_{3}\gets$ \Call{Sort-Lex}{P}\label{sort_2}
+  %     \State $e1\gets$\Call{MakeEdge}{}
+  %     \State $e2\gets$\Call{MakeEdge}{$ $}
+  %     \State \Call{Splice}{$e1.twin$, $e2$} \label{splice}
+  %     \State $e1.org\gets p_{1}$
+  %     \State $e1.dest\gets p_{2}$; $b1.org\gets p_{2}$
+  %     \State $e2.dest\gets p_{3}$
+  %     \State $e3\gets$\Call{Connect}{e2, e1}
+  %     \If{\Call{CCW}{$p_{1}$, $p_{2}$, $p_{3}$}} \Comment{Make a triangle}
+  %       \State \textbf{return} $e1$, $e2.twin$
+  %     \ElsIf{\Call{CCW}{$p_{1}$, $p_{3}$, $p_{2}$}}
+  %       \State \textbf{return} $e3$, $e3.twin$
+  %     \Else \Comment{Case where are sites collinear}
+  %       \State \textbf{return} $e1$, $e2.twin$ \label{return_2}
+  %     \EndIf
+  %   \Else \Comment{Recursive Case}\label{rc}
+  %     \State $x\gets$\Call{Median}{$\{x\mid(x,y)\in\;P\}$}
+  %     \State $L, R,\gets$ \Call{Split}{$P$, $x$}\Comment{Partition $P$ according to $x$}\label{split}
+  %     \State $D_{L} \gets$ \Call{GS-Delaunay}{$L$}
+  %     \Statex[2] $D_{R} \gets$ \Call{GS-Delaunay}{$R$}
+  %     \State $D\gets$ \Call{Merge}{$D_{L}$, $D_{R}$}  \Comment{Merge sub-diagrams}
+  %     \State \textbf{return} $D$\label{fin}
+  %   \EndIf
+  %   \EndProcedure
+  %   \end{algorithmic} 
+  %   \end{algorithm}
+
+  %   As we saw in \cref{sub:gs_sketch}, the \nameref{divconq_del} is a recursive procedure which takes a set of sites $P$  in general position. We will also assume that not all sites are collinear, as special case we covered in \cref{sub:special_case}. Given $P$, \nameref{divconq_del} computes $\mbox{Del}(P)$ by splitting the problem into subproblems and then merging the results pairwise. Like all recursive procedures which intend to end, \nameref{divconq_del} has base cases. \par
+
+  %   Lines \ref{bc_1} to \ref{return_1} outline the first base case. When the number of sites we are hoping to triangulate is equal to two, then the triangulation is a line segment. To determine the direction and orientation of the directed edge corresponding to this line segment, we first make a call to \textsc{Sort-Lex}(P) , which returns the set of sites sorted according to $x$-coordinate. In line \ref{make_edge1}, assign $edge$ to the result of \textsc{MakeEdge}. \textsc{MakeEdge} creates a generic, unconnected quad-edge. Recall the various attributes and functions on quad-edges covered in \cref{sub:quad_edge}. At this point, $edge$ has the following properties: $edge.org \neq edge.dest$, $edge.left = edge.right$, $edge.lnext = edge.rnext = edge.twin$, and $edge.onext = edge.oprev = e$. Now that we have made a single edge, $edge$ we return the pair $edge$, $edge.twin$. Since the diagram consists of just this single edge, $edge$, $edge.twin$ are the oppositely oriented leftmost and rightmost edges we should return.
+
+  %   A slightly more complex base case, where there are only three sites in $P$, is outlined in lines \ref{bc_2} to \ref{return_2}. Our goal in this case is to try to form a triangle of edges with the correct orientation.  As in the previous case, our first order of business is to sort the sites by $x$-coordinate and assign them to $p_{1}$, $p_{2}$, and $p_{3}$, respectively. We make two generic edges, $e1$ and $e2$. \par
+
+  %   The call to \textsc{Splice} on \ref{splice} is a mysterious one. \textsc{Splice} takes as its arguments two quad-edges, $a$ and $b$, and operates on the rings of edges at the origins of $a$ and $b$. It also operates on rings of edges whose origins are the left faces of $a$ and $b$. If $a$ and $b$ have different origins, \textsc{Splice} has the effect of combining and ordering them appropriately. If the origins are the same, \textsc{Splice} has the effect of splitting the ring of edges around the origin. It then does the same thing for the rings (of edges) whose origins are $a.left$ or $b.left$. \par
+
+  %   At this point (line \ref{splice}), $e1$ and $e2$ are totally disconnected from the subdivision, so the effect of \textsc{Splice} is that it sets $e1.twin$ to be in the same ring as $e2$. In this particular case, if we were working with a doubly connected edge list, this could be done by setting $e1.twin.next$ to $e2$ and then by setting $e2.next$ to $e1.twin$. However, since we are working with a quad-edge structure, a bit more care has to be taken to ensure that these operations propagate appropriately to the dual. This is the last we'll see of \textsc{Splice}, as it will only be used implicitly (via the \textsc{Connect} procedure) in the rest of this \nameref{divconq_del}.\par
+
+  %   After updating the source and destination vertices of the edges, we perform the \textsc{Ccw} test to determine the orientation of the triangle. This also allows us to return the correct pair of edges. We create the final edge of the triangle with the \textsc{Connect} procedure. \textsc{Connect} takes two edges, $a$ and $b$, and returns an edge, $e$, whose source is $a.dest$ and whose destination is $b.org$. At this point, the left faces of $a$, $b$, and $e$ are the same. \par
+
+  %   The final chunk of pseudocode, lines \ref{rc} to \ref{fin}, handle the recursive case. When there are more than three sites in $P$, we need to break the problem down further. We call \textsc{Median-Lex}, which takes set of the $x$-coordinates from the sites in $P$ and returns the median value. In line \ref{split}, we pass this value--- along with $P$--- to another helper function, \textsc{Split}. \textsc{Split} returns two sets of sites, $L$ and $R$ (where $L = {p \mid p.x \leq x}$). Then, we make the calls to \nameref{divconq_del} on both $L$ and $R$. Finally, we merge the results with \nameref{del_merge} and return the result.\par
+
+  %   \begin{algorithm}[H]
+  %   \caption{\textsc{Merge}}\label{del_merge}
+  %    \begin{algorithmic}[1]
+  %   \Procedure{Merge}{$D_{L}$, $D_{R}$}
+  %   \State $ldo$, $ldi\gets D_{L}$
+  %   \State $rdi$, $rdo\gets D_{R}$
+  %   \State $basel\gets$ \Call{Lower-Common-Tangent}{$ldi$, $rdi$}\label{lct}
+  %   \If {$ldi.org$ is $ldo.org$}
+  %     \State $ldo\gets basel.sym$
+  %   \EndIf
+  %   \If {$rdi.org$ is $rdo.org$}
+  %     \State $rdo\gets basel$
+  %   \EndIf
+  %   \Loop \label{rb}
+  %     \State $\ell\gets basel.sym.onext$
+  %     \If{\Call{Valid}{$\ell$}} \label{valid_l}
+  %       \While{\Call{InCircle}{$basel.dest$, $basel.org$, $\ell.dest$, $\ell.onext.dest$}}\label{rm_l}
+  %         \State $next\_\ell \gets \ell.onext$
+  %         \State \Call{DeleteEdge}{$\ell$}
+  %         \State $\ell \gets new\_\ell$
+  %       \EndWhile
+  %     \EndIf
+  %     \State $r \gets basel.oprev$
+  %     \If{\Call{Valid}{$\ell$}}
+  %       \While{\Call{InCircle}{$basel.dest$, $basel.org$, $r.dest$, $r.oprev.dest$}}\label{rm_r}
+  %         \State $next\_r \gets r.oprev$
+  %         \State \Call{DeleteEdge}{$r$}
+  %         \State $r \gets new\_r$
+  %       \EndWhile
+  %     \EndIf
+  %     \If{not \Call{Valid}{$\ell$} and not \Call{Valid}{$r$}} \Comment{$basel$ is UCT}\label{ce}
+  %       \State exit loop
+  %     \EndIf
+  %     \If{not \Call{Valid}{$\ell$} or \par
+  %       \hskip\algorithmicindent\hskip\algorithmicindent(\Call{Valid}{$r$} and \Call{InCircle}{$\ell.dest$, $\ell.org$, $r.org$, $r.dest$})}\label{ce_1}
+  %       \State $basel\gets$ \Call{Connect}{$r$, $basel.sym$} \label{ce_add1}
+  %     \Else
+  %       \State $basel\gets$ \Call{Connect}{$basel.sym$, $\ell.sym$} \label{ce_add2}
+  %     \EndIf
+  %   \EndLoop \label{rb_end}
+  %   \State \textbf{return} $ldo$, $rdo$
+  %   \EndProcedure
+  %   \end{algorithmic} 
+  %   \end{algorithm}
+
+  %   \nameref{del_merge} takes two valid Delaunay triangulations and knits them together. Recall that $D_{L}$ and $D_{R}$ are each pairs of edges. In particular, keep in mind that $ldi$ is the convex hull edge coming out of the rightmost vertex in $D_{L}$, going in the counterclockwise direction. $rdi$ is the convex hull edge coming out of the leftmost vertex in $D_{R}$, going in the clockwise direction. We know that all of the vertices in $D_{L}$ are left of the vertices in $D_{R}$, so $ldi$ is to the left of $rdi$. Furthermore, we know that the convex hulls of $D_{L}$ and $D_{R}$ are not overlapping. As we saw in \cref{ssub:merge}, the lower common tangent of $D_{L}$ and $D_{R}$ is a convex hull edge, which we know must be in the merged result, $D$. \par
+
+  %   This is as good a place to start as any. We begin by calling \nameref{del_lct} in line \ref{lct}, which returns $basel$, the appropriately directed and oriented quad-edge connecting the vertices of the lower common tangent. Conceptually, our goal is to walk the respective hulls of the adjacent diagrams until we find the lower common tangent. This is done with a series of \textsc{Ccw} tests. The first \textsc{Ccw} test on line \ref{left_of} is equivalent to asking whether or not the source of $rdi$ is left of $ldi$. If $rdi.org$ is to the left of $ldi$, then we need to take a step (in the clockwise direction) along the hull. This is accomplished in line \ref{inc_ldi} where we update $ldi$'s value to $ldi.lnext$. Recall that $ldi.lnext$ points to the next edge which has the same left face as $ldi$. Since the left face of $ldi$ is the region exterior to the convex hull, $ldi.lnext$ is the next edge on the hull. If the value of this \textsc{Ccw} is not positive, we ask whether or not $ldi.org$ is right of $rdi$. If it is, then we advance $rdi$ to the next edge---in the counterclockwise direction---on the hull of the right triangulation. Similar to our process with $ldi$, we make the corresponding note that $rdi.rnext$ is the next edge with the same right face as $rdi$, and is the next hull edge on $D_{R}$.\par
+
+  %   We loop in this fashion, advancing $ldi$ and $rdi$ in the appropriate manner until both \textsc{Ccw} tests fail. Note that when both tests fail, the line determined by the endpoints of $ldi$ will not intersect with $D_{R}$ and the corresponding line for $rdi$ will not intersect with $D_{L}$. So we know that the line whose endpoints are $rdi.org$ and $ldi.org$ is tangent to both triangulations. We create this edge, $basel$, and return it in line \ref{lct_fin}\par
+
+  %   Stepping back into \nameref{del_merge}, we can now begin the journey upward: we're at the \say{rising bubble} stage, lines \ref{rb} through \ref{rb_end}. \Cref{fig:del_knit_all} on page \pageref{fig:del_knit_all} illustrates this process. The idea behind this loop is to begin with $\ell$ and $r$, which are edges on hulls of their respective triangulations. At the first iteration of the loop, we set $\ell$ to the next outgoing edge whose source is $basel.twin.org$, meaning that $\ell$ is the edge on the convex hull of $D_{L}$ who shares its source vertex with the quad-edge representing the lower common tangent. We do a an analogous thing with $r$. As we iterate through the loop, $\ell$ and $r$ are always set to the convex hull edge whose respective sources are shared with the \say{uppermost} known cross-edge that the time, $basel$. We need to determine whether or not these edges will remain in the final diagram, and subsequently, the appropriate edge which will span $D_{L}$ and $D_{R}$. In line \ref{valid_l} we check to see whether or not $\ell$ is valid with \textsc{Valid}. Recall that \textsc{Valid} is a helper function that tells us whether or not an edge is above $basel$. 
+
+  %   If $\ell$ is a valid edge, we enter a loop in line \ref{rm_l} which we assess whether or not $\ell$ can remain in the merged diagram. This is accomplished with an \textsc{InCircle} test. Recall that $onext$ points to the next edge (in counterclockwise direction) whose source is $ldi.org$. If $ldi.onext.dest$ is contained in the circle defined by the endpoints of $basel$ and the destination of $\ell$, then we know that creating a face with these vertices would result in a face which is not locally Delaunay. So we remove the offending edge, and update $\ell$ to point to the next edge with the same source.\par
+
+  %   When we exit this loop, we know that $\ell$ will be in the merged result. We wish to do the same for $r$; this is accomplished in the loop beginning at line \ref{rm_r}. The only change is that if we fail the \textsc{InCircle} test, we remove the edge $r$ and update $r$ to $r.oprev$, where $oprev$ is the next edge in the clockwise direction with the same source as $r$.\par
+
+  %   Finally, we have reached line \ref{ce}, where we can say that we have a grasp on two edges, $\ell$ and $r$, which will be in the merged result. Note that since we might have deleted some edges, $\ell$ and $r$ might not be edges on the convex hull of their respective triangulations. We know that one of the endpoints of new spanning edge will be either $basel.org$ or $basel.dest$. We also know that the other endpoint of the new edge will be either $r.dest$ or $\ell.dest$. There are two possible triangles: $basel.source$, $basel.dest$, $\ell.dest$; and $basel.source$, $basel.dest$, $r.dest$. The if statements following line \ref{ce} determine and create the appropriate cross edge. Precisely, if $\ell$ and $r$ are not valid, then neither of them are above $basel$, so we must be at the upper common tangent, and thus have no need to create a cross edge. In \ref{ce_1} we check to see if one or both of the following is true: $\ell$ is not valid\footnote{Meaning that $\ell$'s destination is an endpoint of $basel$, so we can't create a triangle with $basel.source$, $basel.dest$, $\ell.dest$.}; or $r$ is valid, and the triangle formed by $\ell.dest$, $\ell.org$ and $r.dest$ contains a site (namely, $r.oprev.dest$). Since this triangle would not be locally delaunay, we create the triangle $r.dest$, $basel.dest$, $basel.org$ by adding an edge with \textsc{Connect} in line \ref{ce_add1}. We update $basel$ to be this edge, which is the \say{uppermost} edge spanning $D_{L}$ and $D_{R}$. If neither of these cases holds, then we know $basel.source$, $basel.dest$, $\ell.dest$ to be a triangle which is locally Delaunay, and we return the edge reflecting that in line \ref{ce_add2}. 
+
+  %   \begin{algorithm}[H]
+  %   \caption{\textsc{Lower-Common-Tangent}}\label{del_lct}
+  %    \begin{algorithmic}[1]
+  %   \Procedure{Lower-Common-Tangent}{$ldi$, $rdi$}
+  %   \Loop
+  %     \If{\Call{CCW}{$rdi.org$, $ldi.org$, $ldi.dest$}} \label{left_of}
+  %       \State $ldi\gets ldi.lnext$ \label{inc_ldi}
+  %     \ElsIf{\Call{CCW}{$ldi.org$, $rdi.dest$, $rdi.org$}} \label{right_of}
+  %       \State $rdi\gets rdi.rnext$
+  %     \Else
+  %       \State $basel\gets$\Call{Connect}{rdi.sym, ldi}
+  %       \State \textbf{return} $basel$ \label{lct_fin}
+  %     \EndIf
+  %   \EndLoop
+  %   \EndProcedure
+  %   \end{algorithmic} 
+  %   \end{algorithm}
+  
+  % subsection divide_and_conquer_algorithm_pseudocode (end)
