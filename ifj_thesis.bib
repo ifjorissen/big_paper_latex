@@ -5,8 +5,8 @@
   isbn = {30540-61270-X},
   language = {English},
   publisher = {Springer-Verlag},
-  author = {de Berg, Marc and van Kreveld, Marc and Overmars, Mark and Schwarzkopf, Otfried},
-  year = {1997}
+  author = {Marc de Berg and Marc van Kreveld and Mark Overmars and Otfried Schwarzkopf},
+  year = {1997},
 }
 
 @book{shamos,
@@ -30,12 +30,327 @@
   year = {2004},
 }
 
+@inproceedings{fortune,
+ author = {Fortune, S},
+ title = {A Sweepline Algorithm for Voronoi Diagrams},
+ booktitle = {Proceedings of the Second Annual Symposium on Computational Geometry},
+ series = {SCG '86},
+ year = {1986},
+ isbn = {0-89791-194-6},
+ location = {Yorktown Heights, New York, USA},
+ pages = {313--322},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/10515.10549},
+ doi = {10.1145/10515.10549},
+ acmid = {10549},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
 @article{guibas,
-    author  = {Guibas, Leonidas and Stolfi, Jorge},
-    title   = {Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams},
-    year    = {1985},
-    journal = {ACM Transactions on Graphics},
-    volume  = {4},
-    number  = {2},
-    pages   = {74-123}
+  author  = {Guibas, Leonidas and Stolfi, Jorge},
+  title   = {Primitives for the Manipulation of General Subdivisions and the Computation of Voronoi Diagrams},
+  year    = {1985},
+  journal = {ACM Transactions on Graphics},
+  volume  = {4},
+  number  = {2},
+  pages   = {74-123},
 }
+
+@phdthesis{lee,
+ author = {Lee, Der-Tsai},
+ title = {Proximity and Reachability in the Plane.},
+ year = {1978},
+ note = {AAI7913526},
+ publisher = {University of Illinois at Urbana-Champaign},
+ address = {Champaign, IL, USA},
+} 
+
+@article{lee_div_conq,
+  author={Lee, D. T.
+  and Schachter, B. J.},
+  title={Two algorithms for constructing a Delaunay triangulation},
+  journal={International Journal of Computer \& Information Sciences},
+  year={1980},
+  volume={9},
+  number={3},
+  pages={219--242},
+  abstract={This paper provides a unified discussion of the Delaunay triangulation. Its geometric properties are reviewed and several applications are discussed. Two algorithms are presented for constructing the triangulation over a planar set ofN points. The first algorithm uses a divide-and-conquer approach. It runs inO(N logN) time, which is asymptotically optimal. The second algorithm is iterative and requiresO(N2) time in the worst case. However, its average case performance is comparable to that of the first algorithm.},
+  issn={1573-7640},
+  doi={10.1007/BF00977785},
+  url={http://dx.doi.org/10.1007/BF00977785}
+}
+
+@book{del_book,
+ author = {Cheng, Siu-Wing and Dey, Tamal K. and Shewchuk, Jonathan},
+ title = {Delaunay Mesh Generation},
+ year = {2012},
+ isbn = {1584887303, 9781584887300},
+ edition = {1st},
+ publisher = {Chapman \& Hall/CRC},
+ pages = {31-53},
+} 
+
+@inproceedings{leach92,
+    author = {Geoff Leach},
+    title = {Improving Worst-Case Optimal Delaunay Triangulation Algorithms},
+    booktitle = {In 4th Canadian Conference on Computational Geometry},
+    year = {1992},
+    pages = {15}
+}
+
+%conclusion lit review
+
+@article{guibas2,
+author={Guibas, Leonidas J.
+and Knuth, Donald E.
+and Sharir, Micha},
+title={Randomized incremental construction of Delaunay and Voronoi diagrams},
+year={1992},
+journal={Algorithmica},
+volume={7},
+number={1},
+pages={381--413},
+issn={1432-0541},
+doi={10.1007/BF01758770},
+url={http://dx.doi.org/10.1007/BF0175877},
+}
+
+@phdthesis{chow,
+ author = {Chow, Anita Liu},
+ title = {Parallel Algorithms for Geometric Problems},
+ year = {1980},
+ note = {AAI8108465},
+ publisher = {University of Illinois at Urbana-Champaign},
+ address = {Champaign, IL, USA},
+} 
+
+@inproceedings{klein,
+ author = {Dehne, Frank K. H. A. and Klein, Rolf},
+ title = {A Sweepcircle Algorithm for Voronoi Diagrams},
+ booktitle = {Proceedings of the International Workshop on Graph-Theoretic Concepts in Computer Science},
+ series = {WG '87},
+ year = {1988},
+ isbn = {3-540-19422-3},
+ pages = {59--83},
+ numpages = {25},
+ url = {http://dl.acm.org/citation.cfm?id=647668.730977},
+ acmid = {730977},
+ publisher = {Springer-Verlag},
+ address = {London, UK, UK},
+} 
+
+@article{aggarwal,
+  author={Aggarwal, A.
+  and Chazelle, B.
+  and Guibas, L.
+  and {\'O}'D{\'u}nlaing, C.
+  and Yap, C.},
+  year = {1988},
+  title={Parallel computational geometry},
+  journal={Algorithmica},
+  volume={3},
+  number={1},
+  pages={293--327},
+  issn={1432-0541},
+}
+
+@ARTICLE{bray2015,
+  author = {{Bray}, A. and {Wong}, K. and {Barr}, C.~D. and {Paik Schoenberg}, F.
+  },
+  title = "{Voronoi residual analysis of spatial point process models with applications to California earthquake forecasts}",
+  journal = {ArXiv e-prints},
+  archivePrefix = "arXiv",
+  eprint = {1501.06387},
+  primaryClass = "stat.AP",  
+  keywords = {Statistics - Applications},
+  year = 2015,
+  month = jan,
+  adsurl = {http://adsabs.harvard.edu/abs/2015arXiv150106387B},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{goodrich1985,
+  title={Fast Parallel Algorithms for Voronoi Diagrams},
+  author={Goodrich, Micahel T and O'Dunlaing, Colm and Yap, Chee},
+  year={1985},
+}
+
+@inproceedings{goodrich1993,
+  author = {Goodrich, Michael T. and Tsay, Jyh{-}Jong and Vengroff, Darren Erik and Vitter, Jeffrey Scott},
+  title     = {External-Memory Computational Geometry (Preliminary Version)},
+  booktitle = {34th Annual Symposium on Foundations of Computer Science, Palo Alto,
+               California, USA, 3-5 November 1993},
+  pages     = {714--723},
+  year      = {1993},
+  crossref  = {DBLP:conf/focs/FOCS34},
+  url       = {http://dx.doi.org/10.1109/SFCS.1993.366816},
+  doi       = {10.1109/SFCS.1993.366816},
+  timestamp = {Tue, 16 Dec 2014 09:57:19 +0100},
+  biburl    = {http://dblp.dagstuhl.de/rec/bib/conf/focs/GoodrichTVV93},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@inproceedings{blelloch_div_conq,
+     author={G. Blelloch and G.~L. Miller and D. Talmor},
+     title={Developing a Practical Projection-Based Parallel
+            {Delaunay} Algorithm},
+     booktitle={Proceedings ACM Symposium on Computational Geometry},
+     year=1996,
+     month=may}
+
+@article{aurenhammer,
+ author = {Aurenhammer, Franz},
+ title = {Voronoi Diagrams\&Mdash;a Survey of a Fundamental Geometric Data Structure},
+ journal = {ACM Comput. Surv.},
+ issue_date = {Sept. 1991},
+ volume = {23},
+ number = {3},
+ year = {1991},
+ issn = {0360-0300},
+ pages = {345--405},
+ numpages = {61},
+ url = {http://doi.acm.org/10.1145/116873.116880},
+ doi = {10.1145/116873.116880},
+ acmid = {116880},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@article{xin,
+title = {Parallel computing 2D Voronoi diagrams using untransformed sweepcircles },
+journal = {Computer-Aided Design},
+volume = {45},
+number = {2},
+pages = {483 - 493},
+year = {2013},
+note = {Solid and Physical Modeling 2012 },
+issn = {0010-4485},
+doi = {http://dx.doi.org/10.1016/j.cad.2012.10.031},
+url = {http://www.sciencedirect.com/science/article/pii/S0010448512002369},
+author = {Shi-Qing Xin and Xiaoning Wang and Jiazhi Xia and Wolfgang Mueller-Wittig and Guo-Jin Wang and Ying He},
+}
+
+@article{bowyer,
+  author = {Bowyer, A.}, 
+  title = {Computing Dirichlet tessellations},
+  volume = {24}, 
+  number = {2}, 
+  pages = {162-166}, 
+  year = {1981}, 
+  doi = {10.1093/comjnl/24.2.162}, 
+  abstract ={An efficient algorithm is proposed for computing the Dirichlet tessellation and Delaunay triangulation in a k dimensional Euclidean space (k≥2). The algorithm is designed in a way that should allow it to be extended to some of the simpler non-Euclidean metric spaces as well. The algorithm has been implemented in ISO FORTRAN by the author and execution time and stereoscopic pictures of the tessellation and triangulation are presented at the end of this paper.}, 
+  URL = {http://comjnl.oxfordjournals.org/content/24/2/162.abstract}, 
+  eprint = {http://comjnl.oxfordjournals.org/content/24/2/162.full.pdf+html}, 
+  journal = {The Computer Journal} 
+}
+
+@article{watson,
+author = {Watson, D. F.}, 
+title = {Computing the n-dimensional Delaunay tessellation with application to Voronoi polytopes},
+volume = {24}, 
+number = {2}, 
+pages = {167-172}, 
+year = {1981}, 
+doi = {10.1093/comjnl/24.2.167}, 
+abstract ={The Delaunay tessellation in n-dimensional space is a space-filling aggregate of n-simplices. These n-simplices are the dual forms of the vertices in the commonly used Voronoi tessellation. Several efforts have been made to simulate the 2-dimensional Voronoi tessellation on the computer. Additional problems occur for the 3 and higher dimensional implementations but some of these can be avoided by alternatively computing the dual Delaunay tessellation. An algorithm that finds the topological relationships in these tessellations is given.}, 
+URL = {http://comjnl.oxfordjournals.org/content/24/2/167.abstract}, 
+eprint = {http://comjnl.oxfordjournals.org/content/24/2/167.full.pdf+html}, 
+journal = {The Computer Journal} 
+}
+
+@inproceedings{blelloch3d,
+ author = {Blandford, Daniel K. and Blelloch, Guy E. and Kadow, Clemens},
+ title = {Engineering a Compact Parallel Delaunay Algorithm in 3D},
+ booktitle = {Proceedings of the Twenty-second Annual Symposium on Computational Geometry},
+ series = {SCG '06},
+ year = {2006},
+ isbn = {1-59593-340-9},
+ location = {Sedona, Arizona, USA},
+ pages = {292--300},
+ numpages = {9},
+ url = {http://doi.acm.org/10.1145/1137856.1137900},
+ doi = {10.1145/1137856.1137900},
+ acmid = {1137900},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Delaunay, meshing, parallel, space-efficient},
+} 
+
+@inproceedings{shamos_hoey,
+ author = {Shamos, Michael Ian and Hoey, Dan},
+ title = {Closest-point Problems},
+ booktitle = {Proceedings of the 16th Annual Symposium on Foundations of Computer Science},
+ series = {SFCS '75},
+ year = {1975},
+ pages = {151--162},
+ numpages = {12},
+ url = {http://dx.doi.org/10.1109/SFCS.1975.8},
+ doi = {10.1109/SFCS.1975.8},
+ acmid = {1382488},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+} 
+
+@article{su,
+  title = "A comparison of sequential Delaunay triangulation algorithms ",
+  journal = "Computational Geometry ",
+  volume = "7",
+  number = "5â6",
+  pages = "361 - 385",
+  year = "1997",
+  note = "11th \{ACM\} Symposium on Computational Geometry ",
+  issn = "0925-7721",
+  doi = "http://dx.doi.org/10.1016/S0925-7721(96)00025-9",
+  url = "http://www.sciencedirect.com/science/article/pii/S0925772196000259",
+  author = "Peter Su and Robert L. Scot Drysdale",
+}
+
+
+%code, etc
+@online{ifjorissen,
+  author={Isabella Jorissen},
+  url={https://github.com/ifjorissen/fortune_voronoi.git},
+  title={Visualizing Fortune's Algorithm with PyOpenGL},
+  year={2015},
+}
+
+@book{cgal
+, title        = "{CGAL} User and Reference Manual"
+, author      = "{The CGAL Project}"
+, publisher     = "{CGAL Editorial Board}"
+, edition     = "{4.8}"
+, year         = 2016
+, url =    "http://doc.cgal.org/4.8/Manual/packages.html"
+}
+
+@article{qhull,
+    author = {C. Bradford Barber and David P. Dobkin and Hannu Huhdanpaa},
+    title = {The Quickhull algorithm for convex hulls},
+    shorttitle = {Qhull},
+    journal = {ACM TRANSACTIONS ON MATHEMATICAL SOFTWARE},
+    year = {1996},
+    volume = {22},
+    number = {4},
+    pages = {469--483},
+    url={http://www.qhull.org}
+}
+
+@incollection{shewchuk1996,
+  author = {Jonathan Richard Shewchuk},
+  title = {Triangle:  {E}ngineering a {2D} {Q}uality {M}esh {G}enerator and
+    {D}elaunay {T}riangulator},
+  booktitle = {Applied Computational Geometry:  Towards Geometric Engineering},
+  editor = {Ming C. Lin and Dinesh Manocha},
+  series = {Lecture Notes in Computer Science},
+  volume = {1148},
+  publisher = {Springer-Verlag},
+  pages = {203--222},
+  month = may,
+  year = {1996},
+  note = {From the First ACM Workshop on Applied Computational Geometry},
+  url={http://www.cs.cmu.edu/~quake/triangle.html}
+}
+
+
+
